@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!--namespace中匹配的是dao包所在包的包路径-->
+<!--copy路径的时候要选择Copy Reference-->
+<mapper namespace="com.water.water.dao.DetailDao">
+    <!--resultMap中type对用所匹配的实体类,id表示resultMap的标识-->
+    <resultMap id="DetailResult" type="com.water.water.pojo.Rec_Detail">
+        <!--对应数据表的字段信息-->
+        <result column="PackageID" property="PackageID" jdbcType="BIGINT"/>
+        <result column="Id" property="Id" jdbcType="INTEGER"/>
+        <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
+        <result column="D_ID" property="D_ID" jdbcType="VARCHAR"/>
+        <result column="DataR1" property="DataR1" jdbcType="SMALLINT"/>
+        <result column="DataR2" property="DataR2" jdbcType="SMALLINT"/>
+        <result column="DataR3" property="DataR3" jdbcType="SMALLINT"/>
+        <result column="DataR4" property="DataR4" jdbcType="SMALLINT"/>
+        <result column="V_status" property="V_status" jdbcType="SMALLINT"/>
+        <result column="V_per" property="V_per" jdbcType="SMALLINT"/>
+        <result column="W_line" property="W_line" jdbcType="SMALLINT"/>
+        <result column="B_status" property="B_status" jdbcType="SMALLINT"/>
+        <result column="O_temp" property="O_temp" jdbcType="SMALLINT"/>
+        <result column="E_temp" property="E_temp" jdbcType="SMALLINT"/>
+        <result column="D_doorsta" property="D_doorsta" jdbcType="SMALLINT"/>
+        <result column="DataR5" property="DataR5" jdbcType="SMALLINT"/>
+        <result column="DataR6" property="DataR6" jdbcType="SMALLINT"/>
+        <result column="DataR7" property="DataR7" jdbcType="SMALLINT"/>
+        <result column="DataR8" property="DataR8" jdbcType="SMALLINT"/>
+        <result column="W_work" property="W_work" jdbcType="SMALLINT"/>
+        <result column="F_Volume" property="F_Volume" jdbcType="SMALLINT"/>
+        <result column="OV_period" property="OV_period" jdbcType="SMALLINT"/>
+        <result column="OV_waterline" property="OV_waterline" jdbcType="SMALLINT"/>
+        <result column="OV_keeptime" property="OV_keeptime" jdbcType="SMALLINT"/>
+        <result column="CV_waterline" property="CV_waterline" jdbcType="SMALLINT"/>
+        <result column="V_aciontime" property="V_aciontime" jdbcType="SMALLINT"/>
+        <result column="UD_period" property="UD_period" jdbcType="SMALLINT"/>
+        <result column="C_times" property="C_times" jdbcType="SMALLINT"/>
+        <result column="Send_error" property="Send_error" jdbcType="SMALLINT"/>
+        <result column="Rece_error" property="Rece_error" jdbcType="SMALLINT"/>
+        <result column="DataR9" property="DataR9" jdbcType="SMALLINT"/>
+        <result column="DataR10" property="DataR10" jdbcType="SMALLINT"/>
+        <result column="Create_time" property="Create_time" jdbcType="DATE"/>
+        <result column="Update_time" property="Update_time" jdbcType="DATE"/>
+
+    </resultMap>
+
+    <!--对应的sql语句-->
+    <select id="getVper" resultMap="DetailResult">
+        select `V_per` from td_Rec_Detail where Id = #{id};
+    </select>
+
+
+</mapper>

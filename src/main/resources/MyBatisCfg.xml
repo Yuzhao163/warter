@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 指定数据库连接信息的位置 -->
+    <properties resource="application.yml"></properties>
+
+    <!--com.lmei.entity下的所有类定义别名 -->
+    <typeAliases>
+        <package name="com.water.water.pojo"/>
+    </typeAliases>
+
+    <mappers>
+        <!--注册BookMapper映射-->
+        <mapper resource="com/water/water/mapper/User.xml" />
+    </mappers>
+</configuration>
+

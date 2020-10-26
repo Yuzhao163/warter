@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.water.water.dao.PipeShowDao">
+    <resultMap id="BaseResultMap" type="com.water.water.pojo.Rec_Detail">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="PackageID" property="PackageID" jdbcType="BIGINT"/>
+        <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
+        <result column="D_ID" property="D_ID" jdbcType="VARCHAR"/>
+        <result column="V_status" property="V_status" jdbcType="INTEGER"/>
+        <result column="V_per" property="V_per" jdbcType="SMALLINT"/>
+        <result column="W_line" property="W_line" jdbcType="SMALLINT"/>
+        <result column="B_status" property="B_status" jdbcType="SMALLINT"/>
+        <result column="O_temp" property="O_temp" jdbcType="SMALLINT"/>
+        <result column="E_temp" property="E_temp" jdbcType="SMALLINT"/>
+        <result column="D_doorsta" property="D_doorsta" jdbcType="SMALLINT"/>
+        <result column="W_work" property="W_work" jdbcType="SMALLINT"/>
+        <result column="F_Volume" property="F_Volume" jdbcType="SMALLINT"/>
+        <result column="OV_period" property="OV_period" jdbcType="SMALLINT"/>
+        <result column="OV_waterline" property="OV_waterline" jdbcType="SMALLINT"/>
+        <result column="OV_keeptime" property="OV_keeptime" jdbcType="SMALLINT"/>
+        <result column="CV_waterline" property="CV_waterline" jdbcType="SMALLINT"/>
+        <result column="V_actiontime" property="V_actiontime" jdbcType="SMALLINT"/>
+        <result column="UD_period" property="UD_period" jdbcType="SMALLINT"/>
+        <result column="Send_error" property="Send_error" jdbcType="SMALLINT"/>
+        <result column="Rece_error" property="Rece_error" jdbcType="SMALLINT"/>
+        <result column="Create_time" property="Create_time" jdbcType="DATE"/>
+        <result column="Update_time" property="Update_time" jdbcType="DATE"/>
+    </resultMap>
+    <select id="getPipe" resultMap="BaseResultMap">
+        select TmnID,V_status,V_per,W_line from td_Rec_Detail;
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.water.water.dao.TerminalsDao">
+    <resultMap id="BaseResultMap" type="com.water.water.pojo.Terminals">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="TmnId" property="TmnId" jdbcType="VARCHAR"/>
+        <result column="TmnName" property="TmnName" jdbcType="VARCHAR"/>
+        <result column="U2TmnID" property="U2TmnID" jdbcType="VARCHAR"/>
+        <result column="U1TmnID" property="U1TmnID" jdbcType="VARCHAR"/>
+        <result column="D2TmnID" property="D2TmnID" jdbcType="VARCHAR"/>
+        <result column="D1TmnID" property="D1TmnID" jdbcType="VARCHAR"/>
+        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getTmnID" resultMap="BaseResultMap">
+        select TmnID from td_terminals;
+    </select>
+</mapper>

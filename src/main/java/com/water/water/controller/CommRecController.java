@@ -30,16 +30,6 @@ public class CommRecController {
             for(Map.Entry<String, String> entry : loginMap.entrySet()) {
                 System.out.println("key:" + entry.getKey() + "value:" + entry.getValue());
             }
-            ////CommRec commRec = commRecService.inserttotd_comm(requestcommrec);
-//            System.out.println(commRec);
-//            System.out.println("调用");
-//            if(commRec == null){
-//                return new Result(400);
-//            }
-//            else {
-//                System.out.println("调用了else");
-//                return new Result(200);
-//            }
             return new Result(200);
         } catch (Exception e) {
             System.out.println("错了");

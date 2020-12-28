@@ -1,7 +1,7 @@
 package com.water.water.pojo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+
 
 public class UserManage {
     private String UserID;

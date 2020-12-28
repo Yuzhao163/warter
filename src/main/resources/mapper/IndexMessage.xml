@@ -51,7 +51,7 @@
     </select>
 
     <select id="getSelectMessage" resultMap="DetailResult">
-        select * from td_Rec_Detail where W_work = #{W_work} AND W_line
+        select * from td_Rec_Detail where W_work = #{W_work} AND F_Volume
         between #{W_Downline} AND #{W_Upline};
     </select>
 <!--    -->

@@ -27,9 +27,6 @@ public class IndexContorller {
     public List getAllMessage() throws Exception {
         List allmessage = indexService.getAllMessage();
         List result_selectmessage = terminalsService.getNameByID(allmessage);
-        System.out.println("result_selectmessage");
-        System.out.println(result_selectmessage);
-        System.out.println("indexcontroller");
         return result_selectmessage;
     }
 
@@ -37,8 +34,7 @@ public class IndexContorller {
     public List getSelectMessage(@RequestParam Map params) throws Exception{
         System.out.println(params.get("W_work"));
         List selectmessage = indexService.getSelectMessage(params);
-        System.out.println("Selectmessage");
-        System.out.println(selectmessage);
-        return selectmessage;
+        List result_selectmessage = terminalsService.getNameByID(selectmessage);
+        return result_selectmessage;
     }
 }

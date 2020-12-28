@@ -14,4 +14,8 @@
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;
     </select>
+
+    <select id="getNameByID" resultMap="BaseResultMap">
+        select TmnName from td_terminals where TmnID = #{TmnID};
+    </select>
 </mapper>

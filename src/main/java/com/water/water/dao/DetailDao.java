@@ -10,7 +10,6 @@ import java.util.List;
 public interface DetailDao {
 
 //    @Select("select `V_per` from td_Rec_Detail where Id = 2")
-    @Mapper
     List getVper(Integer id);
 
 

@@ -16,4 +16,8 @@ public class DetailService {
         return detailDao.getVper(id);
     }
 
+//    public Integer getPipeByPackageId(Long PackageId){
+//        return detailDao.getPipeByPackageId(PackageId);
+//    }
+
 }

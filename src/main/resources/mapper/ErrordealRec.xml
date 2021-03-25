@@ -15,6 +15,10 @@
         <result column="Result" property="Result" jdbcType="VARCHAR"/>
         <result column="C_t" property="C_t" jdbcType="DATE"/>
         <result column="User" property="User" jdbcType="VARCHAR"/>
+        <result column="TmnId" property="TmnId" jdbcType="VARCHAR"/>
+        <result column="TmnName" property="TmnName" jdbcType="VARCHAR"/>
+        <result column="PipId" property="PipId" jdbcType="VARCHAR"/>
+        <result column="PTid" property="PTid" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--对应的sql语句-->

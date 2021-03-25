@@ -23,9 +23,9 @@ public class TerminalsService {
         PrintClassName printClassName = new PrintClassName();
         for (int i = 0;i<selectmessage.size();i++){
             Rec_Detail message = (Rec_Detail)selectmessage.get(i);
-            Integer TmnID = message.getId();
+            String TmnID = message.getTmnID();
             Terminals terminals = terminalsDao.getNameByID(TmnID);
-               String TmnName = terminals.getTmnName();
+            String TmnName = terminals.getTmnName();
             message.setTmnID(TmnName);
         }
         System.out.println(selectmessage);

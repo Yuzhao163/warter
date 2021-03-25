@@ -1,10 +1,10 @@
 package com.water.water.controller;
-
+//异常处理
+//2021.3.24
+//author 李轶杰
 import com.water.water.Result.Result;
-import com.water.water.service.CommRecService;
-import com.water.water.service.ErrordealRecService;
-import com.water.water.service.IndexService;
-import com.water.water.service.TerminalsService;
+import com.water.water.pojo.ErrordealRec;
+import com.water.water.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +17,16 @@ import java.util.Map;
 public class ErrordealRecController {
         @Autowired
         private ErrordealRecService errordealRecService;
+        @Autowired
+        private DetailService detailService;
 
     @RequestMapping(value = "api/error")
     @ResponseBody
     public List getAllError() throws Exception {
         List allerror = errordealRecService.getAllError();
-        return allerror;
+        List allerrorbyid = errordealRecService.getAllErrorById(allerror);
+        //allerror.add()
+        return allerrorbyid;
     }
 }
 

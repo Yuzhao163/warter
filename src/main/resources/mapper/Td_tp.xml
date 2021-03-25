@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+<!--如果id不设置成自动递增的，但是如果不加递增符号的话，就会报如下的错误
+Field 'id' doesn't have a default value] with root cause-->
+
+<!--  <insert id="insertUser">
+      insert into user(username,password) values(#{username},#{password});
+  </insert>-->
+<mapper namespace="com.water.water.dao.Td_tpDao">
+    <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Tp">
+        <id column="Id" property="Id" jdbcType="INTEGER"/>
+        <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
+        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
+        <result column="PTid" property="PTid" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <select id="getAlltdById" resultMap="BaseResultMap">
+        select PipID,PTid from td_TP where TmnID = #{TmnId};
+    </select>
+</mapper>

@@ -1,7 +1,7 @@
 package com.water.water.pojo;
 
 public class User {
-    int id;
+    Integer id;
     String username;
     String password;
     String telephone;

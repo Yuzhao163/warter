@@ -10,7 +10,42 @@ public class ErrordealRec {
     private Date C_t;
     private String User;
     private Long PackageId;
+    private String TmnId;
+    private String TmnName;
+    private String PipId;
+    private Integer PTid;
 
+    public String getTmnId() {
+        return TmnId;
+    }
+
+    public void setTmnId(String tmnId) {
+        TmnId = tmnId;
+    }
+
+    public String getTmnName() {
+        return TmnName;
+    }
+
+    public void setTmnName(String tmnName) {
+        TmnName = tmnName;
+    }
+
+    public String getPipId() {
+        return PipId;
+    }
+
+    public void setPipId(String pipId) {
+        PipId = pipId;
+    }
+
+    public Integer getPTid() {
+        return PTid;
+    }
+
+    public void setPTid(Integer PTid) {
+        this.PTid = PTid;
+    }
 
     public Short getERDId() {
         return ERDId;

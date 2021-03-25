@@ -1,7 +1,7 @@
 package com.water.water.pojo;
 
 public class Terminals {
-    int id;
+    Integer id;
     String TmnId;
     String TmnName;
     String U1TmnID;

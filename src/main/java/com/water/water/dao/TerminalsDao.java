@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface TerminalsDao {
     List getTmnID();
-    Terminals getNameByID(Integer TmnID);
+    Terminals getNameByID(String TmnID);
 }

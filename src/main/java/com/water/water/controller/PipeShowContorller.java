@@ -21,10 +21,7 @@ public class PipeShowContorller {
     @ResponseBody
     public List getPipe() {
         // 对 html 标签进行转义，防止 XSS 攻击
-        System.out.println("进来");
         List pipedata = pipeShowService.getPipe();
-        System.out.println("调用123456");
-        System.out.println(pipedata);
         return pipedata;
     }
 }

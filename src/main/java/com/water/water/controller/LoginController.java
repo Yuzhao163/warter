@@ -32,7 +32,6 @@ public class LoginController {
                 return new Result(400);
             }
             else {
-                System.out.println("调用了else");
                 if (passwords.equals(password)){
                     return new Result(200);
                 }else {

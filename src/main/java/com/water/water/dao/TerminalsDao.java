@@ -9,4 +9,13 @@ import java.util.List;
 public interface TerminalsDao {
     List getTmnID();
     Terminals getNameByID(String TmnID);
+
+
+    List getAllTmnList();
+
+    Integer addTmn(Terminals requestTmn);
+
+    Integer deleteTmn(String tmnID);
+
+    Integer modifyTmn(Terminals tmn);
 }

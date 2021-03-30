@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+        <!--
+        author：李小杰
+        date:3/27/2021
+        function:add,update
+        -->
 <mapper namespace="com.water.water.dao.UserManageDao">
     <resultMap id="BaseResultMap" type="com.water.water.pojo.UserManage">
         <id column="UserID" property="UserID" jdbcType="VARCHAR"/>
@@ -17,11 +22,11 @@
     </select>
 
     <select id="getAllUserManage" resultMap="BaseResultMap">
-        select UserName,RealName,UClassID,MoPhone,DPTName,RegTime from td_User;
+        select UserID,UserName,RealName,UClassID,MoPhone,DPTName,RegTime from td_User;
     </select>
 
     <insert id="insertTotd_user">
-        insert into td_user(UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,DPTName) values (#{UserName},#{UserPswd},#{UClassID},#{Ustate},#{RegTime},#{MoPhone},#{RealName},#{DPTName})
+        insert into td_user(UserName,UserPswd,RealName,UClassID,MoPhone,DPTName) values (#{UserName},#{UserPswd},#{RealName},#{UClassID},#{MoPhone},#{DPTName})
     </insert>
 
     <delete id="deletetd_user">
@@ -29,6 +34,7 @@
     </delete>
 
     <update id="updatetd_user">
-        update td_user set UserName = #{UserName}, UserPswd = #{UserPswd},UClassID = #{UClassID}, Ustate = #{Ustate}, RegTime = #{RegTime}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
+        <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
+        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
     </update>
 </mapper>

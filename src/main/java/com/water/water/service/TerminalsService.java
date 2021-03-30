@@ -1,5 +1,6 @@
 package com.water.water.service;
 
+import com.water.water.Result.Result;
 import com.water.water.dao.TerminalsDao;
 import com.water.water.pojo.Rec_Detail;
 import com.water.water.pojo.Terminals;
@@ -30,5 +31,27 @@ public class TerminalsService {
         }
         System.out.println(selectmessage);
         return selectmessage;
+    }
+
+//  获取全部控制柜
+    public List getAllTmnList() {
+        return terminalsDao.getAllTmnList();
+
+    }
+
+//  增加一个控制柜
+    public Integer addTmn(Terminals requestTmn) {
+        return terminalsDao.addTmn(requestTmn);
+
+    }
+
+//  删除一个控制柜
+    public Integer deleteTmn(String tmnID) {
+        return terminalsDao.deleteTmn(tmnID);
+    }
+
+//  编辑控制柜
+    public Integer modifyTmn(Terminals tmn) {
+        return terminalsDao.modifyTmn(tmn);
     }
 }

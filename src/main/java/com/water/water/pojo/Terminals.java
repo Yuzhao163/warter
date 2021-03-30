@@ -9,6 +9,10 @@ public class Terminals {
     String D1TmnID;
     String D2TmnID;
     String PipID;
+    String ConPont1;
+    String ConPont2;
+    String ConPont3;
+    String TmnDesc;
 
     @Override
     public String toString() {
@@ -23,7 +27,7 @@ public class Terminals {
                 ", PipID='" + PipID + '\'' +
                 ", ConPont1='" + ConPont1 + '\'' +
                 ", ConPont2='" + ConPont2 + '\'' +
-                ", Conpont3='" + Conpont3 + '\'' +
+                ", ConPont3='" + ConPont3 + '\'' +
                 ", TmnDesc='" + TmnDesc + '\'' +
                 '}';
     }
@@ -108,12 +112,12 @@ public class Terminals {
         ConPont2 = conPont2;
     }
 
-    public String getConpont3() {
-        return Conpont3;
+    public String getConPont3() {
+        return ConPont3;
     }
 
-    public void setConpont3(String conpont3) {
-        Conpont3 = conpont3;
+    public void setConPont3(String conPont3) {
+        ConPont3 = conPont3;
     }
 
     public String getTmnDesc() {
@@ -124,8 +128,5 @@ public class Terminals {
         TmnDesc = tmnDesc;
     }
 
-    String ConPont1;
-    String ConPont2;
-    String Conpont3;
-    String TmnDesc;
+
 }

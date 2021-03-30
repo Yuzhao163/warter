@@ -24,35 +24,27 @@ public class UserManageController {
 
     @Autowired
     UserManageService userManageService;
-
+    //通过用户名称搜索展示用户信息
     @RequestMapping(value = "api/staff")
     public List<UserManage> getAllUserManage() throws Exception{
         List<UserManage> user = userManageService.getAllUserManage();
         return user;
     }
-
+    //删除员工数据
     @ResponseBody
     @RequestMapping(value = "api/delstaff")
     public Integer deletetd_user(HttpServletRequest request){
         String UserID = request.getParameter("UserID");
         Integer user = userManageService.deletetd_user(UserID);
-        System.out.println("测试成功");
         return user;
     }
-
+    //插入员工数据
     @ResponseBody
     @RequestMapping(value = "api/addstaff")
     public Integer insertTotd_user(UserManage userManage){
-//        SimpleDateFormat sdf = new SimpleDateFormat();
-//        sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");  //a为am，pm的标记
-//        Date date = new Date();
-//        String new_date = sdf.format(date);
-//        System.out.println(new_date);
-        System.out.println("测试一下22222222222222222222222");
-
         return userManageService.insertTotd_user(userManage);
     }
-
+    //更新员工信息
     @ResponseBody
     @RequestMapping(value = "api/updstaff")
     public Result updatetd_user(UserManage userManage){
@@ -62,7 +54,6 @@ public class UserManageController {
                 return new Result(400);
             }
             else {
-                System.out.println("调用了else");
                 if (userManage.getUserPswd().isEmpty()){
                     userManage.setUserPswd("123456");
                     userManageService.updatetd_user(userManage);

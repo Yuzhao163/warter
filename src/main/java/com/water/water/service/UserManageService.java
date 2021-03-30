@@ -16,11 +16,11 @@ import java.util.List;
 public class UserManageService {
     @Autowired
     UserManageDao userManageDao;
-
+    //通过用户名称搜索展示用户信息
     public List<UserManage> getByUserManageName(String username){
         return userManageDao.getByUserManageName(username);
     }
-
+    //插入员工数据
     public Integer insertTotd_user(UserManage userManage){
         if(userManage.getUserName().isEmpty()){
             userManage.setUserName("admin"+userManage.getRealName());
@@ -33,24 +33,18 @@ public class UserManageService {
         }
         return 200;
     }
-
+    //删除员工数据
     public Integer deletetd_user(String UserID){
         return userManageDao.deletetd_user(UserID);
     }
 
+    //获取所有员工信息
     public List<UserManage> getAllUserManage(){
         return userManageDao.getAllUserManage();
     }
-
+    //更新员工信息
     public Integer updatetd_user(UserManage userManage){
-//        if(userManage.getUserPswd().isEmpty()){
-//            userManage.setUserPswd("123456");
-//            userManageDao.updatetd_user(userManage);
-//        } else {
-//            userManageDao.updatetd_user(userManage);
-//        }
         userManageDao.updatetd_user(userManage);
-        System.out.println("我执行了！");
         return 200;
     }
 

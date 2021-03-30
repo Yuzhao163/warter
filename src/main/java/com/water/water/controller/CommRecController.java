@@ -21,12 +21,7 @@ public class CommRecController {
 
     @RequestMapping(value = "api/ma",method = RequestMethod.POST)
     public Result regist(@RequestBody Map<String,String> loginMap){
-        System.out.println("调用le 1");
         try {
-            System.out.println("进来了");
-            System.out.println(loginMap);
-            String loginMapclass = loginMap.getClass().getName().toString();
-            System.out.println(loginMapclass);
             for(Map.Entry<String, String> entry : loginMap.entrySet()) {
                 System.out.println("key:" + entry.getKey() + "value:" + entry.getValue());
             }

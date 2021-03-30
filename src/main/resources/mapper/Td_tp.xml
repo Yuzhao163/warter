@@ -21,4 +21,10 @@ Field 'id' doesn't have a default value] with root cause-->
     <select id="getAlltdById" resultMap="BaseResultMap">
         select PipID,PTid from td_TP where TmnID = #{TmnId};
     </select>
+
+
+    <select id="getAlltdByPipID" resultMap="BaseResultMap">
+        select TmnID from td_TP where PipID = #{PipID} ORDER BY PTid;
+    </select>
+
 </mapper>

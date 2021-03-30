@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+<!--如果id不设置成自动递增的，但是如果不加递增符号的话，就会报如下的错误
+Field 'id' doesn't have a default value] with root cause-->
+
+<!--  <insert id="insertUser">
+      insert into user(username,password) values(#{username},#{password});
+  </insert>-->
+<mapper namespace="com.water.water.dao.td_AreasDao">
+    <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Areas">
+        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
+        <result column="AreaName" property="AreaName" jdbcType="VARCHAR"/>
+        <result column="AreaLeader" property="AreaLeader" jdbcType="VARCHAR"/>
+        <result column="AreaLeadPhone" property="AreaLeadPhone" jdbcType="VARCHAR"/>
+        <result column="AreaCreateDate" property="AreaCreateDate" jdbcType="DATE"/>
+    </resultMap>
+
+
+    <select id="getAreas" resultMap="BaseResultMap">
+        select AreaName,AreaID from td_areas;
+    </select>
+
+    <select id="getAreaIDByAreaName" resultMap="BaseResultMap">
+        select AreaID from td_areas where AreaName = #{AreaName};
+    </select>
+
+    <select id="getAreaNameByAreaID" resultMap="BaseResultMap">
+        select AreaName from td_areas where AreaID = #{AreaID};
+    </select>
+</mapper>

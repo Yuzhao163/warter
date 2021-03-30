@@ -21,8 +21,7 @@ public class PipeDistributeController {
     @Autowired
     private Td_tpService td_tpService;
 
-    @GetMapping(value = "api/getAreas")
-    @ResponseBody
+    @RequestMapping(value = "api/getAreas")
     public List getAreas() {
         // 对 html 标签进行转义，防止 XSS 攻击
         List Areas = td_areasService.getAreas();

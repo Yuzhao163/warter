@@ -30,11 +30,21 @@
     </insert>
 
     <delete id="deletetd_user">
-        delete from td_user where UserID = #{UserID}
+        delete from td_user where UserID = #{UserID};
     </delete>
 
     <update id="updatetd_user">
         <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
         update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
     </update>
+    <!--这里是同步插入数据，插入userManager的数据之后同时也会往注册页面插入一条新的员工信息-->
+    <insert id="insert_user">
+        insert into user(username, password, telephone) values(#{UserName},#{UserPswd},#{MoPhone});
+    </insert>
+    <update id="update_user">
+        update user set username=#{UserName},password=#{UserPswd},telephone=#{MoPhone} where id = #{UserID};
+    </update>
+    <delete id="delete_user">
+        delete from user where id = #{UserID};
+    </delete>
 </mapper>

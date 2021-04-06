@@ -10,4 +10,6 @@ public interface td_PipesDao {
     List getPips();
     List getPipsByAreaID(String AreaID);
     td_PIPs getPipByAreaID(String AreaID);
+    //通过PipsID查找AreaID
+    td_PIPs getAreasIdByPips(String PipsID);
 }

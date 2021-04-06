@@ -8,4 +8,5 @@ public interface UserDao {
     User getByusername(String username);
 
     int insertToUser(User user);
+//    int insertTo_tdUser(User user);
 }

@@ -30,4 +30,9 @@ Field 'id' doesn't have a default value] with root cause-->
     <select id="getPipByAreaID" resultMap="BaseResultMap">
         select PipName,PipID from td_pips where AreaID = #{AreaID};
     </select>
+
+    <!--找areasid-->
+    <select id="getAreasIdByPips" resultMap="BaseResultMap">
+        select AreaID from td_pips where PipID=#{PipID};
+    </select>
 </mapper>

@@ -13,4 +13,7 @@ public interface UserManageDao {
     Integer deletetd_user(String UserID);
     List<UserManage> getAllUserManage();
     Integer updatetd_user(UserManage userManage);
+    Integer insert_user(UserManage userManage);
+    Integer update_user(UserManage userManage);
+    Integer delete_user(String UserID);
 }

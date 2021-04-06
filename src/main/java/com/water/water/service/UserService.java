@@ -17,6 +17,7 @@ public class UserService {
 
     public User insertToUser(User user){
         userDao.insertToUser(user);
+//        userDao.insertTo_tdUser(user);
         return user;
     }
 }

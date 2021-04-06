@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--
+author：李小杰
+date:3/27/2021
+function:add,update
+-->
+<mapper namespace="com.water.water.dao.UserMessageDao">
+    <resultMap id="BaseResultMap" type="com.water.water.pojo.UserManage">
+        <id column="UserID" property="UserID" jdbcType="VARCHAR"/>
+        <result column="UserName" property="UserName" jdbcType="VARCHAR"/>
+        <result column="UserPswd" property="UserPswd" jdbcType="VARCHAR"/>
+        <result column="UClassID" property="UClassID" jdbcType="VARCHAR"/>
+        <result column="Ustate" property="Ustate" jdbcType="INTEGER"/>
+        <result column="RegTime" property="RegTime" jdbcType="DATE"/>
+        <result column="MoPhone" property="MoPhone" jdbcType="VARCHAR"/>
+        <result column="RealName" property="RealName" jdbcType="VARCHAR"/>
+        <result column="DPTName" property="DPTName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--UserMessage也同样使用UserManage的各个字段-->
+    <!--显示当前登录用户的数据-->
+    <select id="select_userMessage">
+        select UserID,UserName,UserPswd,RealName,MoPhone,DPTName from td_User;
+    </select>
+    <update id="update_userMessage">
+        update td_user set UserName = #{UserName}, UserPswd = #{UserPswd}, RealName = #{RealName}, MoPhone = #{MoPhone}, DPTName = #{DPTName} where UserID = #{UserID};
+    </update>
+    <update id="update_user">
+        update user set username = #{UserName}, password = #{UserPswd}, telephone = #{MoPhone} where UserID = #{UserID};
+    </update>
+</mapper>

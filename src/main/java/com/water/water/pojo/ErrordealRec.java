@@ -14,6 +14,15 @@ public class ErrordealRec {
     private String TmnName;
     private String PipId;
     private Integer PTid;
+    private String AreaID;
+
+    public String getAreaID() {
+        return AreaID;
+    }
+
+    public void setAreaID(String areaID) {
+        AreaID = areaID;
+    }
 
     public String getTmnId() {
         return TmnId;

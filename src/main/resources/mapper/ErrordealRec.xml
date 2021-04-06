@@ -19,6 +19,7 @@
         <result column="TmnName" property="TmnName" jdbcType="VARCHAR"/>
         <result column="PipId" property="PipId" jdbcType="VARCHAR"/>
         <result column="PTid" property="PTid" jdbcType="INTEGER"/>
+        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--对应的sql语句-->
@@ -32,4 +33,23 @@
 <!--    </select>-->
     <!--    -->
     <!--    <select id="getNameById" resultMap=""-->
+
+
+    <!--没啥用的-->
+<!--    <insert id="show_detail_deal">-->
+<!--        select Exception, Result from td_errordeal_rec where TmnId=#{TmnId};-->
+<!--    </insert>-->
+
+<!--    <update id="update_detail_deal">-->
+<!--        update td_errordeal_rec set Exception= # {Exception}, Result= # {Result} where TmnId = #{TmnId};-->
+<!--    </update>-->
+
+    <!--将异常处理的数据查出来返回给前端，可以将数据打成一个列表，然后前端接收会自动对其进行一定的处理-->
+    <select id="getError" resultMap="ErrordealRecMap">
+        select TmnId,TmnName,PipId,Exception,Result from td_errordeal_rec;
+    </select>
+
+    <update id="updateError">
+        update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
+    </update>
 </mapper>

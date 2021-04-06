@@ -12,4 +12,7 @@
     <insert id="insertToUser">
         insert into user(username,password,telephone,email) values (#{username},#{password},#{telephone},#{email})
     </insert>
+<!--    <insert id="insertTo_tdUser">-->
+<!--        insert into td_user(UserName,UserPswd,MoPhone) values (#{username},#{password},#{telephone})-->
+<!--    </insert>-->
 </mapper>

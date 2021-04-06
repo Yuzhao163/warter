@@ -10,4 +10,7 @@ public interface td_PipesDao {
     List getPips();
     List getPipsByAreaID(String AreaID);
     td_PIPs getPipByAreaID(String AreaID);
+
+
+    String getPipNameByPipID(String pipID);
 }

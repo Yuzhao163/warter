@@ -30,7 +30,7 @@ Field 'id' doesn't have a default value] with root cause-->
     </select>
 
 <!--    根据管线id查询管线-->
-    <select id="getPipsByPipID" resultType="String">
+    <select id="getPipNameByPipID" resultType="String">
         select PipName from td_pips where PipID = #{PipID}
     </select>
 z

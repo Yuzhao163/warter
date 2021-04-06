@@ -75,7 +75,7 @@ public class TerminalsService {
             // 获得每一个控制柜的管线id
             String PipID = tmn.getPipID();
             // 根据管线id查询管线
-            String PipName = td_pipesDao.getPipsByPipID(PipID);
+            String PipName = td_pipesDao.getPipNameByPipID(PipID);
             // 查询控制柜相关信息
             String U1TmnID = tmn.getU1TmnID();
             String U2TmnID = tmn.getU2TmnID();

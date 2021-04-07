@@ -1,5 +1,6 @@
 package com.water.water.dao;
 
+import com.water.water.pojo.td_Areas;
 import com.water.water.pojo.td_PIPs;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,4 +13,5 @@ public interface td_PipesDao {
     td_PIPs getPipByAreaID(String AreaID);
     //通过PipsID查找AreaID
     td_PIPs getAreasIdByPips(String PipsID);
+    td_PIPs getPipNameByPipID(String PipID);
 }

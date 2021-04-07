@@ -22,6 +22,8 @@ public class ErrordealRecService {
     Td_tpDao td_tpDao;
     @Autowired
     com.water.water.dao.td_PipesDao td_PipesDao;
+    @Autowired
+    td_AreasDao td_areasDao;
 
     //public ErrordealRec getAllError(){
     //return errordealRecDao.getAllError();
@@ -69,6 +71,10 @@ public class ErrordealRecService {
             String PipId = tp.getPipID();
             td_PIPs td_pips = td_PipesDao.getAreasIdByPips(PipId);
             String areaID = td_pips.getAreaID();
+            td_PIPs td_piPs = td_PipesDao.getPipNameByPipID(PipId);
+            String PipName = td_piPs.getPipName();
+            td_Areas td_areas = td_areasDao.getAreaNameByAreaID(areaID);
+            String AreaName = td_areas.getAreaName();
 
             Integer PTid = tp.getPTid();
             //message.setTmnID(TmnName);
@@ -77,6 +83,8 @@ public class ErrordealRecService {
             message.setPipId(PipId);
             message.setPTid(PTid);
             message.setAreaID(areaID);
+            message.setPipName(PipName);
+            message.setAreaName(AreaName);
         }
         return AllError;
     }

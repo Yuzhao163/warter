@@ -20,6 +20,8 @@
         <result column="PipId" property="PipId" jdbcType="VARCHAR"/>
         <result column="PTid" property="PTid" jdbcType="INTEGER"/>
         <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
+        <result column="PipName" property="PipName" jdbcType="VARCHAR"/>
+        <result column="AreaName" property="AreaName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--对应的sql语句-->

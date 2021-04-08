@@ -19,9 +19,6 @@
         <result column="TmnName" property="TmnName" jdbcType="VARCHAR"/>
         <result column="PipId" property="PipId" jdbcType="VARCHAR"/>
         <result column="PTid" property="PTid" jdbcType="INTEGER"/>
-        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
-        <result column="PipName" property="PipName" jdbcType="VARCHAR"/>
-        <result column="AreaName" property="AreaName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--对应的sql语句-->
@@ -47,11 +44,13 @@
 <!--    </update>-->
 
     <!--将异常处理的数据查出来返回给前端，可以将数据打成一个列表，然后前端接收会自动对其进行一定的处理-->
-    <select id="getError" resultMap="ErrordealRecMap">
-        select TmnId,TmnName,PipId,Exception,Result from td_errordeal_rec;
-    </select>
+<!--    <select id="getError" resultMap="ErrordealRecMap">-->
+<!--        select * from td_errordeal_rec;-->
+<!--    </select>-->
 
     <update id="updateError">
         update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
     </update>
+
+
 </mapper>

@@ -2,9 +2,11 @@ package com.water.water.controller;
 //异常处理
 //2021.3.24
 //author 李轶杰
+import com.mysql.cj.xdevapi.JsonArray;
 import com.water.water.Result.Result;
 import com.water.water.pojo.ErrordealRec;
 import com.water.water.service.*;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,7 @@ public class ErrordealRecController {
     public List getAllError() throws Exception {
         List allerror = errordealRecService.getAllError();
         List allerrorbyid = errordealRecService.getAllErrorById(allerror);
-        System.out.println(allerror);
+        System.out.println(allerrorbyid);
         //allerror.add()
         return allerrorbyid;
     }
@@ -42,16 +44,15 @@ public class ErrordealRecController {
 //    }
 
 //    @RequestMapping(value = "api/geterror")
-//    public List getError() throws Exception{
+//    public JSONArray getError() throws Exception{
 //        List error = errordealRecService.getError();
-//        List errors = errordealRecService.getErrorById(error);
-//        System.out.println(errors);
+//        JSONArray errors = errordealRecService.getErrorById(error);
 //        return errors;
 //    }
 
     @RequestMapping(value = "api/adderror")
-    public void insertError(ErrordealRec errordealRec) throws Exception{
-        errordealRecService.updateError(errordealRec);
+    public void insertError(String TmnId){
+        errordealRecService.updateError(TmnId);
     }
 }
 

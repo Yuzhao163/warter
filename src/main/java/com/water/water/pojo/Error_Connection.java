@@ -1,8 +1,8 @@
 package com.water.water.pojo;
 
 import java.sql.Date;
-//异常展示实体类
-public class ErrordealRec {
+
+public class Error_Connection {
     private Short ERDId;
     private Short ERId;
     private String Exception;
@@ -14,40 +14,8 @@ public class ErrordealRec {
     private String TmnName;
     private String PipId;
     private Integer PTid;
-
-
-
-    public String getTmnId() {
-        return TmnId;
-    }
-
-    public void setTmnId(String tmnId) {
-        TmnId = tmnId;
-    }
-
-    public String getTmnName() {
-        return TmnName;
-    }
-
-    public void setTmnName(String tmnName) {
-        TmnName = tmnName;
-    }
-
-    public String getPipId() {
-        return PipId;
-    }
-
-    public void setPipId(String pipId) {
-        PipId = pipId;
-    }
-
-    public Integer getPTid() {
-        return PTid;
-    }
-
-    public void setPTid(Integer PTid) {
-        this.PTid = PTid;
-    }
+    private String AreaID;
+    private String AreaName;
 
     public Short getERDId() {
         return ERDId;
@@ -105,4 +73,51 @@ public class ErrordealRec {
         PackageId = packageId;
     }
 
+    public String getTmnId() {
+        return TmnId;
+    }
+
+    public void setTmnId(String tmnId) {
+        TmnId = tmnId;
+    }
+
+    public String getTmnName() {
+        return TmnName;
+    }
+
+    public void setTmnName(String tmnName) {
+        TmnName = tmnName;
+    }
+
+    public String getPipId() {
+        return PipId;
+    }
+
+    public void setPipId(String pipId) {
+        PipId = pipId;
+    }
+
+    public Integer getPTid() {
+        return PTid;
+    }
+
+    public void setPTid(Integer PTid) {
+        this.PTid = PTid;
+    }
+
+    public String getAreaID() {
+        return AreaID;
+    }
+
+    public void setAreaID(String areaID) {
+        AreaID = areaID;
+    }
+
+    public String getAreaName() {
+        return AreaName;
+    }
+
+    public void setAreaName(String areaName) {
+        AreaName = areaName;
+    }
 }

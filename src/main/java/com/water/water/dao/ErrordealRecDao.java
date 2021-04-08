@@ -1,6 +1,7 @@
 package com.water.water.dao;
 
 import com.water.water.pojo.ErrordealRec;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,5 +19,5 @@ public interface ErrordealRecDao {
 
 //    List getError();
 //    List getErrorById(List Error);
-    void updateError(ErrordealRec errordealRec);
+    void updateError(String TmnId);
 }

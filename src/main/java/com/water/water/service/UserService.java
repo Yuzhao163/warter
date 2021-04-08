@@ -17,7 +17,9 @@ public class UserService {
 
     public User insertToUser(User user){
         userDao.insertToUser(user);
-//        userDao.insertTo_tdUser(user);
+        userDao.insertTo_tdUser(user);
+        System.out.println("测试一行");
+        System.out.println(user.getPassword());
         return user;
     }
 }

@@ -48,13 +48,13 @@ public class LoginController {
     @ResponseBody
     public Result regist(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
-        String username = requestUser.getUsername();
-        String password = requestUser.getPassword();
-        String telephone = requestUser.getTelephone();
-        String email = requestUser.getEmail();
-        username = HtmlUtils.htmlEscape(username);
-        password = HtmlUtils.htmlEscape(password);
-        email = HtmlUtils.htmlEscape(email);
+//        String username = requestUser.getUsername();
+//        String password = requestUser.getPassword();
+//        String telephone = requestUser.getTelephone();
+//        String email = requestUser.getEmail();
+//        username = HtmlUtils.htmlEscape(username);
+//        password = HtmlUtils.htmlEscape(password);
+//        email = HtmlUtils.htmlEscape(email);
         try {
             User user = userService.insertToUser(requestUser);
             if(user == null){

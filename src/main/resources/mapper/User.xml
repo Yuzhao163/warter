@@ -12,7 +12,8 @@
     <insert id="insertToUser">
         insert into user(username,password,telephone,email) values (#{username},#{password},#{telephone},#{email})
     </insert>
-<!--    <insert id="insertTo_tdUser">-->
-<!--        insert into td_user(UserName,UserPswd,MoPhone) values (#{username},#{password},#{telephone})-->
-<!--    </insert>-->
+    <!--登录界面中插入数据的同时，在usermanage中也插入一条数据-->
+    <insert id="insertTo_tdUser">
+        insert into td_user(UserName,UserPswd,MoPhone) values (#{username},#{password},#{telephone})
+    </insert>
 </mapper>

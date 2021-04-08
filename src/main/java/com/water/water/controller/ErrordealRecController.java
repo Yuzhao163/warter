@@ -27,11 +27,16 @@ public class ErrordealRecController {
     public List getAllError() throws Exception {
         List allerror = errordealRecService.getAllError();
         List allerrorbyid = errordealRecService.getAllErrorById(allerror);
-        System.out.println(allerrorbyid);
-        //allerror.add()
         return allerrorbyid;
     }
 
+    @RequestMapping(value = "api/errors")
+    @ResponseBody
+    public List getErrors(){
+        List allerror = errordealRecService.getErrors();
+        List allerrorbyid = errordealRecService.getErrorsById(allerror);
+        return allerrorbyid;
+    }
 
 //    @RequestMapping(value = "api/showde")
 //    public void show_detail_deal(String TmnId){

@@ -13,11 +13,6 @@ public interface ErrordealRecDao {
 
     List getAllErrorById(List AllError);
 
-//    void show_detail_deal(String TmnId);
-//
-//    void update_detail_deal(String TmnId);
 
-//    List getError();
-//    List getErrorById(List Error);
     Integer updateError(ErrordealRec errordealRec);
 }

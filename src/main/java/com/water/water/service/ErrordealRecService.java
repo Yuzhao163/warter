@@ -34,84 +34,43 @@ public class ErrordealRecService {
     //public ErrordealRec getAllError(){
     //return errordealRecDao.getAllError();
     //}
-    //宇哥代码
-//    public List getAllError() {
-//        return errordealRecDao.getAllError();
-//    }
-//
-//    public List getAllErrorById(List AllError) {
-//        System.out.println(AllError);
-//        for (int i = 0; i < AllError.size(); i++) {
-//            ErrordealRec message = (ErrordealRec) AllError.get(i);
-//            Long packageId = message.getPackageId();
-//            Rec_Detail TmnId_message = detailDao.getPipeByPackageId(packageId);
-//            String TmnId = TmnId_message.getTmnID();
-//            Terminals terminals = terminalsDao.getNameByID(TmnId);
-//            String TmnName = terminals.getTmnName();
-//            td_Tp tp = td_tpDao.getAlltdById(TmnId);
-//            String PipId = tp.getPipID();
-//            Integer PTid = tp.getPTid();
-//            //message.setTmnID(TmnName);
-//            message.setTmnId(TmnId);
-//            message.setTmnName(TmnName);
-//            message.setPipId(PipId);
-//            message.setPTid(PTid);
-//        }
-//        return AllError;
-//    }
-/*这部分是4.8注释掉的数据*/
-//    public List getAllError() {
-//        return errordealRecDao.getAllError();
-//    }
-//
-//    public List getAllErrorById(List AllError) {
-//        System.out.println(AllError);
-//        for (int i = 0; i < AllError.size(); i++) {
-//            ErrordealRec message = (ErrordealRec) AllError.get(i);
-//            Long packageId = message.getPackageId();
-//            Rec_Detail TmnId_message = detailDao.getPipeByPackageId(packageId);
-//            String TmnId = TmnId_message.getTmnID();
-//            Terminals terminals = terminalsDao.getNameByID(TmnId);
-//            String TmnName = terminals.getTmnName();
-//            td_Tp tp = td_tpDao.getAlltdById(TmnId);
-//            String PipId = tp.getPipID();
-//            td_PIPs td_pips = td_PipesDao.getAreasIdByPips(PipId);
-//            String areaID = td_pips.getAreaID();
-//            td_PIPs td_piPs = td_PipesDao.getPipNameByPipID(PipId);
-//            String PipName = td_piPs.getPipName();
-//            td_Areas td_areas = td_areasDao.getAreaNameByAreaID(areaID);
-//            String AreaName = td_areas.getAreaName();
-//
-//            Integer PTid = tp.getPTid();
-//            //message.setTmnID(TmnName);
-//
-////
-////            AllError.add(areaID);
-////            AllError.add(PipName);
-////            AllError.add(AreaName);
-//            message.setTmnId(TmnId);
-//            message.setTmnName(TmnName);
-//            message.setPipId(PipId);
-//            message.setPTid(PTid);
-////            message.setAreaID(areaID);
-////            message.setPipName(PipName);
-////            message.setAreaName(AreaName);
-//
-//        }
-//        return AllError;
-//    }
 
     public List getAllError() {
         return errordealRecDao.getAllError();
     }
+
     public List getAllErrorById(List AllError) {
+        System.out.println(AllError);
+        for (int i = 0; i < AllError.size(); i++) {
+            ErrordealRec message = (ErrordealRec) AllError.get(i);
+            Long packageId = message.getPackageId();
+            Rec_Detail TmnId_message = detailDao.getPipeByPackageId(packageId);
+            String TmnId = TmnId_message.getTmnID();
+            Terminals terminals = terminalsDao.getNameByID(TmnId);
+            String TmnName = terminals.getTmnName();
+            td_Tp tp = td_tpDao.getAlltdById(TmnId);
+            String PipId = tp.getPipID();
+            Integer PTid = tp.getPTid();
+            //message.setTmnID(TmnName);
+            message.setTmnId(TmnId);
+            message.setTmnName(TmnName);
+            message.setPipId(PipId);
+            message.setPTid(PTid);
+        }
+        return AllError;
+    }
+
+
+    public List getErrors() {
+        return errordealRecDao.getAllError();
+    }
+    public List getErrorsById(List AllError) {
 
         ArrayList list = new ArrayList();
         System.out.println(AllError);
         for (int i = 0; i < AllError.size(); i++) {
             Error_Connection error_connection = new Error_Connection();
             ErrordealRec message = (ErrordealRec) AllError.get(i);
-            System.out.println("吼吼哦吼"+message);
             Short ERDId = message.getERDId();
             Short ERId = message.getERId();
             String Exception = message.getException();
@@ -133,7 +92,6 @@ public class ErrordealRecService {
             td_Areas td_areas = td_areasDao.getAreaNameByAreaID(areaID);
             String AreaName = td_areas.getAreaName();
             Integer PTid = tp.getPTid();
-            //message.setTmnID(TmnName);
             error_connection.setERDId(ERDId);
             error_connection.setERId(ERId);
             error_connection.setException(Exception);
@@ -147,24 +105,7 @@ public class ErrordealRecService {
             error_connection.setPTid(PTid);
             error_connection.setAreaName(AreaName);
             list.add(error_connection);
-            System.out.println("哈哈哈哈哈哈哈哈哈哈" + list);
-//            AllError.add(areaID);
-//            AllError.add(PipName);
-//            AllError.add(AreaName);
-//            message.setTmnId(TmnId);
-//            message.setTmnName(TmnName);
-//            message.setPipId(PipId);
-//            message.setPTid(PTid);
-//            message.setAreaID(areaID);
-//            message.setPipName(PipName);
-//            message.setAreaName(AreaName);
-
         }
-        for(Object s:list){
-            System.out.println(s);
-        }
-
-
         return list;
     }
 
@@ -191,8 +132,6 @@ public class ErrordealRecService {
 
 
     public Integer updateError(ErrordealRec errordealRec){
-        System.out.println("我这边插入错误啦");
-        System.out.println(errordealRec.toString());
         return errordealRecDao.updateError(errordealRec);
     }
 }

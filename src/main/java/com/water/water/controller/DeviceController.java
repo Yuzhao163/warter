@@ -4,6 +4,7 @@ package com.water.water.controller;
 import com.water.water.Result.Result;
 import com.water.water.pojo.Terminals;
 import com.water.water.service.TerminalsService;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,8 @@ public class DeviceController {
     @Autowired
     private TerminalsService terminalsService;
 
-//    获取全部控制柜
+
+//    获取全部控制柜（原表）
     @RequestMapping(value = "api/getAllTmnList")
     public List getAllTmnList(){
         List getAllTmnList = terminalsService.getAllTmnList();
@@ -26,49 +28,30 @@ public class DeviceController {
 
 //    添加一个控制柜
     @PostMapping(value = "api/addTmn")
-    public Result addTmn(@RequestBody Terminals requestTmn){
-        try {
-            Integer result = terminalsService.addTmn(requestTmn);
-            if (result == 1){
-                return new Result(200);
-            } else {
-                return new Result(400);
-            }
-        } catch (Exception e) {
-            return new Result(400);
-        }
+    public Integer addTmn(@RequestBody Terminals requestTmn){
+        Integer result = terminalsService.addTmn(requestTmn);
+        return result;
     }
 
 //    删除一个控制柜
-    @PostMapping(value = "api/deleteTmn")
-    public Result deleteTmn(@RequestBody Terminals tmn) {
-        String tmnID = tmn.getTmnId();
-        try {
-            Integer result = terminalsService.deleteTmn(tmnID);
-            if (result == 1) {
-                return new Result(200);
-            } else {
-                return new Result(400);
-            }
-        } catch (Exception e) {
-            return new Result(400);
-        }
+    @PostMapping(value = "api/deleteTmnByID")
+    public Integer deleteTmn(@RequestBody Terminals tmn) {
+        Integer result = terminalsService.deleteTmnByID(tmn);
+        return result;
     }
 
 //    修改控制柜信息
     @PostMapping(value = "api/modifyTmn")
-    public Result modifyTmn(@RequestBody Terminals tmn) {
-        try {
-            Integer result = terminalsService.modifyTmn(tmn);
-            if (result == 1) {
-                return new Result(200);
-            } else {
-                return new Result(400);
-            }
-        } catch (Exception e) {
-            return new Result(400);
-        }
+    public Integer modifyTmn(@RequestBody Terminals tmn) {
+        Integer result = terminalsService.modifyTmn(tmn);
+        return result;
     }
 
+//  根据需求显示控制柜的信息（包含了管线名称）
+    @RequestMapping(value = "api/getTmnList")
+    public JSONArray getTmnList() {
+        JSONArray TmnList = terminalsService.getTmnList();
+        return TmnList;
+    }
 
 }

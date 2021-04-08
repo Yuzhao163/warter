@@ -15,7 +15,9 @@ public interface TerminalsDao {
 
     Integer addTmn(Terminals requestTmn);
 
-    Integer deleteTmn(String tmnID);
+    Integer deleteTmnByID(String tmnID);
 
     Integer modifyTmn(Terminals tmn);
+
+    String getTmnNameByTmnID(String tmnID);
 }

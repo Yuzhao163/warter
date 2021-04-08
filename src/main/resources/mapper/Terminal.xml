@@ -34,7 +34,7 @@
     </insert>
 
 <!--    根据控制柜id删除控制柜-->
-    <delete id="deleteTmn">
+    <delete id="deleteTmnByID">
         delete from td_terminals where TmnId = #{TmnID}
     </delete>
 
@@ -44,4 +44,9 @@
             D1TmnID=#{D1TmnID},D2TmnID=#{D2TmnID},PipID=#{PipID},ConPont1=#{ConPont1},
             ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where id=#{id}
     </update>
+
+<!--    根据控制柜id查询控制柜名称-->
+    <select id="getTmnNameByTmnID" resultType="String">
+        select TmnName from td_terminals where TmnId = #{TmnID}
+    </select>
 </mapper>

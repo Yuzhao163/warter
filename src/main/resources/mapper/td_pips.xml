@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-
-
 <!--如果id不设置成自动递增的，但是如果不加递增符号的话，就会报如下的错误
 Field 'id' doesn't have a default value] with root cause-->
 
@@ -29,5 +27,15 @@ Field 'id' doesn't have a default value] with root cause-->
 
     <select id="getPipByAreaID" resultMap="BaseResultMap">
         select PipName,PipID from td_pips where AreaID = #{AreaID};
+    </select>
+
+<!--    根据管线id查询管线-->
+    <select id="getPipNameByPipID" resultType="String">
+        select PipName from td_pips where PipID = #{PipID}
+    </select>
+
+<!--    返回全部管线信息-->
+    <select id="getPipList" resultMap="BaseResultMap">
+        select * from td_pips
     </select>
 </mapper>

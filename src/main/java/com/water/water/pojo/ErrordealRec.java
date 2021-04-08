@@ -105,4 +105,20 @@ public class ErrordealRec {
         PackageId = packageId;
     }
 
+    @Override
+    public String toString() {
+        return "ErrordealRec{" +
+                "ERDId=" + ERDId +
+                ", ERId=" + ERId +
+                ", Exception='" + Exception + '\'' +
+                ", Result='" + Result + '\'' +
+                ", C_t=" + C_t +
+                ", User='" + User + '\'' +
+                ", PackageId=" + PackageId +
+                ", TmnId='" + TmnId + '\'' +
+                ", TmnName='" + TmnName + '\'' +
+                ", PipId='" + PipId + '\'' +
+                ", PTid=" + PTid +
+                '}';
+    }
 }

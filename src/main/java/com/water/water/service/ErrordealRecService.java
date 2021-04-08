@@ -190,8 +190,9 @@ public class ErrordealRecService {
 //
 
 
-    public void updateError(String TmnId){
+    public Integer updateError(ErrordealRec errordealRec){
         System.out.println("我这边插入错误啦");
-        errordealRecDao.updateError(TmnId);
+        System.out.println(errordealRec.toString());
+        return errordealRecDao.updateError(errordealRec);
     }
 }

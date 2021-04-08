@@ -19,5 +19,5 @@ public interface ErrordealRecDao {
 
 //    List getError();
 //    List getErrorById(List Error);
-    void updateError(String TmnId);
+    Integer updateError(ErrordealRec errordealRec);
 }

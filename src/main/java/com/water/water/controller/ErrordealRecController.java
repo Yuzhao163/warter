@@ -51,8 +51,8 @@ public class ErrordealRecController {
 //    }
 
     @RequestMapping(value = "api/adderror")
-    public void insertError(String TmnId){
-        errordealRecService.updateError(TmnId);
+    public Integer insertError(ErrordealRec errordealRec){
+        return errordealRecService.updateError(errordealRec);
     }
 }
 

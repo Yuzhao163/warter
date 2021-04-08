@@ -10,7 +10,9 @@ import com.water.water.pojo.td_Tp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PipeShowService {
@@ -19,7 +21,8 @@ public class PipeShowService {
     @Autowired
     private TerminalsDao terminalsDao;
 
-    public List getPipe(){
+    public Map<String,Rec_Detail> getPipe(){
+        Map<String,Rec_Detail> res = new HashMap<String , Rec_Detail>();
         List pipe = pipeShowDao.getPipe();
         //控制柜和控制柜名字要对应，否则会出现越界错误
         for (int i = 0;i<pipe.size();i++){
@@ -28,8 +31,9 @@ public class PipeShowService {
             Terminals terminals = terminalsDao.getNameByID(TmnId);
             String TmnName = terminals.getTmnName();
             //message.setTmnID(TmnName);
-            message.setTmnID(TmnName);
+            message.setTmnID(TmnId);
+            res.put(TmnName,message);
         }
-        return pipe;
+        return res;
     }
 }

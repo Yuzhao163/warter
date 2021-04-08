@@ -13,7 +13,15 @@
         <result column="DPTName" property="DPTName" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getByUserManageName" resultMap="BaseResultMap">
-        select UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName, DPTName from td_User where UserName = #{UserName};
+        select
+        UserID,UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,
+        DPTName from td_User where UserName = #{UserName};
+    </select>
+
+    <select id="getByusername" resultMap="BaseResultMap">
+        select
+        UserID,UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,
+        DPTName from td_User where UserName = #{UserName};
     </select>
 
     <select id="getAllUserManage" resultMap="BaseResultMap">

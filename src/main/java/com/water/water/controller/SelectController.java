@@ -25,7 +25,5 @@ public class SelectController {
         List TmnID = terminalsService.getTmnID();
         return TmnID;
     }
-
-
 }
 

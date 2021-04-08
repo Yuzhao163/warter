@@ -1,6 +1,7 @@
 package com.water.water.service;
 
 import com.water.water.dao.UserManageDao;
+import com.water.water.pojo.User;
 import com.water.water.pojo.UserManage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,7 @@ public class UserManageService {
         return userManageDao.updatetd_user(UserID);
     }
 
+    public UserManage getByusername(String username){
+        return userManageDao.getByusername(username);
+    }
 }

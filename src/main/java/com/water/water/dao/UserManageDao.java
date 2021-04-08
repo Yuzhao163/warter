@@ -12,4 +12,5 @@ public interface UserManageDao {
     String deletetd_user(String UserID);
     List<UserManage> getAllUserManage();
     int updatetd_user(String UserID);
+    UserManage getByusername(String username);
 }

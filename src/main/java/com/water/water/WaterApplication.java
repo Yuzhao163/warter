@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import com.water.water.util.PrintClassName;
 
+
 @SpringBootApplication
 //public class WaterApplication extends WebMvcConfigurerAdapter {
 @MapperScan("com.water.water.dao")
@@ -30,10 +31,10 @@ public class WaterApplication {
 //                .allowedOrigins("*")
 //                .allowedMethods("*");
 //    }
-    @EventListener(WebServerInitializedEvent.class)
-    public void onWebServerReady(WebServerInitializedEvent event){
-        PrintClassName printClassName = new PrintClassName();
-        System.out.println("当前webServer的实现类为："+ printClassName.PrintClassName(event)
-        );
-    }
+//    @EventListener(WebServerInitializedEvent.class)
+//    public void onWebServerReady(WebServerInitializedEvent event){
+//        PrintClassName printClassName = new PrintClassName();
+//        System.out.println("当前webServer的实现类为："+ printClassName.PrintClassName(event)
+//        );
+//    }
 }

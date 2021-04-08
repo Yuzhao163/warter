@@ -9,13 +9,39 @@
         <result column="U1TmnID" property="U1TmnID" jdbcType="VARCHAR"/>
         <result column="D2TmnID" property="D2TmnID" jdbcType="VARCHAR"/>
         <result column="D1TmnID" property="D1TmnID" jdbcType="VARCHAR"/>
+        <result column="ConPont1" property="ConPont1" jdbcType="VARCHAR"/>
+        <result column="ConPont2" property="ConPont2" jdbcType="VARCHAR"/>
+        <result column="ConPont3" property="ConPont3" jdbcType="VARCHAR"/>
         <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
+        <result column="TmnDesc" property="TmnDesc" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;
     </select>
 
     <select id="getNameByID" resultMap="BaseResultMap">
-        select TmnName from td_terminals where TmnID = #{TmnID};
+        select TmnName from td_terminals where TmnId = #{TmnID};
     </select>
+
+<!--    获取整个列表信息-->
+    <select id="getAllTmnList" resultMap="BaseResultMap">
+        select * from td_terminals;
+    </select>
+
+<!--    添加一个控制柜到表中-->
+    <insert id="addTmn">
+        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,PipID,ConPont1,ConPont2,ConPont3,TmnDesc) values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{PipID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc})
+    </insert>
+
+<!--    根据控制柜id删除控制柜-->
+    <delete id="deleteTmn">
+        delete from td_terminals where TmnId = #{TmnID}
+    </delete>
+
+<!--    对控制柜信息进行修改-->
+    <update id="modifyTmn">
+        update td_terminals set TmnId=#{TmnId},TmnName=#{TmnName},U1TmnID=#{U1TmnID},U2TmnID=#{U2TmnID},
+            D1TmnID=#{D1TmnID},D2TmnID=#{D2TmnID},PipID=#{PipID},ConPont1=#{ConPont1},
+            ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where id=#{id}
+    </update>
 </mapper>

@@ -51,4 +51,9 @@ public class UserManageService {
     public UserManage getByusername(String username){
         return userManageDao.getByusername(username);
     }
+
+    //根据员工姓名获取员工具体信息
+    public List getUserMessageByName(String UserName){
+        return userManageDao.getByUserManageName(UserName);
+    }
 }

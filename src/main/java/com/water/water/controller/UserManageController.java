@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -37,6 +38,11 @@ public class UserManageController {
         String UserID = request.getParameter("UserID");
         Integer user = userManageService.deletetd_user(UserID);
         return user;
+    }
+
+    @RequestMapping(value = "api/getUserMessage")
+    public List getUserMessageByName(@RequestParam String UserName) throws Exception{
+        return userManageService.getUserMessageByName(UserName);
     }
     //插入员工数据
     @ResponseBody

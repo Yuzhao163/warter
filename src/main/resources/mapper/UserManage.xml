@@ -45,4 +45,9 @@
         <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
         update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
     </update>
+
+    <select id="getUserMessageByName" resultMap="BaseResultMap">
+        select * from td_User where UserName = #{UserName};
+    </select>
+
 </mapper>

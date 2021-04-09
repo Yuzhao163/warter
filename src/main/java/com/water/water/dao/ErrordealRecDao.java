@@ -11,4 +11,6 @@ public interface ErrordealRecDao {
     List getAllError();
 
     List getAllErrorById(List AllError);
+
+    Integer updateError(ErrordealRec errordealRec);
 }

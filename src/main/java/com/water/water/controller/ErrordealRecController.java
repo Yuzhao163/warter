@@ -28,5 +28,18 @@ public class ErrordealRecController {
         //allerror.add()
         return allerrorbyid;
     }
+
+    @RequestMapping(value = "api/errors")
+    @ResponseBody
+    public List getErrors(){
+        List allerror = errordealRecService.getErrors();
+        List allerrorbyid = errordealRecService.getErrorsById(allerror);
+        return allerrorbyid;
+    }
+
+    @RequestMapping(value = "api/adderror")
+    public Integer insertError(ErrordealRec errordealRec){
+        return errordealRecService.updateError(errordealRec);
+    }
 }
 

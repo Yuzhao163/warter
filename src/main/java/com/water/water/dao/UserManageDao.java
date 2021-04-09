@@ -15,4 +15,9 @@ public interface UserManageDao {
     UserManage getByusername(String username);
     Integer updatetd_user(UserManage userManage);
     List getUserMessageByName(String UserName);
+
+    Integer insert_user(UserManage userManage);
+    Integer update_user(UserManage userManage);
+    Integer delete_user(String UserID);
+
 }

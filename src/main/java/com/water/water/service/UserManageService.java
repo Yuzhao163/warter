@@ -35,7 +35,9 @@ public class UserManageService {
     }
     //删除员工数据
     public Integer deletetd_user(String UserID){
-        return userManageDao.deletetd_user(UserID);
+        userManageDao.deletetd_user(UserID);
+        userManageDao.delete_user(UserID);
+        return 200;
     }
 
     //获取所有员工信息
@@ -45,6 +47,7 @@ public class UserManageService {
     //更新员工信息
     public Integer updatetd_user(UserManage userManage){
         userManageDao.updatetd_user(userManage);
+        userManageDao.update_user(userManage);
         return 200;
     }
 

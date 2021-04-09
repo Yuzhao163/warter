@@ -32,4 +32,7 @@
 <!--    </select>-->
     <!--    -->
     <!--    <select id="getNameById" resultMap=""-->
+    <update id="updateError">
+        update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
+    </update>
 </mapper>

@@ -41,6 +41,10 @@
         delete from td_user where UserID = #{UserID}
     </delete>
 
+    <!--这里是同步插入数据，插入userManager的数据之后同时也会往注册页面插入一条新的员工信息-->
+    <insert id="insert_user">
+        insert into user(username, password, telephone) values(#{UserName},#{UserPswd},#{MoPhone});
+    </insert>
     <update id="updatetd_user">
         <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
         update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
@@ -49,5 +53,10 @@
     <select id="getUserMessageByName" resultMap="BaseResultMap">
         select * from td_User where UserName = #{UserName};
     </select>
+
+    <!--这一行可能没用-->
+    <update id="update_userMessage">update td_user set UserName = #{UserName}, UserPswd = #{UserPswd}, RealName = #{RealName}, MoPhone = #{MoPhone}, DPTName = #{DPTName} where UserID = #{UserID}; </update>
+
+    <update id="update_user">update user set username = #{UserName}, password = #{UserPswd}, telephone = #{MoPhone} where UserID = #{UserID}; </update>
 
 </mapper>

@@ -47,7 +47,7 @@
 
     <!--对应的sql语句-->
     <select id="getAllMessage" resultMap="DetailResult">
-        select * from td_Rec_Detail ORDER BY Update_time;
+        select * from td_Rec_Detail ORDER BY Update_time desc;
     </select>
 
     <!--对应的sql语句-->

@@ -58,5 +58,4 @@ public class DeviceController {
     public List getTerminalsByUserName(@RequestParam String UserName){
         return terminalsService.getTerminalsByUserName(UserName);
     }
-
 }

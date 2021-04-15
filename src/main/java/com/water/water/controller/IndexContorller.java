@@ -30,6 +30,13 @@ public class IndexContorller {
         return result_selectmessage;
     }
 
+    @RequestMapping(value = "api/MessageDesc")
+    public List getMessageDesc() throws Exception{
+        List MessageDesc = indexService.getMessageDesc();
+        List result_selectmessage = terminalsService.getNameByID(MessageDesc);
+        return result_selectmessage;
+    }
+
     @RequestMapping(value = "api/SelectMessage")
     public List getSelectMessage(@RequestParam Map params) throws Exception {
         System.out.println(params.get("W_work"));

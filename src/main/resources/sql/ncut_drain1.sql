@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 15/04/2021 14:13:14
+ Date: 15/04/2021 14:25:56
 */
 
 SET NAMES utf8mb4;
@@ -228,17 +228,17 @@ CREATE TABLE `td_rec_detail`  (
 -- ----------------------------
 -- Records of td_rec_detail
 -- ----------------------------
-INSERT INTO `td_rec_detail` VALUES (1, 1, '1', '1', 10, 1, 0, 10, 10, 129, 10, 11, 80, 5, 10, 1, 5, 5, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (2, 2, '2', '2', 20, 41, 15, 20, 20, 10, 10, 21, 50, 3, 30, 2, 20, 6, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (3, 3, '3', '3', 10, 10, 60, 10, 10, 25, 10, 22, 10, 10, 80, 3, 40, 7, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (4, 4, '4', '4', 10, 80, 90, 20, 10, 30, 20, 23, 30, 15, 120, 4, 80, 8, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (5, 5, '5', '5', 20, 100, 0, 10, 20, 40, 20, 11, 20, 1, 80, 5, 60, 9, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (6, 6, '6', '6', 10, 50, 80, 20, 10, 8, 10, 21, 22, 6, 25, 6, 10, 1, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (7, 7, '7', '7', 20, 64, 30, 10, 10, 35, 20, 21, 70, 1, 40, 2, 30, 4, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (8, 8, '8', '8', 10, 16, 60, 10, 10, 20, 10, 11, 100, 2, 30, 3, 10, 2, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (9, 9, '9', '9', 20, 30, 40, 10, 10, 31, 10, 21, 60, 3, 50, 1, 30, 4, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (10, 10, '10', '10', 10, 22, 78, 20, 20, 66, 20, 23, 40, 4, 70, 2, 40, 3, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `td_rec_detail` VALUES (11, 11, '11', '11', 11, 11, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `td_rec_detail` VALUES (1, 1, '1', '1', 10, 1, 0, 10, 10, 129, 10, 11, 80, 5, 10, 1, 5, 5, NULL, NULL, NULL, NULL, '2021-04-15 14:18:33', '2021-04-01 14:19:15');
+INSERT INTO `td_rec_detail` VALUES (2, 2, '2', '2', 20, 41, 15, 20, 20, 10, 10, 21, 50, 3, 30, 2, 20, 6, NULL, NULL, NULL, NULL, '2021-04-23 14:18:37', '2021-04-02 14:19:19');
+INSERT INTO `td_rec_detail` VALUES (3, 3, '3', '3', 10, 10, 60, 10, 10, 25, 10, 22, 10, 10, 80, 3, 40, 7, NULL, NULL, NULL, NULL, '2021-04-02 14:18:41', '2021-04-03 14:19:22');
+INSERT INTO `td_rec_detail` VALUES (4, 4, '4', '4', 10, 80, 90, 20, 10, 30, 20, 23, 30, 15, 120, 4, 80, 8, NULL, NULL, NULL, NULL, '2021-04-01 14:18:45', '2021-04-17 14:19:27');
+INSERT INTO `td_rec_detail` VALUES (5, 5, '5', '5', 20, 100, 0, 10, 20, 40, 20, 11, 20, 1, 80, 5, 60, 9, NULL, NULL, NULL, NULL, '2021-04-13 14:18:49', '2021-04-24 14:19:30');
+INSERT INTO `td_rec_detail` VALUES (6, 6, '6', '6', 10, 50, 80, 20, 10, 8, 10, 21, 22, 6, 25, 6, 10, 1, NULL, NULL, NULL, NULL, '2021-04-02 14:18:54', '2021-04-25 14:19:34');
+INSERT INTO `td_rec_detail` VALUES (7, 7, '7', '7', 20, 64, 30, 10, 10, 35, 20, 21, 70, 1, 40, 2, 30, 4, NULL, NULL, NULL, NULL, '2021-04-05 14:18:57', '2021-04-28 14:19:37');
+INSERT INTO `td_rec_detail` VALUES (8, 8, '8', '8', 10, 16, 60, 10, 10, 20, 10, 11, 100, 2, 30, 3, 10, 2, NULL, NULL, NULL, NULL, '2021-04-18 14:19:00', '2021-04-29 14:19:41');
+INSERT INTO `td_rec_detail` VALUES (9, 9, '9', '9', 20, 30, 40, 10, 10, 31, 10, 21, 60, 3, 50, 1, 30, 4, NULL, NULL, NULL, NULL, '2021-04-24 14:19:04', '2021-04-26 14:19:45');
+INSERT INTO `td_rec_detail` VALUES (10, 10, '10', '10', 10, 22, 78, 20, 20, 66, 20, 23, 40, 4, 70, 2, 40, 3, NULL, NULL, NULL, NULL, '2021-04-02 14:19:08', '2021-04-01 14:19:50');
+INSERT INTO `td_rec_detail` VALUES (11, 11, '11', '11', 11, 11, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-04-09 14:19:11', '2021-04-09 14:19:54');
 
 -- ----------------------------
 -- Table structure for td_terminals

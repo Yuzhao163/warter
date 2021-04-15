@@ -10,4 +10,6 @@ public interface IndexDao {
     List getAllMessage();
 
     List getSelectMessage(String W_work,String W_Upline,String W_Downline);
+
+    List getMessageDesc();
 }

@@ -47,7 +47,12 @@
 
     <!--对应的sql语句-->
     <select id="getAllMessage" resultMap="DetailResult">
-        select * from td_Rec_Detail;
+        select * from td_Rec_Detail ORDER BY Update_time;
+    </select>
+
+    <!--对应的sql语句-->
+    <select id="getMessageDesc" resultMap="DetailResult">
+        select * from td_Rec_Detail ORDER BY Update_time desc LIMIT 10;
     </select>
 
     <select id="getSelectMessage" resultMap="DetailResult">

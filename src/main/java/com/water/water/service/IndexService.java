@@ -19,6 +19,10 @@ public class IndexService {
         return indexDao.getAllMessage();
     }
 
+    public List getMessageDesc(){
+        return indexDao.getMessageDesc();
+    }
+
     public List getSelectMessage(Map params){
         String W_work = "";
         String defult = "";

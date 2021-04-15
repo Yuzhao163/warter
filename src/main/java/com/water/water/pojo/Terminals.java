@@ -13,6 +13,23 @@ public class Terminals {
     String ConPont2;
     String ConPont3;
     String TmnDesc;
+    String UserName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
 
     @Override
     public String toString() {
@@ -30,14 +47,6 @@ public class Terminals {
                 ", ConPont3='" + ConPont3 + '\'' +
                 ", TmnDesc='" + TmnDesc + '\'' +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTmnId() {

@@ -95,4 +95,8 @@ public class TerminalsService {
         return jsonArray;
     }
 
+    public List getTerminalsByUserName(String UserName){
+        return terminalsDao.getTerminalsByUserName(UserName);
+    }
+
 }

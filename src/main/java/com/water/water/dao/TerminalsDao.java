@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface TerminalsDao {
     List getTmnID();
-    Terminals getNameByID(String TmnID);
 
+    Terminals getNameByID(String TmnID);
 
     List getAllTmnList();
 
@@ -20,4 +20,6 @@ public interface TerminalsDao {
     Integer modifyTmn(Terminals tmn);
 
     String getTmnNameByTmnID(String tmnID);
+
+    List getTerminalsByUserName(String UserName);
 }

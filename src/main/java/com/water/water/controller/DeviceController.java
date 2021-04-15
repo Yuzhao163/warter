@@ -54,4 +54,9 @@ public class DeviceController {
         return TmnList;
     }
 
+    @RequestMapping(value = "api/getTerminalsByUserName")
+    public List getTerminalsByUserName(@RequestParam String UserName){
+        return terminalsService.getTerminalsByUserName(UserName);
+    }
+
 }

@@ -12,9 +12,8 @@
         <result column="ConPont1" property="ConPont1" jdbcType="VARCHAR"/>
         <result column="ConPont2" property="ConPont2" jdbcType="VARCHAR"/>
         <result column="ConPont3" property="ConPont3" jdbcType="VARCHAR"/>
-        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
         <result column="TmnDesc" property="TmnDesc" jdbcType="VARCHAR"/>
-        <result column="UserName" property="UserName" jdbcType="VARCHAR"/>
+        <result column="TmnLeader" property="TmnLeader" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;

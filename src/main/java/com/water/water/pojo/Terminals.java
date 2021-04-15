@@ -8,28 +8,10 @@ public class Terminals {
     String U2TmnID;
     String D1TmnID;
     String D2TmnID;
-    String PipID;
     String ConPont1;
     String ConPont2;
     String ConPont3;
     String TmnDesc;
-    String UserName;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
 
     @Override
     public String toString() {
@@ -41,12 +23,22 @@ public class Terminals {
                 ", U2TmnID='" + U2TmnID + '\'' +
                 ", D1TmnID='" + D1TmnID + '\'' +
                 ", D2TmnID='" + D2TmnID + '\'' +
-                ", PipID='" + PipID + '\'' +
                 ", ConPont1='" + ConPont1 + '\'' +
                 ", ConPont2='" + ConPont2 + '\'' +
                 ", ConPont3='" + ConPont3 + '\'' +
                 ", TmnDesc='" + TmnDesc + '\'' +
+                ", TmnLeader='" + TmnLeader + '\'' +
                 '}';
+    }
+
+    String TmnLeader;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTmnId() {
@@ -97,14 +89,6 @@ public class Terminals {
         D2TmnID = d2TmnID;
     }
 
-    public String getPipID() {
-        return PipID;
-    }
-
-    public void setPipID(String pipID) {
-        PipID = pipID;
-    }
-
     public String getConPont1() {
         return ConPont1;
     }
@@ -135,6 +119,14 @@ public class Terminals {
 
     public void setTmnDesc(String tmnDesc) {
         TmnDesc = tmnDesc;
+    }
+
+    public String getTmnLeader() {
+        return TmnLeader;
+    }
+
+    public void setTmnLeader(String tmnLeader) {
+        TmnLeader = tmnLeader;
     }
 
 

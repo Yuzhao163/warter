@@ -16,6 +16,7 @@
         <result column="MoPhone" property="MoPhone" jdbcType="VARCHAR"/>
         <result column="RealName" property="RealName" jdbcType="VARCHAR"/>
         <result column="DPTName" property="DPTName" jdbcType="VARCHAR"/>
+        <result column="ModTime" property="ModTime" jdbcType="DATE"/>
     </resultMap>
     <select id="getByUserManageName" resultMap="BaseResultMap">
         select

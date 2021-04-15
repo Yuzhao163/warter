@@ -13,6 +13,9 @@ public class UserManage {
     private String MoPhone;
     private String RealName;
     private String DPTName;
+    private Date ModTime;
+
+
 
     public UserManage() {
     }
@@ -99,5 +102,13 @@ public class UserManage {
 
     public void setDPTName(String DPTName) {
         this.DPTName = DPTName;
+    }
+
+    public Date getModTime() {
+        return ModTime;
+    }
+
+    public void setModTime(Date modTime) {
+        ModTime = modTime;
     }
 }

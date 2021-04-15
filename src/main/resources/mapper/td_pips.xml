@@ -13,11 +13,10 @@ Field 'id' doesn't have a default value] with root cause-->
         <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
         <result column="PipName" property="PipName" jdbcType="VARCHAR"/>
         <result column="PipDesc" property="PipDesc" jdbcType="VARCHAR"/>
-        <result column="PipLeadPhone" property="PipLeadPhone"
-                jdbcType="VARCHAR"/>
+        <result column="PipLeader" property="PipLeader" jdbcType="VARCHAR"/>
+        <result column="PipLeadPhone" property="PipLeadPhone" jdbcType="VARCHAR"/>
         <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
-        <result column="PipCreateDate" property="PipCreateDate"
-                jdbcType="DATE"/>
+        <result column="PipCreateDate" property="PipCreateDate" jdbcType="DATE"/>
     </resultMap>
 
     <select id="getPips" resultMap="BaseResultMap">

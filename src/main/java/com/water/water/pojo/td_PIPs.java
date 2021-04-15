@@ -8,6 +8,7 @@ public class td_PIPs {
     private String PipDesc;
     private Date PipCreateDate;
     private String AreaID;
+    private String PipLeader;
     private String PipLeadPhone;
 
     public String getPipID() {
@@ -57,4 +58,13 @@ public class td_PIPs {
     public void setPipLeadPhone(String pipLeadPhone) {
         PipLeadPhone = pipLeadPhone;
     }
+
+    public String getPipLeader() {
+        return PipLeader;
+    }
+
+    public void setPipLeader(String pipLeader) {
+        PipLeader = pipLeader;
+    }
+
 }

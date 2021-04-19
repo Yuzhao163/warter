@@ -59,6 +59,18 @@
         select * from td_Rec_Detail where W_work = #{W_work} AND F_Volume
         between #{W_Downline} AND #{W_Upline};
     </select>
+
+    <select id = "getCountMessage" resultType="integer">
+        select COUNT(*) from td_Rec_Detail;
+    </select>
 <!--    -->
 <!--    <select id="getNameById" resultMap=""-->
+
+    <!--分页查询-->
+    <select id="getSelectMessageByPage" resultMap="DetailResult">
+        select * from td_Rec_Detail ORDER BY Update_time desc
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
 </mapper>

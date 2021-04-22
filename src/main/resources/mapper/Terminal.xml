@@ -52,7 +52,7 @@
     </select>
 
     <select id="getTerminalsByUserName" resultMap="BaseResultMap">
-        select TmnName from td_terminals where UserName =
+        select * from td_terminals where TmnLeader =
         #{UserName};
     </select>
 </mapper>

@@ -35,9 +35,7 @@ public class ErrordealRecService {
     public List getAllErrorById(List AllError) {
         for (int i = 0; i < AllError.size(); i++) {
             ErrordealRec message = (ErrordealRec) AllError.get(i);
-            Long packageId = message.getPackageId();
-            Rec_Detail TmnId_message = detailDao.getPipeByPackageId(packageId);
-            String TmnId = TmnId_message.getTmnID();
+            String TmnId = message.getTmnId();
             Terminals terminals = terminalsDao.getNameByID(TmnId);
             String TmnName = terminals.getTmnName();
             td_Tp tp = td_tpDao.getAlltdById(TmnId);

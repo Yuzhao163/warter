@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface PipeShowDao {
     List getPipe();
+
+    Rec_Detail getRecByTmnID(String TmnId);
 }

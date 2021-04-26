@@ -31,4 +31,11 @@
     <select id="getPipe" resultMap="BaseResultMap">
         select TmnID,V_status,V_per,W_line from td_Rec_Detail;
     </select>
+
+    <select id="getRecByTmnID" resultMap="BaseResultMap">
+        select TmnID,V_status,V_per,W_line from td_Rec_Detail where TmnID =
+        #{TmnID};
+    </select>
+
+
 </mapper>

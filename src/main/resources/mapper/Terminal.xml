@@ -50,7 +50,7 @@
     <select id="getTmnNameByTmnID" resultType="String">
         select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
     </select>
-
+    <!--这块的username查不出来！！！！！！！！！！！！！！！！报错了！！！！！！！！！！-->
     <select id="getTerminalsByUserName" resultMap="BaseResultMap">
         select TmnName from td_terminals where UserName =#{UserName};
     </select>
@@ -80,7 +80,13 @@
     </select>
 
     <!--获取控制柜表中TmnLeader为空的控制柜-->
+    <select id="getTerminalsByUserName" resultMap="BaseResultMap">
+        select * from td_terminals where TmnLeader =
+        #{UserName};
+    </select>
+
     <select id="getTmnLeaderNull" resultMap="BaseResultMap">
-        select TmnName from td_terminals where TmnLeader is null;
+         select TmnName from td_terminals where TmnLeader is null;
+
     </select>
 </mapper>

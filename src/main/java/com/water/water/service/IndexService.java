@@ -53,4 +53,15 @@ public class IndexService {
         }
         return indexDao.getSelectMessage(W_work,W_Upline,W_Downline);
     }
+
+    public Integer getCountMessage(){
+        return indexDao.getCountMessage();
+    }
+
+    public List getSelectMessageByPage(Integer page,Integer size){
+        if (page != null && size != null){
+            page = (page - 1) * size;
+        }
+        return indexDao.getSelectMessageByPage(page,size);
+    }
 }

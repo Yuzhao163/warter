@@ -37,10 +37,7 @@ public class ErrordealRecService {
     public List getAllErrorById(List AllError) {
         for (int i = 0; i < AllError.size(); i++) {
             ErrordealRec message = (ErrordealRec) AllError.get(i);
-            Long packageId = message.getPackageId();
             String TmnId = message.getTmnId();
-//            Rec_Detail TmnId_message = detailDao.getTmnIDByPackageId(packageId);
-//            String TmnId = TmnId_message.getTmnID();
             Terminals terminals = terminalsDao.getNameByID(TmnId);
             String TmnName = terminals.getTmnName();
             td_Tp tp = td_tpDao.getAlltdById(TmnId);
@@ -108,4 +105,17 @@ public class ErrordealRecService {
     public Integer updateError(ErrordealRec errordealRec) {
         return errordealRecDao.updateError(errordealRec);
     }
+
+    public Integer getCountMessage(){
+        return errordealRecDao.getCountMessage();
+    }
+
+    public List getSelectErrorMessageByPage(Integer page,Integer size){
+        if (page != null && size != null){
+            page = (page - 1) * size;
+        }
+        return errordealRecDao.getSelectErrorMessageByPage(page,size);
+    }
+
+
 }

@@ -13,4 +13,8 @@ public interface ErrordealRecDao {
     List getAllErrorById(List AllError);
 
     Integer updateError(ErrordealRec errordealRec);
+
+    Integer getCountMessage();
+
+    List getSelectErrorMessageByPage(Integer page,Integer size);
 }

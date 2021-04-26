@@ -12,4 +12,8 @@ public interface IndexDao {
     List getSelectMessage(String W_work,String W_Upline,String W_Downline);
 
     List getMessageDesc();
+
+    Integer getCountMessage();
+
+    List getSelectMessageByPage(Integer page,Integer size);
 }

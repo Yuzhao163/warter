@@ -44,4 +44,14 @@ public class IndexContorller {
         List result_selectmessage = terminalsService.getNameByID(selectmessage);
         return result_selectmessage;
     }
+
+    @RequestMapping(value = "api/count")
+    public Integer getCountMessage() throws Exception{
+        return indexService.getCountMessage();
+    }
+
+    @RequestMapping(value = "api/SelectMessageByPage")
+    public List getSelectMessageByPage(@RequestParam Integer page,Integer size) throws Exception{
+        return indexService.getSelectMessageByPage(page,size);
+    }
 }

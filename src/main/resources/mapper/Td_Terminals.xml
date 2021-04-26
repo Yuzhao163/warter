@@ -30,7 +30,8 @@
 
 <!--    添加一个控制柜到表中-->
     <insert id="addTmn">
-        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,PipID,ConPont1,ConPont2,ConPont3,TmnDesc) values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{PipID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc})
+        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,ConPont1,ConPont2,ConPont3,TmnDesc,TmnLeader)
+                values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc},#{TmnLeader})
     </insert>
 
 <!--    根据控制柜id删除控制柜-->
@@ -41,17 +42,29 @@
 <!--    对控制柜信息进行修改-->
     <update id="modifyTmn">
         update td_terminals set TmnId=#{TmnId},TmnName=#{TmnName},U1TmnID=#{U1TmnID},U2TmnID=#{U2TmnID},
-            D1TmnID=#{D1TmnID},D2TmnID=#{D2TmnID},PipID=#{PipID},ConPont1=#{ConPont1},
+            D1TmnID=#{D1TmnID},D2TmnID=#{D2TmnID},ConPont1=#{ConPont1},
             ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where id=#{id}
     </update>
 
 <!--    根据控制柜id查询控制柜名称-->
     <select id="getTmnNameByTmnID" resultType="String">
-        select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
+        select TmnName from td_terminals where TmnId = #{TmnID}
     </select>
 
     <select id="getTerminalsByUserName" resultMap="BaseResultMap">
-        select TmnName from td_terminals where UserName =
-        #{UserName};
+        select TmnName from td_terminals where UserName =#{UserName};
+    </select>
+
+<!--  修改控制柜管理员名称  -->
+    <update id="updateTmnLeader">
+        update td_terminals set TmnLeader = #{tmnLeader} where TmnLeader = #{beforeName};
+    </update>
+<!--  根据控制柜id查询名称+id-->
+    <select id="getTINByTID" resultMap="BaseResultMap">
+        select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
+    </select>
+<!--  根据id查询整条控制柜信息  -->
+    <select id="getTmnByID" resultMap="BaseResultMap">
+        select * from td_terminals where TmnID = #{TmnID};
     </select>
 </mapper>

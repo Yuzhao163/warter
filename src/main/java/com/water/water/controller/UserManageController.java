@@ -72,4 +72,29 @@ public class UserManageController {
             return new Result(400);
         }
     }
+
+//  个人信息的修改功能
+//  根据id查询修改后的用户名是否重复
+//    @ResponseBody
+//    @RequestMapping(value = "api/checkUserName")
+//    public Integer checkUserName(@RequestParam String userName) {
+//        return userManageService.checkUserName(userName);
+//    }
+
+//  根据用户id修改个人信息
+    @ResponseBody
+    @RequestMapping(value = "api/updateUserInfo")
+    public Integer updateUserInfo(UserManage userManage) {
+//      首先判断修改的用户名是否有重复
+        String userName = userManage.getUserName();
+        String userID = userManage.getUserID();
+//      用户名有重复不执行更新
+        if (userManageService.checkUserName(userName,userID)==201) {
+            return 201;
+        } else {
+//      用户名没有重复执行更新
+            System.out.println(userManage);
+            return userManageService.updateUserInfo(userManage);
+        }
+    }
 }

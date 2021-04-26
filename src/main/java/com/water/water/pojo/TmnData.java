@@ -1,8 +1,9 @@
 package com.water.water.pojo;
 
-public class Terminals {
+public class TmnData {
+
     private Integer id;
-    private String TmnId;
+    private String TmnID;
     private String TmnName;
     private String U1TmnID;
     private String U2TmnID;
@@ -12,12 +13,17 @@ public class Terminals {
     private String ConPont2;
     private String ConPont3;
     private String TmnDesc;
+    private String PipID;
+    private String PipName;
+    private String AreaID;
+    private String AreaName;
+
 
     @Override
     public String toString() {
-        return "Terminals{" +
+        return "TmnData{" +
                 "id=" + id +
-                ", TmnId='" + TmnId + '\'' +
+                ", TmnID='" + TmnID + '\'' +
                 ", TmnName='" + TmnName + '\'' +
                 ", U1TmnID='" + U1TmnID + '\'' +
                 ", U2TmnID='" + U2TmnID + '\'' +
@@ -27,11 +33,12 @@ public class Terminals {
                 ", ConPont2='" + ConPont2 + '\'' +
                 ", ConPont3='" + ConPont3 + '\'' +
                 ", TmnDesc='" + TmnDesc + '\'' +
-                ", TmnLeader='" + TmnLeader + '\'' +
+                ", PipID='" + PipID + '\'' +
+                ", PipName='" + PipName + '\'' +
+                ", AreaID='" + AreaID + '\'' +
+                ", AreaName='" + AreaName + '\'' +
                 '}';
     }
-
-    String TmnLeader;
 
     public Integer getId() {
         return id;
@@ -41,12 +48,12 @@ public class Terminals {
         this.id = id;
     }
 
-    public String getTmnId() {
-        return TmnId;
+    public String getTmnID() {
+        return TmnID;
     }
 
-    public void setTmnId(String tmnId) {
-        TmnId = tmnId;
+    public void setTmnID(String tmnID) {
+        TmnID = tmnID;
     }
 
     public String getTmnName() {
@@ -121,13 +128,35 @@ public class Terminals {
         TmnDesc = tmnDesc;
     }
 
-    public String getTmnLeader() {
-        return TmnLeader;
+    public String getPipID() {
+        return PipID;
     }
 
-    public void setTmnLeader(String tmnLeader) {
-        TmnLeader = tmnLeader;
+    public void setPipID(String pipID) {
+        PipID = pipID;
     }
 
+    public String getPipName() {
+        return PipName;
+    }
 
+    public void setPipName(String pipName) {
+        PipName = pipName;
+    }
+
+    public String getAreaID() {
+        return AreaID;
+    }
+
+    public void setAreaID(String areaID) {
+        AreaID = areaID;
+    }
+
+    public String getAreaName() {
+        return AreaName;
+    }
+
+    public void setAreaName(String areaName) {
+        AreaName = areaName;
+    }
 }

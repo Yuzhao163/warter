@@ -11,6 +11,19 @@ public class td_PIPs {
     private String PipLeader;
     private String PipLeadPhone;
 
+    @Override
+    public String toString() {
+        return "td_PIPs{" +
+                "PipID='" + PipID + '\'' +
+                ", PipName='" + PipName + '\'' +
+                ", PipDesc='" + PipDesc + '\'' +
+                ", PipCreateDate=" + PipCreateDate +
+                ", AreaID='" + AreaID + '\'' +
+                ", PipLeader='" + PipLeader + '\'' +
+                ", PipLeadPhone='" + PipLeadPhone + '\'' +
+                '}';
+    }
+
     public String getPipID() {
         return PipID;
     }

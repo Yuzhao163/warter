@@ -1,6 +1,7 @@
 package com.water.water.pojo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public class UserManage {
@@ -13,7 +14,7 @@ public class UserManage {
     private String MoPhone;
     private String RealName;
     private String DPTName;
-    private Date ModTime;
+    private Timestamp ModTime;
 
 
 
@@ -30,6 +31,22 @@ public class UserManage {
         MoPhone = moPhone;
         RealName = realName;
         this.DPTName = DPTName;
+    }
+
+    @Override
+    public String toString() {
+        return "UserManage{" +
+                "UserID='" + UserID + '\'' +
+                ", UserName='" + UserName + '\'' +
+                ", UserPswd='" + UserPswd + '\'' +
+                ", UClassID='" + UClassID + '\'' +
+                ", Ustate=" + Ustate +
+                ", RegTime=" + RegTime +
+                ", MoPhone='" + MoPhone + '\'' +
+                ", RealName='" + RealName + '\'' +
+                ", DPTName='" + DPTName + '\'' +
+                ", ModTime=" + ModTime +
+                '}';
     }
 
     public String getUserID() {
@@ -104,11 +121,11 @@ public class UserManage {
         this.DPTName = DPTName;
     }
 
-    public Date getModTime() {
+    public Timestamp getModTime() {
         return ModTime;
     }
 
-    public void setModTime(Date modTime) {
+    public void setModTime(Timestamp modTime) {
         ModTime = modTime;
     }
 }

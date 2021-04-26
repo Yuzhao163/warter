@@ -30,4 +30,15 @@ Field 'id' doesn't have a default value] with root cause-->
     <select id="getAreaNameByAreaID" resultMap="BaseResultMap">
         select AreaName from td_areas where AreaID = #{AreaID};
     </select>
+
+
+<!--  更改分区用户名称和电话  -->
+    <update id="updateAreaLeader">
+        update td_areas set AreaLeader = #{areaLeader},AreaLeadPhone = #{areaLeadPhone} where AreaLeader = #{beforeName};
+    </update>
+
+<!--  根据分区id找分区名称  -->
+    <select id="getNameByID" resultType="String">
+        select AreaName from td_areas where AreaID = #{AreaID}
+    </select>
 </mapper>

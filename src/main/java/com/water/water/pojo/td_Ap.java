@@ -6,6 +6,14 @@ public class td_Ap {
     private String PipID;
     private String AreaID;
 
+    @Override
+    public String toString() {
+        return "td_Ap{" +
+                "id=" + id +
+                ", PipID='" + PipID + '\'' +
+                ", AreaID='" + AreaID + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;

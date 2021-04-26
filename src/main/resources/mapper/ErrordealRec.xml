@@ -35,4 +35,10 @@
     <update id="updateError">
         update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
     </update>
+
+
+<!--  更新记录人员名  -->
+    <update id="updateErrorDealUser">
+        update td_errordeal_rec set User = #{userName} where User = #{beforeName};
+    </update>
 </mapper>

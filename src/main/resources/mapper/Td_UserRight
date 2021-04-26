@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.water.water.dao.td_UserRightDao">
+    <resultMap id="BaseResultMap" type="com.water.water.pojo.td_User_Right">
+        <id column="RId" property="RId" jdbcType="SMALLINT"/>
+        <result column="UserID" property="UserID" jdbcType="VARCHAR"/>
+        <result column="Right_PP" property="Right_PP" jdbcType="INTEGER"/>
+        <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
+        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
+        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="getall" resultMap="BaseResultMap">
+        select * from td_User_Right;
+    </select>
+
+
+    <!--  根据用户id找到right_pp  -->
+    <select id="getRightByUID" resultType="Integer">
+        select Right_PP from td_user_right where UserID = #{UserID};
+    </select>
+
+    <!--  插入一条数据   -->
+    <insert id="addUserRight">
+        insert into td_user_right(UserID,Right_PP,TmnID,PipID,AreaID) values (#{UserID},${Right_PP},#{TmnID},#{PipID},#{AreaID})
+    </insert>
+
+    <!--  根据tmnid删除一条数据  -->
+    <delete id="deleteUserRight">
+        delete from td_User_Right where TmnID = #{TmnID};
+    </delete>
+</mapper>

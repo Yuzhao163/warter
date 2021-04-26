@@ -60,4 +60,27 @@
 
     <update id="update_user">update user set username = #{UserName}, password = #{UserPswd}, telephone = #{MoPhone} where UserID = #{UserID}; </update>
 
+
+<!-- 获取所有用户名称-->
+    <select id="getAllUserName" resultType="String">
+        select UserName from td_user where UserID != #{UserID} ;
+    </select>
+
+<!--  根据id修改用户信息  -->
+    <update id="updateUserInfo">
+        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, MoPhone = #{MoPhone},
+                            RealName = #{RealName}, DPTName = #{DPTName}, ModTime = #{ModTime}
+                       where UserID = #{UserID}
+    </update>
+
+<!--  根据id获取用户名称  -->
+    <select id="getUserNameByID" resultType="String">
+        select UserName from td_user where UserID = #{UserID}
+    </select>
+
+<!--  获取用户id和名称  -->
+    <select id="getUIDName" resultMap="BaseResultMap">
+        select UserID,UserName from td_user ;
+    </select>
+
 </mapper>

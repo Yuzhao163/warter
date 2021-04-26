@@ -20,4 +20,14 @@ public interface UserManageDao {
     Integer update_user(UserManage userManage);
     Integer delete_user(String UserID);
 
+
+//  查询所有的用户名称除了当前id的
+    List<String> getAllUserName(String userID);
+//  根据id更改用户信息
+    Integer updateUserInfo(UserManage userManage);
+//  根据id查询用户名称
+    String getUserNameByID(String userName);
+//  获取用户id和名称
+    List getUIDName();
+
 }

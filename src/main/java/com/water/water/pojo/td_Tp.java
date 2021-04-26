@@ -6,6 +6,16 @@ public class td_Tp {
     private String PipID;
     private Integer PTid;
 
+    @Override
+    public String toString() {
+        return "td_Tp{" +
+                "Id=" + Id +
+                ", TmnID='" + TmnID + '\'' +
+                ", PipID='" + PipID + '\'' +
+                ", PTid=" + PTid +
+                '}';
+    }
+
     public Integer getId() {
         return Id;
     }

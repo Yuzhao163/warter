@@ -9,5 +9,13 @@ import java.util.List;
 public interface td_AreasDao {
     List getAreas();
     td_Areas getAreaIDByAreaName(String AreaName);
+
     td_Areas getAreaNameByAreaID(String AreaID);
+
+    Integer updateAreaLeader(String areaLeader, String areaLeadPhone, String beforeName);
+
+    String getNameByID(String AreaID);
+
+
+
 }

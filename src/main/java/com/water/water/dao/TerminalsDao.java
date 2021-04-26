@@ -22,4 +22,12 @@ public interface TerminalsDao {
     String getTmnNameByTmnID(String tmnID);
 
     List getTerminalsByUserName(String UserName);
+
+//  更改控制柜管理员名称
+    Integer updateTmnLeader(String tmnLeader, String beforeName);
+
+    List getTINByTID(String tmnID);
+
+    List getTmnByID(String tmnID);
+
 }

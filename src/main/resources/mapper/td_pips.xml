@@ -46,4 +46,18 @@ Field 'id' doesn't have a default value] with root cause-->
         select * from td_pips
     </select>
 
+<!--  更新管线名称和电话 -->
+    <update id="updatePipLeader">
+        update td_pips set PipLeader = #{pipLeader},PipLeadPhone = #{pipLeadPhone} where PipLeader = #{beforeName};
+    </update>
+
+<!--  根据管线id获取管线id与名称  -->
+    <select id="getPIDNameByPID" resultMap="BaseResultMap">
+        select PipID,PipName from td_pips where PipID = #{PipID};
+    </select>
+
+
+
+
+
 </mapper>

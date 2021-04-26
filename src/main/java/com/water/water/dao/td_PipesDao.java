@@ -16,4 +16,12 @@ public interface td_PipesDao {
     String getPipNameByPipID(String pipID);
 
     td_PIPs getAreasIdByPips(String PipsID);
+
+//  修改管线管理员名称和电话
+    Integer updatePipLeader(String pipLeader, String pipLeadPhone, String beforeName);
+
+//  根据管线id查询管线名称和id
+    List getPIDNameByPID(String pipID);
+
+
 }

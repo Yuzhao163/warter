@@ -109,8 +109,28 @@ public class ErrordealRecService {
         if (page != null && size != null){
             page = (page - 1) * size;
         }
-        return errordealRecDao.getSelectErrorMessageByPage(page,size);
+        List Allerror =
+                getAllErrorById(errordealRecDao.getSelectErrorMessageByPage(page,size));
+        return Allerror;
     }
+
+//        public List getAllErrorById(List AllError) {
+//        for (int i = 0; i < AllError.size(); i++) {
+//            ErrordealRec message = (ErrordealRec) AllError.get(i);
+//            String TmnId = message.getTmnId();
+//            Terminals terminals = terminalsDao.getNameByID(TmnId);
+//            String TmnName = terminals.getTmnName();
+//            td_Tp tp = td_tpDao.getAlltdById(TmnId);
+//            String PipId = tp.getPipID();
+//            Integer PTid = tp.getPTid();
+//            //message.setTmnID(TmnName);
+//            message.setTmnId(TmnId);
+//            message.setTmnName(TmnName);
+//            message.setPipId(PipId);
+//            message.setPTid(PTid);
+//        }
+//        return AllError;
+//    }
 
 
 }

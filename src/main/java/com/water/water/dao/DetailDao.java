@@ -14,6 +14,4 @@ public interface DetailDao {
     List getVper(Integer id);
 
     Rec_Detail getPipeByPackageId(Long PackageId);
-
-
 }

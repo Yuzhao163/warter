@@ -1,6 +1,7 @@
 package com.water.water.pojo;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Rec_Detail {
@@ -91,7 +92,7 @@ public class Rec_Detail {
         return Create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(Timestamp create_time) {
         Create_time = create_time;
     }
 
@@ -99,7 +100,7 @@ public class Rec_Detail {
         return Update_time;
     }
 
-    public void setUpdate_time(Date update_time) {
+    public void setUpdate_time(Timestamp update_time) {
         Update_time = update_time;
     }
 
@@ -251,7 +252,7 @@ public class Rec_Detail {
 
     private Short Send_error;
     private Short Rece_error;
-    private Date Create_time;
-    private Date Update_time;
+    private Timestamp Create_time;
+    private Timestamp Update_time;
 
 }

@@ -50,7 +50,7 @@ public class DeviceController {
 
     @RequestMapping(value = "api/getTerminalsByUserName")
     public List getTerminalsByUserName(@RequestParam String UserName){
-        return terminalsService.getTerminalsByUserName(UserName);
+        return terminalsService.getTNameByUserName(UserName);
     }
 
     @RequestMapping(value = "api/getAllAreas")

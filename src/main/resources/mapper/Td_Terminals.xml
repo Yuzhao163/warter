@@ -52,8 +52,13 @@
     </select>
 
     <select id="getTerminalsByUserName" resultMap="BaseResultMap">
+        select * from td_terminals where TmnLeader = #{UserName};
+    </select>
+
+    <select id="getTNameByUserName" resultMap="BaseResultMap">
         select TmnName from td_terminals where UserName =#{UserName};
     </select>
+
 
 <!--  修改控制柜管理员名称  -->
     <update id="updateTmnLeader">

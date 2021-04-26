@@ -14,10 +14,10 @@ public interface ErrordealRecDao {
 
     Integer updateError(ErrordealRec errordealRec);
 
-
     //  更新记录异常用户名称
     Integer updateErrorDealUser(String userName, String beforeName);
 
+    Integer getCountMessage();
 
-
+    List getSelectErrorMessageByPage(Integer page,Integer size);
 }

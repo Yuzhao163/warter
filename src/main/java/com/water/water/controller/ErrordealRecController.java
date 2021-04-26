@@ -41,5 +41,15 @@ public class ErrordealRecController {
     public Integer insertError(ErrordealRec errordealRec){
         return errordealRecService.updateError(errordealRec);
     }
+
+    @RequestMapping(value = "api/Errorcount")
+    public Integer getCountMessage() throws Exception{
+        return errordealRecService.getCountMessage();
+    }
+
+    @RequestMapping(value = "api/SelectErrorMessageByPage")
+    public List getSelectMessageByPage(@RequestParam Integer page,Integer size) throws Exception{
+        return errordealRecService.getSelectErrorMessageByPage(page,size);
+    }
 }
 

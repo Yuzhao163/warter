@@ -23,10 +23,19 @@
         <result column="UD_period" property="UD_period" jdbcType="SMALLINT"/>
         <result column="Send_error" property="Send_error" jdbcType="SMALLINT"/>
         <result column="Rece_error" property="Rece_error" jdbcType="SMALLINT"/>
-        <result column="Create_time" property="Create_time" jdbcType="DATE"/>
-        <result column="Update_time" property="Update_time" jdbcType="DATE"/>
+        <result column="Create_time" property="Create_time"
+                jdbcType="TIMESTAMP"/>
+        <result column="Update_time" property="Update_time"
+                jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="getPipe" resultMap="BaseResultMap">
         select TmnID,V_status,V_per,W_line from td_Rec_Detail;
     </select>
+
+    <select id="getRecByTmnID" resultMap="BaseResultMap">
+        select TmnID,V_status,V_per,W_line from td_Rec_Detail where TmnID =
+        #{TmnID};
+    </select>
+
+
 </mapper>

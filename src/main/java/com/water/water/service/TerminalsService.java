@@ -197,8 +197,8 @@ public class TerminalsService {
         return jsonArray;
     }
 
-    public List getTerminalsByUserName(String UserName){
-        return terminalsDao.getTerminalsByUserName(UserName);
+    public List getTNameByUserName(String UserName){
+        return terminalsDao.getTNameByUserName(UserName);
     }
 
     public List getAreas() {

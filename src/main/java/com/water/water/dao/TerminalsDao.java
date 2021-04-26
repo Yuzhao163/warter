@@ -23,6 +23,8 @@ public interface TerminalsDao {
 
     List getTerminalsByUserName(String UserName);
 
+    List getTNameByUserName(String UserName);
+
 //  更改控制柜管理员名称
     Integer updateTmnLeader(String tmnLeader, String beforeName);
 

@@ -35,4 +35,15 @@
     <update id="updateError">
         update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
     </update>
+
+    <select id = "getCountMessage" resultType="integer">
+        select COUNT(*) from td_errordeal_rec;
+    </select>
+
+    <select id="getSelectErrorMessageByPage" resultMap="ErrordealRecMap">
+        select * from td_errordeal_rec ORDER BY C_t desc
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
 </mapper>

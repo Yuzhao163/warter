@@ -100,4 +100,17 @@ public class ErrordealRecService {
     public Integer updateError(ErrordealRec errordealRec) {
         return errordealRecDao.updateError(errordealRec);
     }
+
+    public Integer getCountMessage(){
+        return errordealRecDao.getCountMessage();
+    }
+
+    public List getSelectErrorMessageByPage(Integer page,Integer size){
+        if (page != null && size != null){
+            page = (page - 1) * size;
+        }
+        return errordealRecDao.getSelectErrorMessageByPage(page,size);
+    }
+
+
 }

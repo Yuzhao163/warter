@@ -18,6 +18,7 @@ Field 'id' doesn't have a default value] with root cause-->
         <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
         <result column="PipCreateDate" property="PipCreateDate"
                 jdbcType="DATE"/>
+        <result column="PipLeader" property="PipLeader" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getPips" resultMap="BaseResultMap">
@@ -38,13 +39,42 @@ Field 'id' doesn't have a default value] with root cause-->
     </select>
 
     <!--根据管线查区域-->
-    <select id="getAreasIdByPips" resultMap="BaseResultMap">
-        select AreaID from td_pips where PipID=#{PipID};
-    </select>
+<!--    <select id="getAreasIdByPips" resultMap="BaseResultMap">-->
+<!--        select AreaID from td_pips where PipID=#{PipID};-->
+<!--    </select>-->
 
     <!--    返回全部管线信息-->
     <select id="getPipList" resultMap="BaseResultMap">
         select * from td_pips
+    </select>
+
+
+    <update id="updatePipLeader">
+        update td_pips set PipLeader=#{PipLeader} where PipID=#{PipID}
+    </update>
+
+    <!--根据管线名称获得管线id-->
+    <select id="getPipIDByPipName" resultMap="BaseResultMap">
+        select PipID from td_pips where PipName = #{PipName};
+    </select>
+
+    <!--获取所有管线领导名称-->
+    <select id="getPipLeader" resultMap="BaseResultMap">
+        select PipLeader from td_pips where PipLeader is not null;
+    </select>
+
+    <!--通过PipLeder获取对应PipID-->
+    <select id="getPipID" resultMap="BaseResultMap">
+        select PipID from td_pips where PipLeader = #{PipLeader};
+    </select>
+
+
+    <select id="getPipsByAreaID1" resultMap="BaseResultMap">
+        select PipName,PipID from td_pips where AreaID = #{AreaID} and PipLeader is null;
+    </select>
+
+    <select id="getPipsByID" resultMap="BaseResultMap">
+        select PipName from td_pips where PipID = #{PipID} and PipLeader is null;
     </select>
 
 </mapper>

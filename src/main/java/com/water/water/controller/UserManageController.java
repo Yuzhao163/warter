@@ -5,6 +5,7 @@ package com.water.water.controller;
     function:update,add
  */
 import com.water.water.Result.Result;
+import com.water.water.pojo.Area_Pip_Tmn_Leader;
 import com.water.water.pojo.User;
 import com.water.water.pojo.UserManage;
 import com.water.water.service.UserManageService;
@@ -27,8 +28,10 @@ public class UserManageController {
     UserManageService userManageService;
     //通过用户名称搜索展示用户信息
     @RequestMapping(value = "api/staff")
-    public List<UserManage> getAllUserManage() throws Exception{
-        List<UserManage> user = userManageService.getAllUserManage();
+    public List getAllUserManage() throws Exception{
+        List user = userManageService.getAllUserManage();
+//        System.out.println(user["RegTime"]);
+//        System.out.println(user);
         return user;
     }
     //删除员工数据
@@ -36,7 +39,9 @@ public class UserManageController {
     @RequestMapping(value = "api/delstaff")
     public Integer deletetd_user(HttpServletRequest request){
         String UserID = request.getParameter("UserID");
-        Integer user = userManageService.deletetd_user(UserID);
+        Integer userID = Integer.parseInt(UserID);
+//        Integer user = userManageService.deletetd_user(UserID);
+        Integer user = userManageService.deleteUser(userID);
         return user;
     }
 
@@ -47,29 +52,36 @@ public class UserManageController {
     //插入员工数据
     @ResponseBody
     @RequestMapping(value = "api/addstaff")
-    public Integer insertTotd_user(UserManage userManage){
-        return userManageService.insertTotd_user(userManage);
+    public Integer insertTotd_user(Area_Pip_Tmn_Leader area_pip_tmn_leader){
+        System.out.println("后又跟，安都跟"+area_pip_tmn_leader.getArea_Pip_Tmn());
+        return userManageService.insertTotd_user(area_pip_tmn_leader);
     }
     //更新员工信息
     @ResponseBody
     @RequestMapping(value = "api/updstaff")
-    public Result updatetd_user(UserManage userManage){
-        try {
-            Integer num = userManageService.updatetd_user(userManage);
-            if(num != 200){
-                return new Result(400);
-            }
-            else {
-                if (userManage.getUserPswd().isEmpty()){
-                    userManage.setUserPswd("123456");
-                    userManageService.updatetd_user(userManage);
-                }else {
-                    userManageService.updatetd_user(userManage);
-                }
-                return new Result(200);
-            }
-        } catch (Exception e) {
-            return new Result(400);
-        }
+    public Result updatetd_user(Area_Pip_Tmn_Leader area_pip_tmn_leader){
+        System.out.println("这是我的"+area_pip_tmn_leader.getArea_Pip_Tmn());
+        userManageService.updatetd_user(area_pip_tmn_leader);
+        return new Result(200);
+//        try {
+//            Integer num = userManageService.updatetd_user(userManage);
+//            if(num != 200){
+//                return new Result(400);
+//            }
+//            else {
+//                if (userManage.getUserPswd().isEmpty()){
+//                    userManage.setUserPswd("123456");
+//                    userManageService.updatetd_user(userManage);
+//                }else {
+//                    userManageService.updatetd_user(userManage);
+//                }
+//                return new Result(200);
+//            }
+//        } catch (Exception e) {
+//            return new Result(400);
+//        }
     }
+
+
+
 }

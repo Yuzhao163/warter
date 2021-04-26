@@ -30,4 +30,23 @@ Field 'id' doesn't have a default value] with root cause-->
     <select id="getAreaNameByAreaID" resultMap="BaseResultMap">
         select AreaName from td_areas where AreaID = #{AreaID};
     </select>
+    
+    <update id="updateAreaLeader">
+        update td_areas set AreaLeader=#{AreaLeader} where AreaID = #{AreaID};
+    </update>
+
+    <!--获取所有分区领导名称-->
+    <select id="getAreaLeader" resultMap="BaseResultMap">
+        select AreaLeader from td_areas where AreaLeader is not null;
+    </select>
+
+    <!--通过AreaLeder获取对应AreaID-->
+    <select id="getAreaID" resultMap="BaseResultMap">
+        select AreaID from td_areas where AreaLeader = #{AreaLeader};
+    </select>
+
+    <!--测试getAreas1-->
+    <select id="getAreas1" resultMap="BaseResultMap">
+        select AreaName,AreaID from td_areas where AreaLeader is null;
+    </select>
 </mapper>

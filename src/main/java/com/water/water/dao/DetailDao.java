@@ -13,7 +13,6 @@ public interface DetailDao {
 //    @Select("select `V_per` from td_Rec_Detail where Id = 2")
     List getVper(Integer id);
 
-    Rec_Detail getPipeByPackageId(Long PackageId);
-
+    Rec_Detail getTmnIDByPackageId(Long PackageId);
 
 }

@@ -13,7 +13,7 @@ public class Terminals {
     String ConPont2;
     String ConPont3;
     String TmnDesc;
-    String UserName;
+    String TmnLeader;
 
     public Integer getId() {
         return id;
@@ -23,12 +23,12 @@ public class Terminals {
         this.id = id;
     }
 
-    public String getUserName() {
-        return UserName;
+    public String getTmnLeader() {
+        return TmnLeader;
     }
 
-    public void setUserName(String userName) {
-        UserName = userName;
+    public void setUserName(String tmnLeader) {
+        TmnLeader = tmnLeader;
     }
 
     @Override

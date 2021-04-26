@@ -41,8 +41,32 @@ public class PipeDistributeController {
     }
     @RequestMapping(value = "api/getTerminals")
     public List getTerminalsBypip(@RequestParam String PipID) throws Exception{
-        String pipid = PipID;
-        List Terminals = td_tpService.getAlltdByPipID(pipid);
+//        String pipid = PipID;
+//        List Terminals = td_tpService.getAlltdByPipID(pipid);
+        List Terminals = td_tpService.getTmnLeaderNull();
         return Terminals;
     }
+//------------------------------------------------------------------------------------------------------------------
+    @RequestMapping(value = "api/getAreas1")
+    public List getAreas1() {
+        // 对 html 标签进行转义，防止 XSS 攻击
+        List Areas = td_areasService.getAreas1();
+        return Areas;
+    }
+
+    @RequestMapping(value = "api/getPipes1")
+    public List getPipeByArea1(@RequestParam String AreaName) throws Exception{
+        String AreasName = AreaName;
+        List Pipes = pipeDistributeService.getPipeByArea1(AreaName);
+        return Pipes;
+    }
+
+    @RequestMapping(value = "api/getTerminals1")
+    public List getTerminalsBypip1(@RequestParam String PipID) throws Exception{
+//        String pipid = PipID;
+//        List Terminals = td_tpService.getAlltdByPipID(pipid);
+        List Terminals = td_tpService.getTmnLeaderNull();
+        return Terminals;
+    }
+
 }

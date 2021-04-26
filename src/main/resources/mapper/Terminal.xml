@@ -14,7 +14,7 @@
         <result column="ConPont3" property="ConPont3" jdbcType="VARCHAR"/>
         <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
         <result column="TmnDesc" property="TmnDesc" jdbcType="VARCHAR"/>
-        <result column="UserName" property="UserName" jdbcType="VARCHAR"/>
+        <result column="TmnLeader" property="TmnLeader" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;
@@ -52,7 +52,35 @@
     </select>
 
     <select id="getTerminalsByUserName" resultMap="BaseResultMap">
-        select TmnName from td_terminals where UserName =
-        #{UserName};
+        select TmnName from td_terminals where UserName =#{UserName};
+    </select>
+
+    <update id="updateTmnLeader">
+        update td_terminals set TmnLeader=#{TmnLeader} where TmnId=#{TmnId};
+    </update>
+
+    <select id="getTmnIDByTmnName" resultMap="BaseResultMap">
+        select TmnId from td_terminals where TmnName = #{TmnName};
+    </select>
+
+
+
+    <select id="getNameByID2" resultMap="BaseResultMap">
+        select TmnName,TmnLeader from td_terminals where TmnId = #{TmnID};
+    </select>
+
+    <!--获取所有控制柜领导名称-->
+    <select id="getTerminalLeader" resultMap="BaseResultMap">
+        select TmnLeader from td_terminals where TmnLeader is not null;
+    </select>
+
+    <!--通过TmnLeder获取对应TmnID-->
+    <select id="getTmnIDs" resultMap="BaseResultMap">
+        select TmnID from td_terminals where TmnLeader = #{TmnLeader};
+    </select>
+
+    <!--获取控制柜表中TmnLeader为空的控制柜-->
+    <select id="getTmnLeaderNull" resultMap="BaseResultMap">
+        select TmnName from td_terminals where TmnLeader is null;
     </select>
 </mapper>

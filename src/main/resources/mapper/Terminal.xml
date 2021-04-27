@@ -14,14 +14,14 @@
         <result column="ConPont3" property="ConPont3" jdbcType="VARCHAR"/>
         <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
         <result column="TmnDesc" property="TmnDesc" jdbcType="VARCHAR"/>
-        <result column="UserName" property="UserName" jdbcType="VARCHAR"/>
+        <result column="TmnLeader" property="TmnLeader" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;
     </select>
 
     <select id="getNameByID" resultMap="BaseResultMap">
-        select TmnName from td_terminals where TmnId = #{TmnID};
+        select TmnName,TmnLeader from td_terminals where TmnId = #{TmnID};
     </select>
 
 <!--    获取整个列表信息-->

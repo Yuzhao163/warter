@@ -26,8 +26,8 @@
         select * from td_errordeal_rec;
     </select>
 
-    <select id="getErrorByTmnid" resultMap="ErrordealRecMap">
-        select * from td_errordeal_rec where TmnId = #{TmnId};
+    <select id="getErrorByErId" resultMap="ErrordealRecMap">
+        select * from td_errordeal_rec where ERId = #{ERId};
     </select>
 
 <!--    <select id="getSelectMessage" resultMap="DetailResult">-->

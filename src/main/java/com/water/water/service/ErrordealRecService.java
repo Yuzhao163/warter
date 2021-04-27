@@ -119,12 +119,14 @@ public class ErrordealRecService {
             td_error_rec message = (td_error_rec)Allerror.get(i);
             String TmnId = message.getTmnID();
             Terminals terminals = terminalsDao.getNameByID(TmnId);
+            String user = terminals.getTmnLeader();
             String TmnName = terminals.getTmnName();
             ErrordealRec errordealRec = new ErrordealRec();
             td_Tp tp = td_tpDao.getAlltdById(TmnId);
             String PipId = tp.getPipID();
             Integer PTid = tp.getPTid();
             //message.setTmnID(TmnName);
+            errordealRec.setUser(user);
             errordealRec.setTmnId(TmnId);
             errordealRec.setPipId(PipId);
             errordealRec.setPTid(PTid);

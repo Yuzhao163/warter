@@ -157,7 +157,7 @@ public class ErrordealRecService {
         return error;
     }
 
-    public List geterrorbyusername(String TmnLeader){
+    public List geterrorbyusername(String TmnLeader) throws Exception{
         //拿出来当前页的所有数据
         //对数据进行处理
         List terminal = terminalsDao.getTerminalsByUserName(TmnLeader);
@@ -165,7 +165,12 @@ public class ErrordealRecService {
         for(int k = 0;k < terminal.size();k++){
             Terminals terminals = (Terminals)terminal.get(k);
             String TmnId = terminals.getTmnId();
-            List Allerror = td_error_recDao.getErrorByTmnId(TmnId);
+            List Allerror = new ArrayList();
+            try{
+                Allerror = td_error_recDao.getErrorByTmnId(TmnId);
+            }catch(Exception e){
+                Allerror = Allerror;
+            }
             for (int i = 0; i < Allerror.size(); i++) {
                 td_error_rec message = (td_error_rec)Allerror.get(i);
 //                String TmnId = message.getTmnID();

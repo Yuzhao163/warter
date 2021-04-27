@@ -25,7 +25,7 @@
     </update>
 
     <select id="getErrorByTmnId" resultMap="ErrorRecMap">
-        select * from td_error_rec ORDER BY if_deal desc where TmnId = #{TmnId};
+        select * from td_error_rec where TmnID = #{TmnId} ORDER BY if_deal desc;
     </select>
 
     <select id = "getCountErrorMessage" resultType="integer">

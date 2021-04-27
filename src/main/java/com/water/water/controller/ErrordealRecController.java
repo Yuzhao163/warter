@@ -55,7 +55,7 @@ public class ErrordealRecController {
     }
 
     @RequestMapping(value = "api/geterrorbyusername")
-    public List geterrorbyusername(@RequestParam String TmnLeader){
+    public List geterrorbyusername(@RequestParam String TmnLeader) throws Exception{
         String tmnleader = TmnLeader;
         List errordata =
                 errordealRecService.geterrorbyusername(tmnleader);

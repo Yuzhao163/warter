@@ -223,6 +223,15 @@ public class ErrordealRecService {
 //        return AllError;
 //    }
     public Integer InsertToError(ErrordealRec errordealRec){
+        String TmnID = errordealRec.getTmnId();
+        //根据tmnID去总异常表中查找该条记录，判断if_deal是否为2，如果不是的话则改成2，如果是的话则不变
+        td_error_rec error = td_error_recDao.getIfByTmnId(TmnID);
+        String if_deal = error.getIf_deal();
+        if(if_deal.equals("1")){
+            td_error_recDao.updateByTmnId(TmnID);
+        }else{
+            return errordealRecDao.InsertToError(errordealRec);
+        }
         return errordealRecDao.InsertToError(errordealRec);
     };
 

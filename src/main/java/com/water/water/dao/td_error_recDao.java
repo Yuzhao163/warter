@@ -1,5 +1,7 @@
 package com.water.water.dao;
 
+import com.water.water.pojo.td_error_rec;
+
 import java.util.List;
 
 public interface td_error_recDao {
@@ -12,4 +14,7 @@ public interface td_error_recDao {
 
     List getErrorByTmnId(String TmnId);
 
+    td_error_rec getIfByTmnId(String TmnId);
+
+    Integer updateByTmnId(String TmnId);
 }

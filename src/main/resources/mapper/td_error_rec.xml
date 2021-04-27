@@ -38,4 +38,13 @@
             limit #{page},#{size}
         </if>
     </select>
+
+    <select id="getIfByTmnId" resultMap="ErrorRecMap">
+        select if_deal from td_error_rec where TmnID = #{TmnId};
+    </select>
+
+    <update id="updateByTmnId">
+        update td_error_rec set if_deal = '2' where TmnId = #{TmnId};
+    </update>
+
 </mapper>

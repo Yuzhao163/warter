@@ -65,7 +65,8 @@ public class ErrordealRecController {
     }
 
     @RequestMapping(value = "api/dealerror")
-    public Integer InsertToError(@RequestParam ErrordealRec errordealRec) throws Exception{
+    public Integer InsertToError(ErrordealRec errordealRec) throws Exception{
+        System.out.println(errordealRec);
 //        java.util.Date date = new java.util.Date();
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        //获取String类型的时间

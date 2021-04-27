@@ -18,6 +18,26 @@ public class ErrordealRec {
     private String Error_Position;
     private Date Time;
 
+    @Override
+    public String toString() {
+        return "ErrordealRec{" +
+                "ERDId=" + ERDId +
+                ", ERId=" + ERId +
+                ", Exception='" + Exception + '\'' +
+                ", Result='" + Result + '\'' +
+                ", C_t=" + C_t +
+                ", User='" + User + '\'' +
+                ", PackageId=" + PackageId +
+                ", TmnId='" + TmnId + '\'' +
+                ", TmnName='" + TmnName + '\'' +
+                ", PipId='" + PipId + '\'' +
+                ", PTid=" + PTid +
+                ", if_deal='" + if_deal + '\'' +
+                ", Error_Position='" + Error_Position + '\'' +
+                ", Time=" + Time +
+                '}';
+    }
+
     public String getIf_deal() {
         return if_deal;
     }

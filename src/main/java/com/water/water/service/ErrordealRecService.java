@@ -138,7 +138,7 @@ public class ErrordealRecService {
             errordealRec.setERId(message.getERId());
             String if_deal = message.getIf_deal();
             //if_deal如果已经处理过了就是2，如果未处理是1
-            if(if_deal.equals("2")){
+            if(if_deal.equals("1")){
                 error.add(errordealRec);
             }else{
                 //由tmnID去td_errordeal_rec表中查找
@@ -151,6 +151,7 @@ public class ErrordealRecService {
                     errordealRec.setUser(errordeal.getUser());
                     errordealRec.setC_t(errordeal.getC_t());
                 }
+                error.add(errordealRec);
             }
         }
         return error;

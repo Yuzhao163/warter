@@ -24,6 +24,8 @@ public class ErrordealRecService {
     td_AreasDao td_areasDao;
     @Autowired
     com.water.water.dao.td_PipesDao td_PipesDao;
+    @Autowired
+    td_error_recDao td_error_recDao;
 
     //public ErrordealRec getAllError(){
     //return errordealRecDao.getAllError();
@@ -100,35 +102,60 @@ public class ErrordealRecService {
     public Integer updateError(ErrordealRec errordealRec) {
         return errordealRecDao.updateError(errordealRec);
     }
-
+    //统计td_error_rec表中数据总数
     public Integer getCountMessage(){
-        return errordealRecDao.getCountMessage();
+        return td_error_recDao.getCountErrorMessage();
     }
-
+    //有了总数，有了page,size之后，需要判断是否提交过。
     public List getSelectErrorMessageByPage(Integer page,Integer size){
         if (page != null && size != null){
             page = (page - 1) * size;
         }
-        List Allerror =
-                getAllErrorById(errordealRecDao.getSelectErrorMessageByPage(page,size));
-        return Allerror;
+        //拿出来当前页的所有数据
+        //对数据进行处理
+        List Allerror = td_error_recDao.getSelectMessageByPage(page,size);
+        List error = new ArrayList();
+        for (int i = 0; i < Allerror.size(); i++) {
+            td_error_rec message = (td_error_rec)Allerror.get(i);
+            String TmnId = message.getTmnID();
+            Terminals terminals = terminalsDao.getNameByID(TmnId);
+            String TmnName = terminals.getTmnName();
+            ErrordealRec errordealRec = new ErrordealRec();
+            td_Tp tp = td_tpDao.getAlltdById(TmnId);
+            String PipId = tp.getPipID();
+            Integer PTid = tp.getPTid();
+            //message.setTmnID(TmnName);
+            errordealRec.setTmnId(TmnId);
+            errordealRec.setPipId(PipId);
+            errordealRec.setPTid(PTid);
+            errordealRec.setTmnName(TmnName);
+            errordealRec.setIf_deal(message.getIf_deal());
+            errordealRec.setError_Position(message.getError_Position());
+            errordealRec.setTime(message.getTime());
+            errordealRec.setTmnId(message.getTmnID());
+            errordealRec.setERId(message.getERId());
+            String if_deal = message.getIf_deal();
+            //if_deal如果已经处理过了就是2，如果未处理是1
+            if(if_deal.equals("2")){
+                error.add(errordealRec);
+            }else{
+                //由tmnID去td_errordeal_rec表中查找
+                Short ERID = message.getERId();
+                List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
+                for(int j = 0;j < ErrorDeal.size();j++){
+                    ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(j);
+                    errordealRec.setException(errordeal.getException());
+                    errordealRec.setResult(errordeal.getResult());
+                    errordealRec.setUser(errordeal.getUser());
+                    errordealRec.setC_t(errordeal.getC_t());
+                }
+            }
+        }
+        return error;
     }
 
 //        public List getAllErrorById(List AllError) {
-//        for (int i = 0; i < AllError.size(); i++) {
-//            ErrordealRec message = (ErrordealRec) AllError.get(i);
-//            String TmnId = message.getTmnId();
-//            Terminals terminals = terminalsDao.getNameByID(TmnId);
-//            String TmnName = terminals.getTmnName();
-//            td_Tp tp = td_tpDao.getAlltdById(TmnId);
-//            String PipId = tp.getPipID();
-//            Integer PTid = tp.getPTid();
-//            //message.setTmnID(TmnName);
-//            message.setTmnId(TmnId);
-//            message.setTmnName(TmnName);
-//            message.setPipId(PipId);
-//            message.setPTid(PTid);
-//        }
+//
 //        return AllError;
 //    }
 

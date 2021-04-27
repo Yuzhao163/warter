@@ -2,6 +2,10 @@ package com.water.water.service;
 
 import com.water.water.dao.DetailDao;
 import com.water.water.dao.IndexDao;
+import com.water.water.dao.TerminalsDao;
+import com.water.water.pojo.Rec_Detail;
+import com.water.water.pojo.Terminals;
+import com.water.water.util.PrintClassName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,8 @@ public class IndexService {
 
     @Autowired
     private IndexDao indexDao;
+    @Autowired
+    private TerminalsDao terminalsDao;
 
     public List getAllMessage(){
         return indexDao.getAllMessage();
@@ -62,6 +68,20 @@ public class IndexService {
         if (page != null && size != null){
             page = (page - 1) * size;
         }
-        return indexDao.getSelectMessageByPage(page,size);
+        List allmessage = indexDao.getSelectMessageByPage(page,size);
+        for (int i = 0;i<allmessage.size();i++){
+            Rec_Detail message = (Rec_Detail)allmessage.get(i);
+            String TmnID = message.getTmnID();
+            String TmnName;
+            if(TmnID == null){
+                TmnName = "名字查询失败";
+            }else{
+                Terminals terminals = terminalsDao.getNameByID(TmnID);
+                TmnName = terminals.getTmnName();
+            }
+
+            message.setTmnID(TmnName);
+        }
+        return allmessage;
     }
 }

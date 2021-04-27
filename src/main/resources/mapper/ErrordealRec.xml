@@ -26,6 +26,10 @@
         select * from td_errordeal_rec;
     </select>
 
+    <select id="getErrorByTmnid" resultMap="ErrordealRecMap">
+        select * from td_errordeal_rec where TmnId = #{TmnId};
+    </select>
+
 <!--    <select id="getSelectMessage" resultMap="DetailResult">-->
 <!--        select * from td_Rec_Detail where W_work = #{W_work} AND F_Volume-->
 <!--        between #{W_Downline} AND #{W_Upline};-->
@@ -33,7 +37,8 @@
     <!--    -->
     <!--    <select id="getNameById" resultMap=""-->
     <update id="updateError">
-        update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
+        update td_errordeal_rec set Exception=#{Exception},Result=#{Result}
+        where ERId=#{ERId};
     </update>
 
     <select id = "getCountMessage" resultType="integer">

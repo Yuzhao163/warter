@@ -48,7 +48,8 @@ public class ErrordealRecController {
     }
 
     @RequestMapping(value = "api/SelectErrorMessageByPage")
-    public List getSelectMessageByPage(@RequestParam Integer page,Integer size) throws Exception{
+    public List getSelectMessageByPage(@RequestParam Integer page,
+                                      Integer size) throws Exception{
         return errordealRecService.getSelectErrorMessageByPage(page,size);
     }
 }

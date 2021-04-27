@@ -10,6 +10,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+*
+* */
+
 @Service
 public class ErrordealRecService {
     @Autowired
@@ -218,6 +222,8 @@ public class ErrordealRecService {
 //
 //        return AllError;
 //    }
-
+    public Integer InsertToError(ErrordealRec errordealRec){
+        return errordealRecDao.InsertToError(errordealRec);
+    };
 
 }

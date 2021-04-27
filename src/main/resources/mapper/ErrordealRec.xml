@@ -51,4 +51,13 @@
             limit #{page},#{size}
         </if>
     </select>
+    
+    <insert id="InsertToError">
+        insert into td_errordeal_rec
+        (ERId,Exception,Result,User,TmnID)
+         VALUES (#{ERId},#{Exception},#{Result},#{User},#{TmnID}) ON
+         DUPLICATE
+          KEY UPDATE ERId = #{ERId} , Exception = #{Exception} , Result =
+          #{Result},User = #{User},TmnID = #{TmnID};
+    </insert>
 </mapper>

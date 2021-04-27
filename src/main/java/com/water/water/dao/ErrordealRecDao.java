@@ -19,4 +19,6 @@ public interface ErrordealRecDao {
     List getSelectErrorMessageByPage(Integer page,Integer size);
 
     List getErrorByErId(Short ERID);
+
+    Integer InsertToError(ErrordealRec errordealRec);
 }

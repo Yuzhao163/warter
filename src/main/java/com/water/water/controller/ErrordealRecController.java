@@ -9,6 +9,8 @@ import com.water.water.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +62,18 @@ public class ErrordealRecController {
         List errordata =
                 errordealRecService.geterrorbyusername(tmnleader);
         return errordata;
+    }
+
+    @RequestMapping(value = "api/dealerror")
+    public Integer InsertToError(@RequestParam ErrordealRec errordealRec) throws Exception{
+//        java.util.Date date = new java.util.Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        //获取String类型的时间
+//        String createdate = sdf.format(date);
+//        //Date c_t = sdf.parse(createdate);
+//        Date c_t = sdf.parse(createdate);
+//        errordealRec.setC_t(c_t);
+        return errordealRecService.InsertToError(errordealRec);
     }
 }
 

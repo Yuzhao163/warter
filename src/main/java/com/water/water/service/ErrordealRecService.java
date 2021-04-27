@@ -157,6 +157,58 @@ public class ErrordealRecService {
         return error;
     }
 
+    public List geterrorbyusername(String TmnLeader){
+        //拿出来当前页的所有数据
+        //对数据进行处理
+        List terminal = terminalsDao.getTerminalsByUserName(TmnLeader);
+        List error = new ArrayList();
+        for(int k = 0;k < terminal.size();k++){
+            Terminals terminals = (Terminals)terminal.get(k);
+            String TmnId = terminals.getTmnId();
+            List Allerror = td_error_recDao.getErrorByTmnId(TmnId);
+            for (int i = 0; i < Allerror.size(); i++) {
+                td_error_rec message = (td_error_rec)Allerror.get(i);
+//                String TmnId = message.getTmnID();
+//                Terminals terminals = terminalsDao.getNameByID(TmnId);
+                String user = terminals.getTmnLeader();
+                String TmnName = terminals.getTmnName();
+                ErrordealRec errordealRec = new ErrordealRec();
+                td_Tp tp = td_tpDao.getAlltdById(TmnId);
+                String PipId = tp.getPipID();
+                Integer PTid = tp.getPTid();
+                //message.setTmnID(TmnName);
+                errordealRec.setUser(user);
+                errordealRec.setTmnId(TmnId);
+                errordealRec.setPipId(PipId);
+                errordealRec.setPTid(PTid);
+                errordealRec.setTmnName(TmnName);
+                errordealRec.setIf_deal(message.getIf_deal());
+                errordealRec.setError_Position(message.getError_Position());
+                errordealRec.setTime(message.getTime());
+                errordealRec.setTmnId(message.getTmnID());
+                errordealRec.setERId(message.getERId());
+                String if_deal = message.getIf_deal();
+                //if_deal如果已经处理过了就是2，如果未处理是1
+                if(if_deal.equals("1")){
+                    error.add(errordealRec);
+                }else{
+                    //由tmnID去td_errordeal_rec表中查找
+                    Short ERID = message.getERId();
+                    List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
+                    for(int j = 0;j < ErrorDeal.size();j++){
+                        ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(j);
+                        errordealRec.setException(errordeal.getException());
+                        errordealRec.setResult(errordeal.getResult());
+                        errordealRec.setUser(errordeal.getUser());
+                        errordealRec.setC_t(errordeal.getC_t());
+                    }
+                    error.add(errordealRec);
+                }
+            }
+        }
+        return error;
+    }
+
 //        public List getAllErrorById(List AllError) {
 //
 //        return AllError;

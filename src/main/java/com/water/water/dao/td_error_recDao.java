@@ -8,4 +8,8 @@ public interface td_error_recDao {
 
     List getSelectMessageByPage(Integer page, Integer size);
 
+    List getAllErrorByTmnLeader(String TmnId);
+
+    List getErrorByTmnId(String TmnId);
+
 }

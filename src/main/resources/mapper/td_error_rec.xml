@@ -24,12 +24,16 @@
         update td_errordeal_rec set Exception=#{Exception},Result=#{Result} where TmnId=#{TmnId};
     </update>
 
+    <select id="getErrorByTmnId" resultMap="ErrorRecMap">
+        select * from td_error_rec ORDER BY if_deal desc where TmnId = #{TmnId};
+    </select>
+
     <select id = "getCountErrorMessage" resultType="integer">
         select COUNT(*) from td_error_rec;
     </select>
 
     <select id="getSelectMessageByPage" resultMap="ErrorRecMap">
-        select * from td_error_rec ORDER BY Time desc
+        select * from td_error_rec ORDER BY if_deal asc
         <if test="page!=null and size!=null">
             limit #{page},#{size}
         </if>

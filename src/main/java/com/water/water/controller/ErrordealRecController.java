@@ -4,6 +4,7 @@ package com.water.water.controller;
 //author 李轶杰
 import com.water.water.Result.Result;
 import com.water.water.pojo.ErrordealRec;
+import com.water.water.pojo.Rec_Detail;
 import com.water.water.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,14 @@ public class ErrordealRecController {
     public List getSelectMessageByPage(@RequestParam Integer page,
                                       Integer size) throws Exception{
         return errordealRecService.getSelectErrorMessageByPage(page,size);
+    }
+
+    @RequestMapping(value = "api/geterrorbyusername")
+    public List geterrorbyusername(@RequestParam String TmnLeader){
+        String tmnleader = TmnLeader;
+        List errordata =
+                errordealRecService.geterrorbyusername(tmnleader);
+        return errordata;
     }
 }
 

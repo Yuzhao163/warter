@@ -16,7 +16,7 @@
         <result column="D_ID" property="D_ID" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="inserttotd_comm">
-        insert into td_Comm_rec(TmnID,V_pre,OV_period,OV_waterline,OV_keeptime,CV_waterline,V_actiontime) values (#{TmnID},#{V_pre},#{OV_period},#{OV_waterline},#{OV_keeptime},#{CV_waterline},#{V_actiontime})
+        insert into td_Comm_rec(TmnID,V_pre,OV_period,OV_waterline,OV_keeptime,CV_waterline,V_actiontime,PeerAddress) values (#{TmnID},#{V_pre},#{OV_period},#{OV_waterline},#{OV_keeptime},#{CV_waterline},#{V_actiontime},#{PeerAddress})
     </insert>
 
 

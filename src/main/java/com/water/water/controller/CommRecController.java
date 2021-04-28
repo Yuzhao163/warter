@@ -31,5 +31,10 @@ public class CommRecController {
             System.out.println(e);
             return new Result(400);
         }
-}
+    }
+
+    @RequestMapping(value = "api/order")
+    public Result SendOrder(CommRec commRec){
+       return commRecService.SendOrder(commRec);
+    }
 }

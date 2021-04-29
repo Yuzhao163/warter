@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 
 
 public class UserManage {
-    private String UserID;
+    private Integer UserID;
+
+
     private String UserName;
     private String UserPswd;
     private String UClassID;
@@ -21,7 +23,7 @@ public class UserManage {
     public UserManage() {
     }
 
-    public UserManage(String userID, String userName, String userPswd, String UClassID, Integer ustate, Date regTime, String moPhone, String realName, String DPTName) {
+    public UserManage(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Date regTime, String moPhone, String realName, String DPTName) {
         UserID = userID;
         UserName = userName;
         UserPswd = userPswd;
@@ -49,13 +51,15 @@ public class UserManage {
                 '}';
     }
 
-    public String getUserID() {
+
+    public Integer getUserID() {
         return UserID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Integer userID) {
         UserID = userID;
     }
+
 
     public String getUserName() {
         return UserName;

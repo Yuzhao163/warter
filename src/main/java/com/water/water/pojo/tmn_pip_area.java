@@ -14,7 +14,7 @@ public class tmn_pip_area {
     private String TmnDesc;
     private String PipID;
     private String AreaID;
-    private String TmnLeadID;
+    private Integer TmnLeadID;
 
     @Override
     public String toString() {
@@ -36,11 +36,11 @@ public class tmn_pip_area {
                 '}';
     }
 
-    public String getTmnLeadID() {
+    public Integer getTmnLeadID() {
         return TmnLeadID;
     }
 
-    public void setTmnLeadID(String tmnLeadID) {
+    public void setTmnLeadID(Integer tmnLeadID) {
         TmnLeadID = tmnLeadID;
     }
 

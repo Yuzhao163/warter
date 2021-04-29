@@ -74,7 +74,7 @@ public class UserManageService {
 
 //lmh
     //  判断修改后的用户名是否重复
-    public Integer checkUserName(String userName,String userID) {
+    public Integer checkUserName(String userName,Integer userID) {
     //      将用户名与数据库中的用户名进行比较
         List<String> allName = userManageDao.getAllUserName(userID);
         for (int i=0; i<allName.size(); i++) {
@@ -90,7 +90,7 @@ public class UserManageService {
 //  根据用户id修改个人信息
     public Integer updateUserInfo(UserManage userManage) {
 //      在没有进行真正的更新之前先将旧的用户名记录下来 用于其他表的更新
-        String userID = userManage.getUserID();
+        Integer userID = userManage.getUserID();
         String beforeName = userManageDao.getUserNameByID(userID);
         String userName = userManage.getUserName();
         String MoPhone = userManage.getMoPhone();

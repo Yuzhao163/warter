@@ -56,7 +56,7 @@
     </select>
 
     <select id="getTNameByUserName" resultMap="BaseResultMap">
-        select TmnName from td_terminals where UserName =#{UserName};
+        select TmnName from td_terminals where TmnLeader =#{UserName};
     </select>
 
 
@@ -68,8 +68,28 @@
     <select id="getTINByTID" resultMap="BaseResultMap">
         select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
     </select>
-<!--  根据id查询整条控制柜信息  -->
+<!--  根据控制柜id查询整条控制柜信息  -->
     <select id="getTmnByID" resultMap="BaseResultMap">
         select * from td_terminals where TmnID = #{TmnID};
+    </select>
+
+<!--  根据id查询整条控制柜信息（为了解决为解决的bug写的）  -->
+    <select id="getTmnByid" resultMap="BaseResultMap">
+        select * from td_terminals where id = ${id}
+    </select>
+
+<!--  更新控制柜  -->
+    <select id="updateTmnByid">
+        update td_terminals set TmnName = #{tmnName}, ConPont1 = #{conPont1}, ConPont2 = #{conPont2},
+                        ConPont3 = #{conPont3}, TmnDesc = #{tmnDesc}, TmnLeader = #{tmnLeadName} where id=#{id}
+    </select>
+
+
+<!--  分页查询  -->
+    <select id="getAllTmnListByPage" resultMap="BaseResultMap">
+        select * from td_terminals
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
     </select>
 </mapper>

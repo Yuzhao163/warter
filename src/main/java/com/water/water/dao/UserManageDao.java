@@ -22,11 +22,11 @@ public interface UserManageDao {
 
 
 //  查询所有的用户名称除了当前id的
-    List<String> getAllUserName(String userID);
+    List<String> getAllUserName(Integer userID);
 //  根据id更改用户信息
     Integer updateUserInfo(UserManage userManage);
 //  根据id查询用户名称
-    String getUserNameByID(String userName);
+    String getUserNameByID(Integer userID);
 //  获取用户id和名称
     List getUIDName();
 

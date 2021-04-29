@@ -79,8 +79,8 @@
     </select>
 
 <!--  获取用户id和名称  -->
-    <select id="getUIDName" resultMap="BaseResultMap">
-        select UserID,UserName from td_user ;
+    <select id="getUIDNameByID" resultMap="BaseResultMap">
+        select UserID,UserName from td_user where UserID = ${UserID};
     </select>
 
 </mapper>

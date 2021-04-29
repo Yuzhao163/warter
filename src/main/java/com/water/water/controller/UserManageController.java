@@ -87,7 +87,7 @@ public class UserManageController {
     public Integer updateUserInfo(UserManage userManage) {
 //      首先判断修改的用户名是否有重复
         String userName = userManage.getUserName();
-        String userID = userManage.getUserID();
+        Integer userID = userManage.getUserID();
 //      用户名有重复不执行更新
         if (userManageService.checkUserName(userName,userID)==201) {
             return 201;

@@ -27,6 +27,15 @@ public class DeviceController {
         return getAllTmnList;
     }
 
+//  分页获取控制柜信息
+    @RequestMapping(value = "api/getAllTmnListByPage")
+    public JSONArray getAllTmnListByPage(Integer page, Integer size) {
+        System.out.println(page+""+size);
+        JSONArray TmnList = terminalsService.getAllTmnListByPage(page,size);
+
+        return TmnList;
+    }
+
     @PostMapping(value = "api/deleteTmn")
     public Integer deleteTmn(@RequestBody tmn_pip_area tpa) {
         System.out.println(tpa);
@@ -36,8 +45,9 @@ public class DeviceController {
 
 //    修改控制柜信息
     @PostMapping(value = "api/modifyTmn")
-    public Integer modifyTmn(@RequestBody Terminals tmn) {
-        Integer result = terminalsService.modifyTmn(tmn);
+    public Integer modifyTmn(@RequestBody tmn_pip_area tpa) {
+        System.out.println("修改传入的参数"+tpa);
+        Integer result = terminalsService.modifyTmn(tpa);
         return result;
     }
 
@@ -82,9 +92,12 @@ public class DeviceController {
     }
 
     @RequestMapping(value = "api/test")
-    public void test() {
-        terminalsService.test();
+    public List test() {
+        System.out.println("////");
+        return terminalsService.test();
     }
+
+
 
 
 }

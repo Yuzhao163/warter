@@ -13,6 +13,9 @@ public interface TerminalsDao {
 
     List getAllTmnList();
 
+    // 分页获取控制柜信息
+    List getAllTmnListByPage(Integer page, Integer size);
+
     Integer addTmn(Terminals requestTmn);
 
     Integer deleteTmnByID(String tmnID);
@@ -31,5 +34,12 @@ public interface TerminalsDao {
     List getTINByTID(String tmnID);
 
     List getTmnByID(String tmnID);
+
+//  解决为解决的bug写的
+    Terminals getTmnByid(Integer id);
+
+//  更新控制柜信息
+    Integer updateTmnByid(Integer id, String tmnName, String conPont1, String conPont2,
+                      String conPont3, String TmnDesc, String tmnLeadName);
 
 }

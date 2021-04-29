@@ -29,7 +29,7 @@ public class PipeDistributeService {
         String AreaID = Area.getAreaID();
         System.out.println(AreaID);
         List Pips = td_pipesDao.getPipsByAreaID(AreaID);
-        System.out.println("吼吼"+Pips);
+        System.out.println("获得各个管线的值"+Pips);
         return Pips;
     }
 
@@ -72,31 +72,5 @@ public class PipeDistributeService {
         return Areas;
     }
 
-    //-----------------------------------------------------------------------------------------------------------
-//    public List getPipeByArea(String AreaName){
-//
-//        td_Areas Area = td_areasDao.getAreaIDByAreaName(AreaName);
-//        String AreaID = Area.getAreaID();
-//        List Pips = td_pipesDao.getPipsByAreaID(AreaID);
-//        return Pips;
-//    }
-    public List getPipeByArea1(String AreaName){
-        td_Areas Area = td_areasDao.getAreaIDByAreaName(AreaName);
-        String AreaID = Area.getAreaID();
-        List pipID = td_apDao.getPipID(AreaID);
-        List Pips = new ArrayList();
-        for(int i = 0; i < pipID.size(); i++){
-            td_Ap td_ap = (td_Ap)pipID.get(i);
-            System.out.println("PipID为"+td_ap.getPipID());
-            td_PIPs pipsByID = td_pipesDao.getPipsByID(td_ap.getPipID());
-            Pips.add(pipsByID);
-
-        }
-        System.out.println(Pips);
-//        System.out.println("分区编号为"+AreaID);
-
-        //List Pips = td_pipesDao.getPipsByAreaID1(AreaID);
-        return Pips;
-    }
 
 }

@@ -15,15 +15,29 @@
         <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="addUserRight">
-        insert into td_user_right(UserID, Right_PP, TmnID, PipID, AreaID) values(#{UserID}, #{Right_PP}, #{TmnID}, #{PipID}, #{AreaID})
-    </insert>
+<!--    <insert id="addUserRight">-->
+<!--        insert into td_user_right(UserID, Right_PP, TmnID, PipID, AreaID) values(#{UserID}, #{Right_PP}, #{TmnID}, #{PipID}, #{AreaID})-->
+<!--    </insert>-->
 
     <select id="showID" resultMap="BaseResultMap">
         select TmnID, PipID, AreaID from td_user_right where UserID = #{UserID};
     </select>
 
-<!--    <update id="updateUserRight">-->
-<!--        update td_user_right set Right_PP = "", TmnID = "", PipID = "", AreaID = "" where UserID = #{UserID};-->
-<!--    </update>-->
+    <update id="updateUserRight">
+        update td_user_right set Right_PP = "", TmnID = "", PipID = "", AreaID = "" where UserID = #{UserID};
+    </update>
+
+    <insert id="addUserRights">
+        insert into td_user_right(UserID, Right_PP) values(#{UserID}, #{Right_PP})
+    </insert>
+
+    <!--修改调整名字后的用户权限表-->
+    <update id="updateUserRights">
+        update td_user_right set Right_PP = #{Right_PP}  where UserID = #{UserID}
+    </update>
+
+    <!--根据UserID获取对应Right_PP-->
+    <select id="getRight_PP" resultMap="BaseResultMap">
+        select Right_PP from td_user_right where UserID = #{UserID}
+    </select>
 </mapper>

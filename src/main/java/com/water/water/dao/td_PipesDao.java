@@ -13,7 +13,7 @@ public interface td_PipesDao {
 
     List getPipsByAreaID(String AreaID);
 
-    td_PIPs getPipByAreaID(String AreaID);
+//    td_PIPs getPipByAreaID(String AreaID);
 
     String getPipNameByPipID(String pipID);
 
@@ -34,9 +34,10 @@ public interface td_PipesDao {
     //通过PipLeder获取对应PipID
     List getPipID(@Param("PipLeader") String PipLeader);
 
-    //-----------------------------------------------------------------------------
-    List getPipsByAreaID1(String AreaID);
 
-    td_PIPs getPipsByID(@Param("PipID") String PipID);
+    //获取对应管线-4.27/15.37--------------------------------------------------
+    List getPipes();
 
+    //通过AreaID获取Leader,使之为空
+    void updateLeaderByPipID(String id);
 }

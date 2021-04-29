@@ -1,10 +1,8 @@
 package com.water.water.pojo;
 
-import java.sql.Array;
 import java.sql.Timestamp;
-import java.util.List;
 
-public class Area_Pip_Tmn_Leader {
+public class UserRight {
     private Integer UserID;
     private String UserName;
     private String UserPswd;
@@ -20,9 +18,12 @@ public class Area_Pip_Tmn_Leader {
     private String PipName;
     private String TmnId;
     private String TmnName;
-    private String Area_Pip_Tmn;
+    private Integer Right_PP;
 
-    public Area_Pip_Tmn_Leader(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName, String areaID, String areaName, String pipID, String pipName, String tmnId, String tmnName, String area_Pip_Tmn) {
+    public UserRight() {
+    }
+
+    public UserRight(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName, String areaID, String areaName, String pipID, String pipName, String tmnId, String tmnName, Integer right_PP) {
         UserID = userID;
         UserName = userName;
         UserPswd = userPswd;
@@ -38,15 +39,7 @@ public class Area_Pip_Tmn_Leader {
         PipName = pipName;
         TmnId = tmnId;
         TmnName = tmnName;
-        Area_Pip_Tmn = area_Pip_Tmn;
-    }
-
-    public String getArea_Pip_Tmn() {
-        return Area_Pip_Tmn;
-    }
-
-    public void setArea_Pip_Tmn(String area_Pip_Tmn) {
-        Area_Pip_Tmn = area_Pip_Tmn;
+        Right_PP = right_PP;
     }
 
     public Integer getUserID() {
@@ -169,10 +162,18 @@ public class Area_Pip_Tmn_Leader {
         TmnName = tmnName;
     }
 
+    public Integer getRight_PP() {
+        return Right_PP;
+    }
+
+    public void setRight_PP(Integer right_PP) {
+        Right_PP = right_PP;
+    }
+
     @Override
     public String toString() {
-        return "Area_Pip_Tmn_Leader{" +
-                "UserID='" + UserID + '\'' +
+        return "UserRight{" +
+                "UserID=" + UserID +
                 ", UserName='" + UserName + '\'' +
                 ", UserPswd='" + UserPswd + '\'' +
                 ", UClassID='" + UClassID + '\'' +
@@ -187,6 +188,7 @@ public class Area_Pip_Tmn_Leader {
                 ", PipName='" + PipName + '\'' +
                 ", TmnId='" + TmnId + '\'' +
                 ", TmnName='" + TmnName + '\'' +
+                ", Right_PP=" + Right_PP +
                 '}';
     }
 }

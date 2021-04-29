@@ -16,11 +16,12 @@ public class UserManage {
     private String MoPhone;
     private String RealName;
     private String DPTName;
+    private Timestamp ModTime;
 
     public UserManage() {
     }
 
-    public UserManage(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName) {
+    public UserManage(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName, Timestamp modTime) {
         UserID = userID;
         UserName = userName;
         UserPswd = userPswd;
@@ -30,6 +31,7 @@ public class UserManage {
         MoPhone = moPhone;
         RealName = realName;
         this.DPTName = DPTName;
+        ModTime = modTime;
     }
 
     public Integer getUserID() {
@@ -104,10 +106,18 @@ public class UserManage {
         this.DPTName = DPTName;
     }
 
+    public Timestamp getModTime() {
+        return ModTime;
+    }
+
+    public void setModTime(Timestamp modTime) {
+        ModTime = modTime;
+    }
+
     @Override
     public String toString() {
         return "UserManage{" +
-                "UserID='" + UserID + '\'' +
+                "UserID=" + UserID +
                 ", UserName='" + UserName + '\'' +
                 ", UserPswd='" + UserPswd + '\'' +
                 ", UClassID='" + UClassID + '\'' +
@@ -116,6 +126,7 @@ public class UserManage {
                 ", MoPhone='" + MoPhone + '\'' +
                 ", RealName='" + RealName + '\'' +
                 ", DPTName='" + DPTName + '\'' +
+                ", ModTime=" + ModTime +
                 '}';
     }
 }

@@ -77,4 +77,14 @@ Field 'id' doesn't have a default value] with root cause-->
         select PipName from td_pips where PipID = #{PipID} and PipLeader is null;
     </select>
 
+
+    <!--获取管线4.27/15.37-->
+    <select id="getPipes" resultMap="BaseResultMap">
+        select * from td_pips where PipLeader is null;
+    </select>
+
+    <!--设置对应ID的PipLeader为空-->
+    <update id="updateLeaderByPipID">
+        update td_pips set PipLeader = null where PipID = #{PipID};
+    </update>
 </mapper>

@@ -15,8 +15,6 @@ public class td_AreasService {
         return td_areasDao.getAreas();
     }
 
-//    ---------------------------------------------------------------------
-    public List getAreas1(){
-        return td_areasDao.getAreas1();
-    }
+
+
 }

@@ -16,6 +16,7 @@
         <result column="MoPhone" property="MoPhone" jdbcType="VARCHAR"/>
         <result column="RealName" property="RealName" jdbcType="VARCHAR"/>
         <result column="DPTName" property="DPTName" jdbcType="VARCHAR"/>
+        <result column="ModTime" property="ModTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="getByUserManageName" resultMap="BaseResultMap">
         select
@@ -43,11 +44,11 @@
 
     <update id="updatetd_user">
         <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
-        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
+        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName},ModTime = #{ModTime} where UserID = #{UserID}
     </update>
 
     <select id="getUserMessageByName" resultMap="BaseResultMap">
-        select * from td_User where UserName = #{UserName};
+        select * from td_User where UserName = #{UserName};getUserID
     </select>
 
     <!--这一行可能没用-->
@@ -59,4 +60,9 @@
     <update id="deleteUser">
         update td_user set Ustate = 0 where UserID = #{UserID};
     </update>
+
+    <!--通过用户名获取用户ID-->
+    <select id="getUserID" resultMap="BaseResultMap">
+        select UserID from td_user where UserName = #{UserName};
+    </select>
 </mapper>

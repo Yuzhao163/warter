@@ -99,4 +99,9 @@ public class TerminalsService {
         return terminalsDao.getTerminalsByUserName(UserName);
     }
 
+    //获取控制柜--4.27/16.01------------------------------------------------------
+    public List getTerminals() {
+        List terminals = terminalsDao.getTerminals();
+        return terminals;
+    }
 }

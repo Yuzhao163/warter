@@ -10,7 +10,9 @@ import java.util.List;
 @Mapper
 public interface td_AreasDao {
     List getAreas();
+
     td_Areas getAreaIDByAreaName(String AreaName);
+
     td_Areas getAreaNameByAreaID(String AreaID);
 
     //更新新增用户分配所属分区
@@ -22,6 +24,6 @@ public interface td_AreasDao {
     //通过AreaLeder获取对应AreaID
     List getAreaID(@Param("AreaLeader") String Arealeader);
 
-    List getAreas1();
-
+    //通过AreaID获取Leader,使之为空
+    void updateLeaderByAreaID(String id);
 }

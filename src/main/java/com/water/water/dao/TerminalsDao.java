@@ -40,6 +40,8 @@ public interface TerminalsDao {
     //通过TmnLeder获取对应TmnID
     List getTmnIDs(@Param("TmnLeader") String TmnLeader);
 
-    //获取控制柜表中TmnLeader为空的控制柜
-    List getTmnLeaderNull();
+    //获取控制柜--4.27/16.01------------------------------------------------------
+    List getTerminals();
+
+    void updateLeaderByTmnID(String id);
 }

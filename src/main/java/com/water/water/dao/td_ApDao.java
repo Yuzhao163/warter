@@ -11,6 +11,5 @@ public interface td_ApDao {
     //代替td_PipsDao中的通过管线ID获取分区ID
     td_Ap getAreasIdByPips(String PipsID);
 
-    //通过ap表获取对应的PipID
-    List getPipID(String AreaID);
+
 }

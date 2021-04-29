@@ -20,7 +20,7 @@ Field 'id' doesn't have a default value] with root cause-->
 
 
     <select id="getAreas" resultMap="BaseResultMap">
-        select AreaName,AreaID from td_areas;
+        select AreaName,AreaID from td_areas where AreaLeader is null;
     </select>
 
     <select id="getAreaIDByAreaName" resultMap="BaseResultMap">
@@ -45,8 +45,9 @@ Field 'id' doesn't have a default value] with root cause-->
         select AreaID from td_areas where AreaLeader = #{AreaLeader};
     </select>
 
-    <!--测试getAreas1-->
-    <select id="getAreas1" resultMap="BaseResultMap">
-        select AreaName,AreaID from td_areas where AreaLeader is null;
-    </select>
+    <!--设置对应ID的AreaLeader为空-->
+    <update id="updateLeaderByAreaID">
+        update td_areas set AreaLeader = null where AreaID = #{AreaID};
+    </update>
+
 </mapper>

@@ -28,4 +28,10 @@ public class td_PipesService {
 //        return td_pipesDao.getAreasIdByPips(PipsID);
         return td_apDao.getAreasIdByPips(PipsID);
     }
+
+    //获取对应管线--4.27/15.37-------------------------------------------------
+    public List getPipes(){
+        List pipes = td_pipesDao.getPipes();
+        return pipes;
+    }
 }

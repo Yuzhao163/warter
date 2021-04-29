@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.water.water.dao.CommRecDao">
     <resultMap id="BaseResultMap" type="com.water.water.pojo.CommRec">
-        <id column="PackageID" property="PackageID" jdbcType="INTEGER"/>
+        <id column="PackageID" property="PackageID" jdbcType="BIGINT"/>
         <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
         <result column="V_pre" property="V_pre" jdbcType="INTEGER"/>
         <result column="OV_period" property="OV_period" jdbcType="INTEGER"/>
@@ -16,6 +16,11 @@
         <result column="D_ID" property="D_ID" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="inserttotd_comm">
+        insert into td_Comm_rec(TmnID,V_pre,OV_period,OV_waterline,OV_keeptime,CV_waterline,V_actiontime,PeerAddress) values (#{TmnID},#{V_pre},#{OV_period},#{OV_waterline},#{OV_keeptime},#{CV_waterline},#{V_actiontime},#{PeerAddress})
+    </insert>
+
+
+    <insert id="SendOrder">
         insert into td_Comm_rec(TmnID,V_pre,OV_period,OV_waterline,OV_keeptime,CV_waterline,V_actiontime) values (#{TmnID},#{V_pre},#{OV_period},#{OV_waterline},#{OV_keeptime},#{CV_waterline},#{V_actiontime})
     </insert>
 </mapper>

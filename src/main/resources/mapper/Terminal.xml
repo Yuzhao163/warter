@@ -21,7 +21,7 @@
     </select>
 
     <select id="getNameByID" resultMap="BaseResultMap">
-        select TmnName from td_terminals where TmnId = #{TmnID};
+        select TmnName,TmnLeader from td_terminals where TmnId = #{TmnID};
     </select>
 
 <!--    获取整个列表信息-->

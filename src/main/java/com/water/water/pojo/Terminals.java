@@ -15,13 +15,8 @@ public class Terminals {
     String TmnDesc;
     String TmnLeader;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
     public String getTmnLeader() {
         return TmnLeader;
@@ -29,6 +24,15 @@ public class Terminals {
 
     public void setUserName(String tmnLeader) {
         TmnLeader = tmnLeader;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+
     }
 
     @Override

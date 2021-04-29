@@ -1,7 +1,7 @@
 package com.water.water.pojo;
 
 public class CommRec {
-    private Integer PackageID;
+    private Long PackageID;
     private String TmnID;
     private String PeerAddress;
     private String D_ID;
@@ -32,11 +32,11 @@ public class CommRec {
                 '}';
     }
 
-    public Integer getPackageID() {
+    public Long getPackageID() {
         return PackageID;
     }
 
-    public void setPackageID(Integer packageID) {
+    public void setPackageID(Long packageID) {
         PackageID = packageID;
     }
 

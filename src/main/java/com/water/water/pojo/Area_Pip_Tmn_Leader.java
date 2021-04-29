@@ -1,12 +1,10 @@
 package com.water.water.pojo;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.sql.Date;
+import java.sql.Array;
 import java.sql.Timestamp;
+import java.util.List;
 
-
-public class UserManage {
+public class Area_Pip_Tmn_Leader {
     private Integer UserID;
     private String UserName;
     private String UserPswd;
@@ -16,12 +14,15 @@ public class UserManage {
     private String MoPhone;
     private String RealName;
     private String DPTName;
-    private Timestamp ModTime;
+    private String AreaID;
+    private String AreaName;
+    private String PipID;
+    private String PipName;
+    private String TmnId;
+    private String TmnName;
+    private String Area_Pip_Tmn;
 
-    public UserManage() {
-    }
-
-    public UserManage(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName, Timestamp modTime) {
+    public Area_Pip_Tmn_Leader(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName, String areaID, String areaName, String pipID, String pipName, String tmnId, String tmnName, String area_Pip_Tmn) {
         UserID = userID;
         UserName = userName;
         UserPswd = userPswd;
@@ -31,7 +32,21 @@ public class UserManage {
         MoPhone = moPhone;
         RealName = realName;
         this.DPTName = DPTName;
-        ModTime = modTime;
+        AreaID = areaID;
+        AreaName = areaName;
+        PipID = pipID;
+        PipName = pipName;
+        TmnId = tmnId;
+        TmnName = tmnName;
+        Area_Pip_Tmn = area_Pip_Tmn;
+    }
+
+    public String getArea_Pip_Tmn() {
+        return Area_Pip_Tmn;
+    }
+
+    public void setArea_Pip_Tmn(String area_Pip_Tmn) {
+        Area_Pip_Tmn = area_Pip_Tmn;
     }
 
     public Integer getUserID() {
@@ -106,18 +121,58 @@ public class UserManage {
         this.DPTName = DPTName;
     }
 
-    public Timestamp getModTime() {
-        return ModTime;
+    public String getAreaID() {
+        return AreaID;
     }
 
-    public void setModTime(Timestamp modTime) {
-        ModTime = modTime;
+    public void setAreaID(String areaID) {
+        AreaID = areaID;
+    }
+
+    public String getAreaName() {
+        return AreaName;
+    }
+
+    public void setAreaName(String areaName) {
+        AreaName = areaName;
+    }
+
+    public String getPipID() {
+        return PipID;
+    }
+
+    public void setPipID(String pipID) {
+        PipID = pipID;
+    }
+
+    public String getPipName() {
+        return PipName;
+    }
+
+    public void setPipName(String pipName) {
+        PipName = pipName;
+    }
+
+    public String getTmnId() {
+        return TmnId;
+    }
+
+    public void setTmnId(String tmnId) {
+        TmnId = tmnId;
+    }
+
+    public String getTmnName() {
+        return TmnName;
+    }
+
+    public void setTmnName(String tmnName) {
+        TmnName = tmnName;
     }
 
     @Override
     public String toString() {
-        return "UserManage{" +
-                "UserID=" + UserID +
+        return "Area_Pip_Tmn_Leader{" +
+                "UserID='" + UserID + '\'' +
                 ", UserName='" + UserName + '\'' +
                 ", UserPswd='" + UserPswd + '\'' +
                 ", UClassID='" + UClassID + '\'' +
@@ -126,7 +181,12 @@ public class UserManage {
                 ", MoPhone='" + MoPhone + '\'' +
                 ", RealName='" + RealName + '\'' +
                 ", DPTName='" + DPTName + '\'' +
-                ", ModTime=" + ModTime +
+                ", AreaID='" + AreaID + '\'' +
+                ", AreaName='" + AreaName + '\'' +
+                ", PipID='" + PipID + '\'' +
+                ", PipName='" + PipName + '\'' +
+                ", TmnId='" + TmnId + '\'' +
+                ", TmnName='" + TmnName + '\'' +
                 '}';
     }
 }

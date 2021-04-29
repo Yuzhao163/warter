@@ -50,9 +50,54 @@
     <select id="getTmnNameByTmnID" resultType="String">
         select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
     </select>
+<!--    &lt;!&ndash;这块的username查不出来！！！！！！！！！！！！！！！！报错了！！！！！！！！！！&ndash;&gt;-->
+<!--    <select id="getTmnByUserName" resultMap="BaseResultMap">-->
+<!--        select TmnName from td_terminals where UserName =#{UserName};-->
+<!--    </select>-->
 
-    <select id="getTerminalsByUserName" resultMap="BaseResultMap">
-        select * from td_terminals where TmnLeader =
-        #{UserName};
+    <update id="updateTmnLeader">
+        update td_terminals set TmnLeader=#{TmnLeader} where TmnId=#{TmnId};
+    </update>
+
+    <select id="getTmnIDByTmnName" resultMap="BaseResultMap">
+        select TmnId from td_terminals where TmnName = #{TmnName};
     </select>
+
+
+
+    <select id="getNameByID2" resultMap="BaseResultMap">
+        select TmnName,TmnLeader from td_terminals where TmnId = #{TmnID};
+    </select>
+
+    <!--获取所有控制柜领导名称-->
+    <select id="getTerminalLeader" resultMap="BaseResultMap">
+        select TmnLeader from td_terminals where TmnLeader is not null;
+    </select>
+
+    <!--通过TmnLeder获取对应TmnID-->
+    <select id="getTmnIDs" resultMap="BaseResultMap">
+        select TmnID from td_terminals where TmnLeader = #{TmnLeader};
+    </select>
+
+    <!--获取控制柜表中TmnLeader为空的控制柜-->
+    <select id="getTerminalsByUserName" resultMap="BaseResultMap">
+        select * from td_terminals where TmnLeader = #{UserName};
+    </select>
+
+    <select id="getTmnLeaderNull" resultMap="BaseResultMap">
+         select TmnName from td_terminals where TmnLeader is null;
+    </select>
+
+
+    <!--//获取控制柜4.27/16.01-->
+    <select id="getTerminals" resultMap="BaseResultMap">
+        select * from td_terminals where TmnLeader is null;
+    </select>
+
+    <!--设置对应ID的TmnLeader为空-->
+    <update id="updateLeaderByTmnID">
+        update td_terminals set TmnLeader = null where TmnID = #{TmnID};
+    </update>
+
+
 </mapper>

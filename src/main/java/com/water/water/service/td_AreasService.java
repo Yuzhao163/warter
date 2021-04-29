@@ -14,4 +14,7 @@ public class td_AreasService {
     public List getAreas(){
         return td_areasDao.getAreas();
     }
+
+
+
 }

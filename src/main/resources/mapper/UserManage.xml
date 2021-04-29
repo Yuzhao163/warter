@@ -7,15 +7,16 @@
         -->
 <mapper namespace="com.water.water.dao.UserManageDao">
     <resultMap id="BaseResultMap" type="com.water.water.pojo.UserManage">
-        <id column="UserID" property="UserID" jdbcType="VARCHAR"/>
+        <id column="UserID" property="UserID" jdbcType="INTEGER"/>
         <result column="UserName" property="UserName" jdbcType="VARCHAR"/>
         <result column="UserPswd" property="UserPswd" jdbcType="VARCHAR"/>
         <result column="UClassID" property="UClassID" jdbcType="VARCHAR"/>
         <result column="Ustate" property="Ustate" jdbcType="INTEGER"/>
-        <result column="RegTime" property="RegTime" jdbcType="DATE"/>
+        <result column="RegTime" property="RegTime" jdbcType="TIMESTAMP"/>
         <result column="MoPhone" property="MoPhone" jdbcType="VARCHAR"/>
         <result column="RealName" property="RealName" jdbcType="VARCHAR"/>
         <result column="DPTName" property="DPTName" jdbcType="VARCHAR"/>
+        <result column="ModTime" property="ModTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="getByUserManageName" resultMap="BaseResultMap">
         select
@@ -34,29 +35,34 @@
     </select>
 
     <insert id="insertTotd_user">
-        insert into td_user(UserName,UserPswd,RealName,UClassID,MoPhone,DPTName) values (#{UserName},#{UserPswd},#{RealName},#{UClassID},#{MoPhone},#{DPTName})
+        insert into td_user(UserName,UserPswd,RealName,UClassID,Ustate,RegTime,MoPhone,DPTName) values (#{UserName},#{UserPswd},#{RealName},#{UClassID},#{Ustate},#{RegTime},#{MoPhone},#{DPTName})
     </insert>
 
     <delete id="deletetd_user">
         delete from td_user where UserID = #{UserID}
     </delete>
 
-    <!--这里是同步插入数据，插入userManager的数据之后同时也会往注册页面插入一条新的员工信息-->
-    <insert id="insert_user">
-        insert into user(username, password, telephone) values(#{UserName},#{UserPswd},#{MoPhone});
-    </insert>
     <update id="updatetd_user">
         <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
-        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
+        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName},ModTime = #{ModTime} where UserID = #{UserID}
     </update>
 
     <select id="getUserMessageByName" resultMap="BaseResultMap">
-        select * from td_User where UserName = #{UserName};
+        select * from td_User where UserName = #{UserName};getUserID
     </select>
 
     <!--这一行可能没用-->
     <update id="update_userMessage">update td_user set UserName = #{UserName}, UserPswd = #{UserPswd}, RealName = #{RealName}, MoPhone = #{MoPhone}, DPTName = #{DPTName} where UserID = #{UserID}; </update>
 
-    <update id="update_user">update user set username = #{UserName}, password = #{UserPswd}, telephone = #{MoPhone} where UserID = #{UserID}; </update>
 
+
+    <!--删除员工，通过设置其ustate为0来标识-->
+    <update id="deleteUser">
+        update td_user set Ustate = 0 where UserID = #{UserID};
+    </update>
+
+    <!--通过用户名获取用户ID-->
+    <select id="getUserID" resultMap="BaseResultMap">
+        select UserID from td_user where UserName = #{UserName};
+    </select>
 </mapper>

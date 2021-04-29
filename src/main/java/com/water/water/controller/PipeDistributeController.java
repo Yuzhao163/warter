@@ -20,6 +20,8 @@ public class PipeDistributeController {
     private PipeDistributeService pipeDistributeService;
     @Autowired
     private Td_tpService td_tpService;
+    @Autowired
+    private TerminalsService terminalsService;
 
     @RequestMapping(value = "api/getAreas")
     public List getAreas() {
@@ -33,16 +35,32 @@ public class PipeDistributeController {
         Map<String,Map<String,List>> Pips = pipeDistributeService.getPipe();
         return Pips;
     }
+//    @RequestMapping(value = "api/getPipes")
+//    public List getPipeByArea(@RequestParam String AreaName) throws Exception{
+//        String AreasName = AreaName;
+//        List Pipes = pipeDistributeService.getPipeByArea(AreaName);
+//        return Pipes;
+//    }
+//    @RequestMapping(value = "api/getTerminals")
+//    public List getTerminalsBypip(@RequestParam String PipID) throws Exception{
+//        String pipid = PipID;
+//        List Terminals = td_tpService.getAlltdByPipID(pipid);
+//        System.out.println(Terminals);
+////        List Terminals = td_tpService.getTmnLeaderNull();
+//        return Terminals;
+
+
+    //获取管线--4.27/15.37------------------------------------------------------
     @RequestMapping(value = "api/getPipes")
-    public List getPipeByArea(@RequestParam String AreaName) throws Exception{
-        String AreasName = AreaName;
-        List Pipes = pipeDistributeService.getPipeByArea(AreaName);
-        return Pipes;
+    public List getPipes(){
+        List pipes = td_pipesService.getPipes();
+        return pipes;
     }
+
+    //获取控制柜--4.27/16.01------------------------------------------------------
     @RequestMapping(value = "api/getTerminals")
-    public List getTerminalsBypip(@RequestParam String PipID) throws Exception{
-        String pipid = PipID;
-        List Terminals = td_tpService.getAlltdByPipID(pipid);
-        return Terminals;
+    public List getTerminals(){
+        List terminals = terminalsService.getTerminals();
+        return terminals;
     }
 }

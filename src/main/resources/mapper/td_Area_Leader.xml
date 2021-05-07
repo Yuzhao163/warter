@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.water.water.dao.td_Area_LeaderDao">
+    <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Area_Leader">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="Leader" property="Leader" jdbcType="VARCHAR"/>
+        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addAreaLeader">
+        insert into td_area_leader(Leader, AreaID) values (#{Leader}, #{AreaID})
+    </insert>
+
+    <delete id="deleteRight">
+        delete from td_area_leader where Leader = #{Leader}
+    </delete>
+
+    <update id="updateLeader">
+        update td_area_leader set Leader = #{new_name} where Leader = #{origin_name}
+    </update>
+
+    <!--5.6查找这个人在分区中是否有权限-->
+    <select id="showLeader" resultMap="BaseResultMap">
+        select AreaID from td_area_leader where Leader = #{Leader}
+    </select>
+</mapper>

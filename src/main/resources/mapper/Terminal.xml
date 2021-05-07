@@ -55,4 +55,23 @@
         select * from td_terminals where TmnLeader =
         #{UserName};
     </select>
+
+    <select id="getTmnLeaderNull" resultMap="BaseResultMap">select TmnName from td_terminals where TmnLeader is null; </select>
+
+
+
+    <!--//获取控制柜4.27/16.01-->
+    <!--//和管线分布起冲突，修改人员管理获取控制柜5.2 获取数据库中所有的控制柜-->
+
+    <select id="getTerminal" resultMap="BaseResultMap">select * from td_terminals; </select>
+
+    <!--设置对应ID的TmnLeader为空-->
+    <update id="updateLeaderByTmnID">update td_terminals set TmnLeader = null where TmnID = #{TmnID}; </update>
+
+    <!--5.2获取PipLeader为空的所有PipID-->
+    <select id="getLeaderIsNull" resultMap="BaseResultMap">select TmnID from td_terminals where TmnLeader is null; </select>
+
+    <!--5.2带有追加功能的更新TmnLeader，使得TmnLeader具有多个人员-->
+    <update id="appendTmnLeader">update td_terminals set TmnLeader=CONCAT_WS(',',TmnLeader,#{TmnLeader}) where TmnID = #{TmnID}; </update>
+
 </mapper>

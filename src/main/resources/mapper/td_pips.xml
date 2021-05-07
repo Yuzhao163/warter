@@ -47,4 +47,37 @@ Field 'id' doesn't have a default value] with root cause-->
         select * from td_pips
     </select>
 
+
+
+    <update id="updatePipLeader">update td_pips set PipLeader=#{PipLeader} where PipID=#{PipID} </update>
+
+    <!--根据管线名称获得管线id-->
+    <select id="getPipIDByPipName" resultMap="BaseResultMap">select PipID from td_pips where PipName = #{PipName}; </select>
+
+    <!--获取所有管线领导名称-->
+    <select id="getPipLeader" resultMap="BaseResultMap">select PipLeader from td_pips where PipLeader is not null; </select>
+
+    <!--通过PipLeder获取对应PipID-->
+    <select id="getPipID" resultMap="BaseResultMap">select PipID from td_pips where PipLeader = #{PipLeader}; </select>
+
+    <select id="getPipsByAreaID1" resultMap="BaseResultMap">select PipName,PipID from td_pips where AreaID = #{AreaID} and PipLeader is null; </select>
+
+    <select id="getPipsByID" resultMap="BaseResultMap">select PipName from td_pips where PipID = #{PipID} and PipLeader is null; </select>
+
+    <!--获取管线4.27/15.37-->
+    <!--//和管线分布起冲突，修改人员管理获取管线5.2 获取数据库中所有的管线-->
+    <select id="getPipe" resultMap="BaseResultMap">select * from td_pips; </select>
+
+    <!--设置对应ID的PipLeader为空-->
+    <update id="updateLeaderByPipID">update td_pips set PipLeader = null where PipID = #{PipID}; </update>
+
+    <!--5.2获取PipLeader为空的所有PipID-->
+    <select id="getLeaderIsNull" resultMap="BaseResultMap">select PipID from td_pips where PipLeader is null; </select>
+
+    <!--5.2带有追加功能的更新PipLeader，使得PipLeader具有多个人员-->
+    <update id="appendPipLeader">update td_pips set PipLeader=CONCAT_WS(',',PipLeader,#{PipLeader}) where PipID = #{PipID}; </update>
+
+
+
+
 </mapper>

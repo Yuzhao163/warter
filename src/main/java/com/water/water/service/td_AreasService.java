@@ -14,4 +14,9 @@ public class td_AreasService {
     public List getAreas(){
         return td_areasDao.getAreas();
     }
+
+    //5.2 应用到人员管理的getAreas方法
+    public List getArea(){
+        return td_areasDao.getArea();
+    }
 }

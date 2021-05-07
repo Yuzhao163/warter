@@ -1,6 +1,7 @@
 package com.water.water.dao;
 import com.water.water.pojo.Terminals;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,29 @@ public interface TerminalsDao {
     String getTmnNameByTmnID(String tmnID);
 
     List getTerminalsByUserName(String UserName);
+
+    //更新新增用户分配所属控制柜
+    void updateTmnLeader(@Param("TmnLeader") String TmnLeader,@Param("TmnId") String TmnId);
+
+    //根据控制柜名称查找控制柜ID
+    Terminals getTmnIDByTmnName(@Param("TmnName") String TmnName);
+
+    Terminals getNameByID2(String TmnID);
+
+    //获取所有控制柜领导名称
+    List getTerminalLeader();
+
+    //通过TmnLeder获取对应TmnID
+    List getTmnIDs(@Param("TmnLeader") String TmnLeader);
+
+    //获取控制柜--4.27/16.01--------------5.2解决和管线分布的冲突----------------------------------------
+    List getTerminal();
+
+    void updateLeaderByTmnID(String id);
+
+    //5.2获取TmnLeader为空的所有TmnID
+    List getLeaderIsNull();
+
+    //5.2带有追加功能的update，用于添加多个leader
+    void appendTmnLeader(@Param("TmnLeader") String TmnLeader, @Param("TmnID") String TmnID);
 }

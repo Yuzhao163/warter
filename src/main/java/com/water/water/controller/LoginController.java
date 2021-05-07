@@ -34,6 +34,10 @@ public class LoginController {
 //            String passwords = user.getPassword();
 //            String userid = user
             UserManage userManage = userManageService.getByusername(username);
+            Integer Ustate = userManage.getUstate();
+            if(Ustate == 0){
+                return new Result(400);
+            }
             String UserPswd = userManage.getUserPswd();
             String UClassID = userManage.getUClassID();
             if(userManage == null){

@@ -32,11 +32,15 @@ public class TerminalsService {
         System.out.println(selectmessage);
         PrintClassName printClassName = new PrintClassName();
         for (int i = 0;i<selectmessage.size();i++){
-            Rec_Detail message = (Rec_Detail)selectmessage.get(i);
-            String TmnID = message.getTmnID();
-            Terminals terminals = terminalsDao.getNameByID(TmnID);
-            String TmnName = terminals.getTmnName();
-            message.setTmnID(TmnName);
+            try{
+                Rec_Detail message = (Rec_Detail)selectmessage.get(i);
+                String TmnID = message.getTmnID();
+                Terminals terminals = terminalsDao.getNameByID(TmnID);
+                String TmnName = terminals.getTmnName();
+                message.setTmnID(TmnName);
+            }catch (Exception e){
+                System.err.println(e);
+            }
         }
         System.out.println(selectmessage);
         return selectmessage;
@@ -99,4 +103,10 @@ public class TerminalsService {
         return terminalsDao.getTerminalsByUserName(UserName);
     }
 
+
+    //获取控制柜--4.27/16.01--------5.2解决和管线分布的冲突----------------------------------------------
+    public List getTerminal() {
+        List terminals = terminalsDao.getTerminal();
+        return terminals;
+    }
 }

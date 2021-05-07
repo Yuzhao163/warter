@@ -1,23 +1,24 @@
 package com.water.water.pojo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 public class UserManage {
-    private String UserID;
+    private Integer UserID;
     private String UserName;
     private String UserPswd;
     private String UClassID;
     private Integer Ustate;
-    private Date RegTime;
+    private Timestamp RegTime;
     private String MoPhone;
     private String RealName;
     private String DPTName;
-
+    private Timestamp ModTime;
     public UserManage() {
     }
 
-    public UserManage(String userID, String userName, String userPswd, String UClassID, Integer ustate, Date regTime, String moPhone, String realName, String DPTName) {
+    public UserManage(Integer userID, String userName, String userPswd, String UClassID, Integer ustate, Timestamp regTime, String moPhone, String realName, String DPTName, Timestamp modTime) {
         UserID = userID;
         UserName = userName;
         UserPswd = userPswd;
@@ -27,13 +28,22 @@ public class UserManage {
         MoPhone = moPhone;
         RealName = realName;
         this.DPTName = DPTName;
+        ModTime = modTime;
     }
 
-    public String getUserID() {
+    public Timestamp getModTime() {
+        return ModTime;
+    }
+
+    public void setModTime(Timestamp modTime) {
+        ModTime = modTime;
+    }
+
+    public Integer getUserID() {
         return UserID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Integer userID) {
         UserID = userID;
     }
 
@@ -69,11 +79,11 @@ public class UserManage {
         Ustate = ustate;
     }
 
-    public Date getRegTime() {
+    public Timestamp getRegTime() {
         return RegTime;
     }
 
-    public void setRegTime(Date regTime) {
+    public void setRegTime(Timestamp regTime) {
         RegTime = regTime;
     }
 

@@ -19,4 +19,12 @@ public class td_PipesService {
     td_PIPs getAreasIdByPips(String PipsID) {
         return td_pipesDao.getAreasIdByPips(PipsID);
     }
+
+    //获取对应管线--4.27/15.37------5.2解决和管线部分的冲突问题-------------------------------------------
+    public List getPipe(){
+        List pipes = td_pipesDao.getPipe();
+        return pipes;
+    }
+
+
 }

@@ -70,17 +70,24 @@ public class IndexService {
         }
         List allmessage = indexDao.getSelectMessageByPage(page,size);
         for (int i = 0;i<allmessage.size();i++){
-            Rec_Detail message = (Rec_Detail)allmessage.get(i);
-            String TmnID = message.getTmnID();
-            String TmnName;
-            if(TmnID == null){
-                TmnName = "名字查询失败";
-            }else{
-                Terminals terminals = terminalsDao.getNameByID(TmnID);
-                TmnName = terminals.getTmnName();
-            }
+            try{
+                //Rec_Detail message = (Rec_Detail)allmessage.get(i);
+                Rec_Detail message = (Rec_Detail)allmessage.get(i);
+                String TmnID = message.getTmnID();
+                String TmnName;
+                if(TmnID == null){
+                    TmnName = "名字查询失败";
+                }else{
+                    Terminals terminals = terminalsDao.getNameByID(TmnID);
+                    TmnName = terminals.getTmnName();
+                }
 
-            message.setTmnID(TmnName);
+                message.setTmnID(TmnName);
+            }catch (Exception e){
+                Rec_Detail message = new Rec_Detail();
+                message.setTmnID("false,warning");
+                allmessage.set(i,message);
+            }
         }
         return allmessage;
     }

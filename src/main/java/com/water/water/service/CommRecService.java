@@ -31,13 +31,11 @@ public class CommRecService {
         String createdate = sdf.format(date);
         Long PackageID = Long.parseLong(createdate);
         commRec.setPackageID(PackageID);
-        commRec.setPeerAddress("10.192.168.1");
         commRec.setCmdStatus(1);
         try {
             commRecDao.SendOrder(commRec);
             return new Result(200);
         }catch (Exception e){
-            System.out.println(e);
             return new Result(400);
         }
     }

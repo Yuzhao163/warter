@@ -29,10 +29,7 @@ public class ErrordealRecService {
     @Autowired
     com.water.water.dao.td_PipesDao td_PipesDao;
     @Autowired
-    td_ApDao td_apDao;
-    @Autowired
     td_error_recDao td_error_recDao;
-
 
     //public ErrordealRec getAllError(){
     //return errordealRecDao.getAllError();
@@ -76,19 +73,16 @@ public class ErrordealRecService {
             String Result = message.getResult();
             Date C_t = message.getC_t();
             String User = message.getUser();
-            String TmnId = message.getTmnId();
-//            Long PackageId = message.getPackageId();
-//            Long packageId = message.getPackageId();
-//            Rec_Detail TmnId_message = detailDao.getTmnIDByPackageId(packageId);
-//            String TmnId = TmnId_message.getTmnID();
+            Long PackageId = message.getPackageId();
+            Long packageId = message.getPackageId();
+            Rec_Detail TmnId_message = detailDao.getPipeByPackageId(packageId);
+            String TmnId = TmnId_message.getTmnID();
             Terminals terminals = terminalsDao.getNameByID(TmnId);
             String TmnName = terminals.getTmnName();
             td_Tp tp = td_tpDao.getAlltdById(TmnId);
             String PipId = tp.getPipID();
-            td_Ap areasIdByPips = td_apDao.getAreasIdByPips(PipId);
-            String areaID = areasIdByPips.getAreaID();
-//            td_PIPs td_pips = td_PipesDao.getAreasIdByPips(PipId);
-//            String areaID = td_pips.getAreaID();
+            td_PIPs td_pips = td_PipesDao.getAreasIdByPips(PipId);
+            String areaID = td_pips.getAreaID();
             td_Areas td_areas = td_areasDao.getAreaNameByAreaID(areaID);
             String AreaName = td_areas.getAreaName();
             Integer PTid = tp.getPTid();
@@ -98,7 +92,7 @@ public class ErrordealRecService {
             error_connection.setResult(Result);
             error_connection.setC_t(C_t);
             error_connection.setUser(User);
-//            error_connection.setPackageId(PackageId);
+            error_connection.setPackageId(PackageId);
             error_connection.setTmnId(TmnId);
             error_connection.setTmnName(TmnName);
             error_connection.setPipId(PipId);

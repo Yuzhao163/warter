@@ -20,16 +20,11 @@ public class PipeDistributeService {
     private Td_tpDao td_tpDao;
     @Autowired
     private TerminalsDao terminalsDao;
-    @Autowired
-    private td_ApDao td_apDao;
 
     public List getPipeByArea(String AreaName){
-
         td_Areas Area = td_areasDao.getAreaIDByAreaName(AreaName);
         String AreaID = Area.getAreaID();
-        System.out.println(AreaID);
         List Pips = td_pipesDao.getPipsByAreaID(AreaID);
-        System.out.println("获得各个管线的值"+Pips);
         return Pips;
     }
 
@@ -68,9 +63,6 @@ public class PipeDistributeService {
             PIPs.put(PipsName,Terminals);
         }
         Areas.put(AreaName, PIPs);
-        System.out.println(Areas);
         return Areas;
     }
-
-
 }

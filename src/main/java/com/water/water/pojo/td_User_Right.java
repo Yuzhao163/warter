@@ -2,7 +2,7 @@ package com.water.water.pojo;
 
 public class td_User_Right {
     private Short RId;
-    private Integer UserID;
+    private String UserID;
     private Integer Right_PP;
     private String TmnID;
     private String PipID;
@@ -16,11 +16,11 @@ public class td_User_Right {
         this.RId = RId;
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return UserID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         UserID = userID;
     }
 

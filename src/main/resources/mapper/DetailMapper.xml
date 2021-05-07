@@ -50,7 +50,7 @@
         select `V_per` from td_Rec_Detail where Id = #{id};
     </select>
 
-    <select id="getTmnIDByPackageId" resultMap="DetailResult">
+    <select id="getPipeByPackageId" resultMap="DetailResult">
         select TmnID from td_Rec_Detail where PackageID = #{PackageId};
     </select>
 

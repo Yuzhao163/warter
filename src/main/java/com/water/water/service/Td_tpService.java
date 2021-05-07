@@ -32,6 +32,4 @@ public class Td_tpService {
         }
         return Terminals;
     }
-
-
 }

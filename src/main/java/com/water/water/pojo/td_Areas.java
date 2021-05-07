@@ -48,4 +48,15 @@ public class td_Areas {
     public void setAreaLeadPhone(String areaLeadPhone) {
         AreaLeadPhone = areaLeadPhone;
     }
+
+    @Override
+    public String toString() {
+        return "td_Areas{" +
+                "AreaID='" + AreaID + '\'' +
+                ", AreaName='" + AreaName + '\'' +
+                ", AreaLeader='" + AreaLeader + '\'' +
+                ", AreaCreateDate=" + AreaCreateDate +
+                ", AreaLeadPhone='" + AreaLeadPhone + '\'' +
+                '}';
+    }
 }

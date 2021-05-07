@@ -116,5 +116,4 @@
         update td_terminals set TmnLeader = null where TmnID = #{TmnID};
     </update>
 
-
 </mapper>

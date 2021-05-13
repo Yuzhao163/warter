@@ -83,4 +83,14 @@
         select UserID,UserName from td_user where UserID = ${UserID};
     </select>
 
+<!--  查询除了id下的用户名称是否存在  -->
+    <select id="checkUserName" resultMap="BaseResultMap">
+        select * from td_user where UserName=#{userName} and UserID != ${userID};
+    </select>
+
+<!--  根据用户id获取用户全部信息  -->
+    <select id="getUserByID" resultMap="BaseResultMap">
+        select * from td_user where UserID = #{userID};
+    </select>
+
 </mapper>

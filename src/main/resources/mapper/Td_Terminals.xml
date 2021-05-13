@@ -75,15 +75,19 @@
 
 <!--  根据id查询整条控制柜信息（为了解决为解决的bug写的）  -->
     <select id="getTmnByid" resultMap="BaseResultMap">
-        select * from td_terminals where id = ${id}
+        select * from td_terminals where id = #{id}
     </select>
 
 <!--  更新控制柜  -->
     <select id="updateTmnByid">
-        update td_terminals set TmnName = #{tmnName}, ConPont1 = #{conPont1}, ConPont2 = #{conPont2},
-                        ConPont3 = #{conPont3}, TmnDesc = #{tmnDesc}, TmnLeader = #{tmnLeadName} where id=#{id}
+        update td_terminals set TmnName=#{TmnName},ConPont1=#{ConPont1},
+            ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where TmnID=#{TmnID}
     </select>
 
+<!--  获取控制柜个数  -->
+    <select id="getTmnSize" resultType="Integer">
+        select count(id) from td_terminals;
+    </select>
 
 <!--  分页查询  -->
     <select id="getAllTmnListByPage" resultMap="BaseResultMap">
@@ -92,4 +96,38 @@
             limit #{page},#{size}
         </if>
     </select>
+
+<!--  获取全部控制柜id的最大值id 用于自动插入控制柜id  -->
+    <select id="getMaxID" resultType="Integer">
+        select max(id) from td_terminals
+    </select>
+
+<!--  根据id修改下一控制柜id  -->
+    <update id="setD1TmnID">
+        update td_terminals set D1TmnID=#{D1TmnID} where TmnID = #{TmnID}
+    </update>
+
+    <update id="setD1TmnIDNull">
+        update td_terminals set D1TmnID="" where TmnID = #{TmnID}
+    </update>
+
+    <!--  根据id修改上一控制柜id  -->
+    <update id="setU1TmnID">
+        update td_terminals set U1TmnID=#{U1TmnID} where TmnID = #{TmnID}
+    </update>
+    <update id="setU1TmnIDNull">
+        update td_terminals set U1TmnID="" where TmnID = #{TmnID}
+    </update>
+
+    <select id="existname" resultType="String">
+        select * from td_terminals where TmnName = #{TmnName}
+    </select>
+
+    <update id="modifyTmnMessage">
+        update td_terminals set TmnId=#{TmnId},TmnName=#{TmnName},U1TmnID=#{U1TmnID},U2TmnID=#{U2TmnID},
+            D1TmnID=#{D1TmnID},D2TmnID=#{D2TmnID},ConPont1=#{ConPont1},
+            ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where id=#{id}
+    </update>
+
+
 </mapper>

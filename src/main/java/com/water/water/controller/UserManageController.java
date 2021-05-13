@@ -75,11 +75,11 @@ public class UserManageController {
 
 //  个人信息的修改功能
 //  根据id查询修改后的用户名是否重复
-//    @ResponseBody
-//    @RequestMapping(value = "api/checkUserName")
-//    public Integer checkUserName(@RequestParam String userName) {
-//        return userManageService.checkUserName(userName);
-//    }
+    @ResponseBody
+    @RequestMapping(value = "api/checkUserName")
+    public Integer checkUserName(@RequestParam Integer userID,@RequestParam String userName) {
+        return userManageService.checkUserName(userID,userName);
+    }
 
 //  根据用户id修改个人信息
     @ResponseBody
@@ -89,7 +89,7 @@ public class UserManageController {
         String userName = userManage.getUserName();
         Integer userID = userManage.getUserID();
 //      用户名有重复不执行更新
-        if (userManageService.checkUserName(userName,userID)==201) {
+        if (userManageService.checkUserName(userID,userName)==201) {
             return 201;
         } else {
 //      用户名没有重复执行更新

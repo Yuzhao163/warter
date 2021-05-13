@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.water.water.dao.td_Tmn_LeaderDao">
+    <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Tmn_Leader">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="Leader" property="Leader" jdbcType="INTEGER"/>
+        <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addTmnLeader">
+        insert into td_tmn_leader(Leader, TmnID) values (#{Leader}, #{TmnID})
+    </insert>
+
+    <delete id="deleteRight">
+        delete from td_tmn_leader where Leader = #{Leader}
+    </delete>
+
+<!--    <update id="updateLeader">-->
+<!--        update td_tmn_leader set Leader = #{new_name} where Leader = #{origin_name}-->
+<!--    </update>-->
+
+    <!--5.6查找这个人在控制柜中是否有权限-->
+    <select id="showLeader" resultMap="BaseResultMap">
+        select TmnID from td_tmn_leader where Leader = #{Leader}
+    </select>
+
+<!--  通过控制柜id获取用户id  -->
+    <select id="getUIDByTID" resultMap="BaseResultMap">
+        select Leader from td_tmn_leader where TmnID = #{TmnID}
+    </select>
+
+    <delete id="deleteTmnLeader">
+        delete from td_tmn_leader where TmnID = #{TmnID}
+    </delete>
+
+
+</mapper>

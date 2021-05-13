@@ -35,4 +35,15 @@ function:往用户权限表中插入元素/删除元素
     <select id="getUIDByRight" resultMap="BaseResultMap">
         select distinct UserID from td_User_Right where Right_PP = 3;
     </select>
+
+    <!--  选择出所有分区管理员  -->
+    <select id="getAIDByRight" resultMap="BaseResultMap">
+        select distinct UserID from td_User_Right where Right_PP = 1;
+    </select>
+
+    <!--  选出所有管线管理员  -->
+    <select id="getPIDByRight" resultMap="BaseResultMap">
+        select distinct UserID from td_User_Right where Right_PP = 2;
+    </select>
+
 </mapper>

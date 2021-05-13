@@ -27,11 +27,17 @@ public class DeviceController {
         return getAllTmnList;
     }
 
+//  获取控制柜个数
+    @RequestMapping(value = "api/getTmnSize")
+    public Integer getTmnSize() {
+        return terminalsService.getTmnSize();
+    }
+
 //  分页获取控制柜信息
-    @RequestMapping(value = "api/getAllTmnListByPage")
-    public JSONArray getAllTmnListByPage(Integer page, Integer size) {
+    @RequestMapping(value = "api/getTmnListByPage")
+    public JSONArray getTmnListByPage(Integer page, Integer size) {
         System.out.println(page+""+size);
-        JSONArray TmnList = terminalsService.getAllTmnListByPage(page,size);
+        JSONArray TmnList = terminalsService.getTmnListByPage(page,size);
 
         return TmnList;
     }
@@ -45,11 +51,14 @@ public class DeviceController {
 
 //    修改控制柜信息
     @PostMapping(value = "api/modifyTmn")
-    public Integer modifyTmn(@RequestBody tmn_pip_area tpa) {
+    public Integer modifyTmn(tmn_pip_area tpa,@RequestParam List<Integer> TmnLeader) {
         System.out.println("修改传入的参数"+tpa);
-        Integer result = terminalsService.modifyTmn(tpa);
+        System.out.println("tmnLeader"+ TmnLeader);
+        System.out.println("前端传过来的下一控制柜id"+tpa.getD1TmnID());
+        Integer result = terminalsService.modifyTmn(tpa,TmnLeader);
         return result;
     }
+
 
 //  根据需求显示控制柜的信息（包含了管线名称）
     @RequestMapping(value = "api/getTmnList")
@@ -85,18 +94,20 @@ public class DeviceController {
     }
 
     @RequestMapping(value = "api/addTmn")
-    public Integer addTmn(tmn_pip_area tpa) {
+    public Integer addTmn(tmn_pip_area tpa,@RequestParam List<Integer> TmnLeader) {
+        System.out.println(TmnLeader);
         System.out.println(tpa);
-        System.out.println(tpa.getU1TmnID()==null);
-        return terminalsService.addTmnTP(tpa);
+//        System.out.println(tpa.getU1TmnID()==null);
+//        return 0;
+        return terminalsService.addTmnTP(tpa,TmnLeader);
     }
 
-    @RequestMapping(value = "api/test")
-    public List test() {
-        System.out.println("////");
-        return terminalsService.test();
-    }
-
+//    @RequestMapping(value = "api/test")
+//    public List test() {
+//        System.out.println("////");
+//        return terminalsService.test();
+//    }
+//
 
 
 

@@ -19,5 +19,28 @@
         select AreaID from td_ap where PipID = #{PipID}
     </select>
 
+<!--  删除某一分区的所有数据  -->
+    <delete id="clearArea" >
+        delete from td_ap where AreaID = #{AreaID}
+    </delete>
+
+
+
+    <!--5.9插入选中的分区ID和管线ID-->
+    <insert id="addID">
+    insert into td_ap(AreaID,PipID) values (#{AreaID},#{PipID});
+</insert>
+
+    <!--5.9删除td_ap表中PipID对应的AreaID的关系-->
+    <delete id="deletePip">
+    delete from td_ap where PipID = #{PipID};
+</delete>
+
+    <!--5.10更新td_ap表中PipID对应AreaID关系-->
+    <update id="updateID">
+    update td_ap set AreaID = #{AreaID} where PipID = #{PipID};
+</update>
+
+
 
 </mapper>

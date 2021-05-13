@@ -74,17 +74,23 @@ public class UserManageService {
 
 //lmh
     //  判断修改后的用户名是否重复
-    public Integer checkUserName(String userName,Integer userID) {
-    //      将用户名与数据库中的用户名进行比较
-        List<String> allName = userManageDao.getAllUserName(userID);
-        for (int i=0; i<allName.size(); i++) {
-            if (userName.equals(allName.get(i))) {
-//              存在相等
-                return 201;
-            }
-        }
+    public Integer checkUserName(Integer userID,String userName) {
+    //      将用户名与数据库中的不是该id的用户名进行比较
+        List result = userManageDao.checkUserName(userID,userName);
+        if (result.size() != 0) {
+            // 存在用户名 返回用户名存在状态码
+            return 201;
+        } else
+            return 200;
+//        List<String> allName = userManageDao.getAllUserName(userID);
+//        for (int i=0; i<allName.size(); i++) {
+//            if (userName.equals(allName.get(i))) {
+////              存在相等
+//                return 201;
+//            }
+//        }
 //      不存在用户名
-        return 200;
+//        return 200;
     }
 
 //  根据用户id修改个人信息

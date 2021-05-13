@@ -47,7 +47,7 @@ Field 'id' doesn't have a default value] with root cause-->
         update td_Tp set PTid=PTid+1 where (PipID = #{PipID} and PTid >= ${PTid})
     </update>
 <!--  根据控制柜id查询管线id  -->
-    <select id="getPIDByTID" resultMap="BaseResultMap">
+    <select id="getPIDByTID" resultType="String">
         select PipID from td_TP where TmnID = #{TmnID}
     </select>
 <!--  根据控制柜id删除一条数据  -->
@@ -56,11 +56,32 @@ Field 'id' doesn't have a default value] with root cause-->
     </delete>
 <!--  修改线内id  -->
     <update id="ptidMinus">
-        update td_Tp set PTid=PTid-1 where (PipID = #{PipID} and PTid >= ${PTid})
+        update td_Tp set PTid=PTid-1 where (PipID = #{PipID} and PTid >= #{PTid})
     </update>
 <!--  根据控制柜id找到所有数据  -->
     <select id="getTpByTID" resultMap="BaseResultMap">
         select * from td_tp where TmnID = #{TmnID};
+    </select>
+
+<!--  根据管线查询是否存在控制柜  -->
+    <select id="getTmnByPID" resultMap="BaseResultMap">
+        select * from td_tp where PipID = #{PipID};
+    </select>
+
+    <!--  更新线内控制柜位置  -->
+    <update id="updatePTid">
+        update td_tp set PTid = PTid -1 where (PipID = #{PipID} and PTid &lt;= ${PTid});
+        update td_tp set PTid = PTid +1 where (PipID = #{PipID} and PTid > ${PTid});
+    </update>
+
+<!--  得到管线内第一个控制柜id  -->
+    <select id="getFirstTmn" resultType="String">
+        select TmnID from td_tp where PipID = #{PipID} and PTid = 1;
+    </select>
+
+<!--  得到管线内控制柜的个数  -->
+    <select id="getPipSize" resultType="Integer">
+        select count(TmnID) from td_tp where PipID = #{PipID};
     </select>
 
 </mapper>

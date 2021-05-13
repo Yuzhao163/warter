@@ -21,6 +21,9 @@ public interface UserManageDao {
     Integer delete_user(String UserID);
 
 
+//  查询除了此id下的用户名是否有匹配的
+    List checkUserName(Integer userID, String userName);
+
 //  查询所有的用户名称除了当前id的
     List<String> getAllUserName(Integer userID);
 //  根据id更改用户信息
@@ -29,5 +32,9 @@ public interface UserManageDao {
     String getUserNameByID(Integer userID);
 //  获取用户id和名称
     List getUIDName();
+
+
+//  根据用户id获取全部用户信息
+    UserManage getUserByID(Integer userID);
 
 }

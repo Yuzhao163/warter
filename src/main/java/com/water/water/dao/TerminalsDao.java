@@ -13,6 +13,8 @@ public interface TerminalsDao {
 
     List getAllTmnList();
 
+    Integer getTmnSize();
+
     // 分页获取控制柜信息
     List getAllTmnListByPage(Integer page, Integer size);
 
@@ -39,7 +41,21 @@ public interface TerminalsDao {
     Terminals getTmnByid(Integer id);
 
 //  更新控制柜信息
-    Integer updateTmnByid(Integer id, String tmnName, String conPont1, String conPont2,
-                      String conPont3, String TmnDesc, String tmnLeadName);
+    Integer updateTmnByid(String TmnID, String TmnName, String ConPont1, String ConPont2,
+                      String ConPont3, String TmnDesc);
+
+//  获取id最大值
+    Integer getMaxID();
+
+//  修改控制柜的下一控制柜id
+    Integer setD1TmnID(String TmnID,String D1TmnID);
+    Integer setD1TmnIDNull(String TmnID);
+
+//  修改控制柜的上一控制柜id
+    Integer setU1TmnID(String TmnID,String U1TmnID);
+    Integer setU1TmnIDNull(String TmnID);
+
+//  判断控制柜名称是否存在
+    String existname(String TmnName);
 
 }

@@ -15,8 +15,22 @@ Field 'id' doesn't have a default value] with root cause-->
         <result column="AreaName" property="AreaName" jdbcType="VARCHAR"/>
         <result column="AreaLeader" property="AreaLeader" jdbcType="VARCHAR"/>
         <result column="AreaLeadPhone" property="AreaLeadPhone" jdbcType="VARCHAR"/>
-        <result column="AreaCreateDate" property="AreaCreateDate" jdbcType="DATE"/>
+        <result column="AreaCreateDate" property="AreaCreateDate" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+<!--  获取分区总个数  -->
+    <select id="getAreaSize" resultType="Integer">
+        select count(AreaID) from td_areas;
+    </select>
+
+<!--  获取分区全部信息  -->
+    <select id="getAllAreas" resultMap="BaseResultMap">
+        select * from td_areas
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
+
 
 
     <select id="getAreas" resultMap="BaseResultMap">
@@ -41,4 +55,34 @@ Field 'id' doesn't have a default value] with root cause-->
     <select id="getNameByID" resultType="String">
         select AreaName from td_areas where AreaID = #{AreaID}
     </select>
+
+<!--  获取所有分区id  -->
+    <select id="getAreaID" resultMap="BaseResultMap">
+        select AreaID from td_areas
+    </select>
+
+<!--  添加分区id与分区名称  -->
+    <insert id="addArea">
+        insert into td_areas(AreaID,AreaName,AreaCreateDate) values (#{AreaID},#{AreaName},now())
+    </insert>
+
+
+    <select id="getByAreaId" resultType="String">
+        select * from td_areas where AreaID = #{AreaID}
+    </select>
+
+<!--  查询是否有存在的名称  -->
+    <select id="getAreaNameByName" resultType="String">
+        select * from td_areas where AreaName = #{AreaName}
+    </select>
+
+<!--  更新分区名称  -->
+    <update id="modifyAreaNameByID">
+        update td_areas set AreaName = #{AreaName} where AreaID = #{AreaID}
+    </update>
+
+    <delete id="deleteArea">
+        delete from td_areas where AreaID = #{AreaID}
+    </delete>
+
 </mapper>

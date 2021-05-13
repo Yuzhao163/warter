@@ -16,7 +16,7 @@ Field 'id' doesn't have a default value] with root cause-->
         <result column="PipLeader" property="PipLeader" jdbcType="VARCHAR"/>
         <result column="PipLeadPhone" property="PipLeadPhone" jdbcType="VARCHAR"/>
         <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
-        <result column="PipCreateDate" property="PipCreateDate" jdbcType="DATE"/>
+        <result column="PipCreateDate" property="PipCreateDate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <select id="getPips" resultMap="BaseResultMap">
@@ -55,6 +55,50 @@ Field 'id' doesn't have a default value] with root cause-->
     <select id="getPIDNameByPID" resultMap="BaseResultMap">
         select PipID,PipName from td_pips where PipID = #{PipID};
     </select>
+
+
+    <select id="getPipSize" resultType="Integer">
+        select count(PipID) from td_pips;
+    </select>
+
+    <select id="getAllPips" resultMap="BaseResultMap">
+        select * from td_pips
+        <if test="page!=null and size!=null">
+            limit #{page},#{size};
+        </if>
+    </select>
+
+    <!--5.9增加管线-->
+    <insert id="addPips">
+    insert into td_pips(PipID,PipName,PipCreateDate) values (#{PipID},#{PipName},now());
+</insert>
+
+    <!--5.9根据管线名称查询是否存在同名管线-->
+    <select id="ifSameNamePip" resultMap="BaseResultMap">
+    select * from td_pips where PipName = #{PipName};
+</select>
+
+    <!--5.9判断在数据库中是否存在相同的PipID-->
+    <select id="getByPipId" resultType="String">
+    select * from td_pips where PipID = #{PipID};
+</select>
+
+    <!--5.9删除管线-->
+    <delete id="deletePip">
+    delete from td_pips where PipID = #{PipID};
+</delete>
+
+    <!--5.9更新管线-->
+    <update id="updatePips">
+    update td_pips set PipName = #{PipName} where PipID = #{PipID};
+</update>
+
+    <!--判断名称是否重复-->
+    <select id="getPipNameByName" resultType="String">
+    select PipName from td_pips where PipName = #{PipName};
+</select>
+
+
 
 
 

@@ -21,6 +21,13 @@ public interface Td_User_RightDao {
     // 选择出所有控制柜管理员id
     List getUIDByRight();
 
+    // 选出所有分区管理员id
+    List getAIDByRight();
+
+    // 选出所有管线管理员id
+    List getPIDByRight();
+
+
     Integer deleteUserRight(String TmnID);
 
     void addUserRight(Integer UserID, Integer Right_PP, String TmnID, String PipID, String AreaID);

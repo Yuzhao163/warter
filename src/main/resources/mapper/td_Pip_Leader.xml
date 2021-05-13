@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.water.water.dao.td_Pip_LeaderDao">
+    <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Pip_Leader">
+        <id column="ID" property="ID" jdbcType="INTEGER"/>
+        <result column="Leader" property="Leader" jdbcType="INTEGER"/>
+        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addPipLeader">
+        insert into td_pip_leader(Leader, PipID) values (#{Leader}, #{PipID})
+    </insert>
+
+    <delete id="deleteRight">
+        delete from td_pip_leader where Leader = #{Leader}
+    </delete>
+
+<!--    <update id="updateLeader">-->
+<!--        update td_pip_leader set Leader = #{new_name} where Leader = #{origin_name}-->
+<!--    </update>-->
+
+    <!--5.6查找这个人在管线中是否有权限-->
+    <select id="showLeader" resultMap="BaseResultMap">
+        select PipID from td_pip_leader where Leader = #{Leader}
+    </select>
+
+    <select id="getUIDByPID" resultMap="BaseResultMap">
+        select Leader from td_pip_leader where PipID = #{PipID}
+    </select>
+
+
+    <!--5.9删除td_pip_leader表中的PipID的关系-->
+    <delete id="deletePip">
+    delete from td_pip_leader where PipID = #{PipID};
+</delete>
+
+
+</mapper>

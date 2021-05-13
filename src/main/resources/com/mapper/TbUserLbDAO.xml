@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.water.water.dao.TbUserLbDAO">
+  <resultMap id="BaseResultMap" type="com.water.water.pojo.TbUserLb">
+    <id column="UClassID" jdbcType="VARCHAR" property="uclassid" />
+    <result column="UClassName" jdbcType="VARCHAR" property="uclassname" />
+    <result column="NoteMeme" jdbcType="VARCHAR" property="notememe" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UClassID, UClassName, NoteMeme
+  </sql>
+  <select id="selectByExample" parameterType="com.water.water.pojo.TbUserLbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user_lb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user_lb
+    where UClassID = #{uclassid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user_lb
+    where UClassID = #{uclassid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.water.water.pojo.TbUserLbExample">
+    delete from tb_user_lb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="UClassID" keyProperty="uclassid" parameterType="com.water.water.pojo.TbUserLb" useGeneratedKeys="true">
+    insert into tb_user_lb (UClassName, NoteMeme)
+    values (#{uclassname,jdbcType=VARCHAR}, #{notememe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="UClassID" keyProperty="uclassid" parameterType="com.water.water.pojo.TbUserLb" useGeneratedKeys="true">
+    insert into tb_user_lb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uclassname != null">
+        UClassName,
+      </if>
+      <if test="notememe != null">
+        NoteMeme,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uclassname != null">
+        #{uclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="notememe != null">
+        #{notememe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.water.water.pojo.TbUserLbExample" resultType="java.lang.Long">
+    select count(*) from tb_user_lb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_user_lb
+    <set>
+      <if test="record.uclassid != null">
+        UClassID = #{record.uclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uclassname != null">
+        UClassName = #{record.uclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notememe != null">
+        NoteMeme = #{record.notememe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_user_lb
+    set UClassID = #{record.uclassid,jdbcType=VARCHAR},
+      UClassName = #{record.uclassname,jdbcType=VARCHAR},
+      NoteMeme = #{record.notememe,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.water.water.pojo.TbUserLb">
+    update tb_user_lb
+    <set>
+      <if test="uclassname != null">
+        UClassName = #{uclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="notememe != null">
+        NoteMeme = #{notememe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UClassID = #{uclassid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.water.water.pojo.TbUserLb">
+    update tb_user_lb
+    set UClassName = #{uclassname,jdbcType=VARCHAR},
+      NoteMeme = #{notememe,jdbcType=VARCHAR}
+    where UClassID = #{uclassid,jdbcType=VARCHAR}
+  </update>
+</mapper>

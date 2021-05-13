@@ -17,6 +17,23 @@ public interface td_AreasDao {
 
     String getNameByID(String AreaID);
 
+//  获取分区总个数
+    Integer getAreaSize();
 
+//  获取全部分区信息
+    List getAllAreas(Integer page, Integer size);
 
+//  获取所有分区id
+    List getAreaID();
+
+//  添加分区名称与id
+    Integer addArea(String AreaID,String AreaName);
+
+    String getByAreaId(String AreaID);
+
+    String getAreaNameByName(String AreaName);
+
+    Integer modifyAreaNameByID(String AreaID, String AreaName);
+
+    Integer deleteArea(String AreaID);
 }

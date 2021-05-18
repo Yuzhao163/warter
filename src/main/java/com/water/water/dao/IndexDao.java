@@ -16,4 +16,6 @@ public interface IndexDao {
     Integer getCountMessage();
 
     List getSelectMessageByPage(Integer page,Integer size);
+
+    List getAllMessageToException();
 }

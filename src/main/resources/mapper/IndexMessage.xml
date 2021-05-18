@@ -73,4 +73,8 @@
             limit #{page},#{size}
         </if>
     </select>
+
+    <select id="getAllMessageToException" resultMap="DetailResult">
+        select * from td_rec_detail;
+    </select>
 </mapper>

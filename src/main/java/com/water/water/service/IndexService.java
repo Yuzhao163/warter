@@ -11,6 +11,8 @@ import com.water.water.util.PrintClassName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +29,101 @@ public class IndexService {
 
     public List getAllMessage(){
         return indexDao.getAllMessage();
+    }
+
+    public List<Map> getAllMessageToException(){
+        List allmessage = indexDao.getAllMessageToException();
+        Map fistException = new HashMap();
+        List<Map> AllToException = new LinkedList<>();
+        Integer yanzhong = 0;
+        Integer jinji = 0;
+        Integer jinggao = 0;
+        for (int i = 0;i<allmessage.size();i++){
+            try{
+                Rec_Detail message = (Rec_Detail)allmessage.get(i);
+                String TmnID = message.getTmnID();
+                Short Errorme = 0;
+                Short W_line = message.getW_line();
+                Short V_status = message.getV_status();
+                Short B_status = message.getB_status();
+                Short F_volume = message.getF_Volume();
+                if(W_line > 90){
+                    Errorme = 4;
+                    yanzhong++;
+                    if(V_status > 90){
+                        Errorme = 4;
+                        yanzhong++;
+                    }
+                    if(B_status > 90){
+                        Errorme = 4;
+                        yanzhong++;
+                    }
+                    if(F_volume > 90){
+                        Errorme = 4;
+                        yanzhong++;
+                    }
+                }
+                else if(W_line > 70 && W_line <= 90){
+                    Errorme = 3;
+                    jinji++;
+                    if(V_status > 90){
+                        Errorme = 4;
+                        yanzhong++;
+                    }
+                    if(B_status > 90){
+                        Errorme = 4;
+                        yanzhong++;
+                    }
+                    if(F_volume > 90){
+                        Errorme = 4;
+                        yanzhong++;
+                    }
+                }else if(W_line > 50 && W_line <= 70){
+                    Errorme = 2;
+                    jinggao++;
+                    if(V_status > 90){
+                        Errorme = 3;
+                        jinji++;
+                        if(B_status > 90){
+                            Errorme = 4;
+                            yanzhong++;
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            yanzhong++;
+                        }
+                    }else if(B_status > 90){
+                        Errorme = 3;
+                        jinji++;
+                        if(V_status > 90){
+                            Errorme = 4;
+                            yanzhong++;
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            yanzhong++;
+                        }
+                    }else if(F_volume > 90){
+                        Errorme = 3;
+                        if(V_status > 90){
+                            Errorme = 4;
+                            yanzhong++;
+                        }
+                        if(B_status > 90){
+                            Errorme = 4;
+                            yanzhong++;
+                        }
+                    }
+                }
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        fistException.put("yanzhong",yanzhong);
+        fistException.put("jinji",jinji);
+        fistException.put("jinggao",jinggao);
+        AllToException.add(fistException);
+        return AllToException;
     }
 
     public List getMessageDesc(){

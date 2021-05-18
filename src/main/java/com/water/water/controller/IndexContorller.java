@@ -53,4 +53,9 @@ public class IndexContorller {
     public List getSelectMessageByPage(@RequestParam Integer page,Integer size) throws Exception{
         return indexService.getSelectMessageByPage(page,size);
     }
+
+    @RequestMapping(value = "api/getAllMessageToException")
+    public List<Map> getAllMessageToException() throws Exception{
+        return indexService.getAllMessageToException();
+    }
 }

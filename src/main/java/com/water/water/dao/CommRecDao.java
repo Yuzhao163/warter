@@ -9,4 +9,6 @@ public interface CommRecDao {
     int inserttotd_comm(CommRec commRec);
 
     void SendOrder(CommRec commRec);
+
+    //String GetIp(String TmnID);
 }

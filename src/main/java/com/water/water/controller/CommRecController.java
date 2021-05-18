@@ -1,7 +1,7 @@
 package com.water.water.controller;
 
 import com.water.water.Result.Result;
-import com.water.water.netty.MyClient;
+import com.water.water.netty.MyServerHandler;
 import com.water.water.pojo.CommRec;
 import com.water.water.pojo.User;
 import com.water.water.service.CommRecService;
@@ -20,7 +20,7 @@ public class CommRecController {
     @Autowired
     private CommRecService commRecService;
     @Autowired
-    private MyClient myClient;
+    private MyServerHandler myServerHandler;
 
     @RequestMapping(value = "api/ma",method = RequestMethod.POST)
     public Result regist(@RequestBody Map<String,String> loginMap){
@@ -39,7 +39,8 @@ public class CommRecController {
     @RequestMapping(value = "api/order")
     public Result SendOrder(CommRec commRec) throws Exception{
         commRec.setD_ID("1");
-        myClient.timer(commRec);
+        String IP = commRecService.GetIp(commRec);
+        myServerHandler.channelActive(commRec,IP);
        return commRecService.SendOrder(commRec);
     }
 }

@@ -22,10 +22,10 @@ public class DetailController {
     @RequestMapping(value = "api/detail")
     public List getVper(@RequestParam Integer Id) throws Exception{
         Integer id = Id;
-        System.out.println("正在查询阀开度");
+        //System.out.println("正在查询阀开度");
         List Vper = detailService.getVper(id);
 
-        System.out.println("得到的阀开度是："+Vper);
+//        System.out.println("得到的阀开度是："+Vper);
 
         return Vper;
     }

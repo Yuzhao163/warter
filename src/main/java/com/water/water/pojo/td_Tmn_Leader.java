@@ -3,13 +3,13 @@ package com.water.water.pojo;
 public class td_Tmn_Leader {
 
     private Integer ID;
-    private String Leader;
+    private Integer Leader;
     private String TmnID;
 
     public td_Tmn_Leader() {
     }
 
-    public td_Tmn_Leader(Integer ID, String leader, String tmnID) {
+    public td_Tmn_Leader(Integer ID, Integer leader, String tmnID) {
         this.ID = ID;
         Leader = leader;
         TmnID = tmnID;
@@ -23,11 +23,11 @@ public class td_Tmn_Leader {
         this.ID = ID;
     }
 
-    public String getLeader() {
+    public Integer getLeader() {
         return Leader;
     }
 
-    public void setLeader(String leader) {
+    public void setLeader(Integer leader) {
         Leader = leader;
     }
 

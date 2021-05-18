@@ -13,8 +13,6 @@ Field 'id' doesn't have a default value] with root cause-->
     <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Areas">
         <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
         <result column="AreaName" property="AreaName" jdbcType="VARCHAR"/>
-        <result column="AreaLeader" property="AreaLeader" jdbcType="VARCHAR"/>
-        <result column="AreaLeadPhone" property="AreaLeadPhone" jdbcType="VARCHAR"/>
         <result column="AreaCreateDate" property="AreaCreateDate" jdbcType="DATE"/>
     </resultMap>
 
@@ -32,23 +30,71 @@ Field 'id' doesn't have a default value] with root cause-->
     </select>
 
 
-    <update id="updateAreaLeader">update td_areas set AreaLeader=#{AreaLeader} where AreaID = #{AreaID}; </update>
+    <!--    <update id="updateAreaLeader">update td_areas set AreaLeader=#{AreaLeader} where AreaID = #{AreaID}; </update>-->
 
     <!--获取所有分区领导名称-->
-    <select id="getAreaLeader" resultMap="BaseResultMap">select * from td_areas where AreaLeader is not null; </select>
+    <!--    <select id="getAreaLeader" resultMap="BaseResultMap">select * from td_areas where AreaLeader is not null; </select>-->
 
     <!--通过AreaLeder获取对应AreaID-->
-    <select id="getAreaID" resultMap="BaseResultMap">select AreaID from td_areas where AreaLeader = #{AreaLeader}; </select>
+    <!--    <select id="getAreaID" resultMap="BaseResultMap">select AreaID from td_areas where AreaLeader = #{AreaLeader}; </select>-->
 
     <!--设置对应ID的AreaLeader为空-->
-    <update id="updateLeaderByAreaID">update td_areas set AreaLeader = null where AreaID = #{AreaID}; </update>
+    <!--    <update id="updateLeaderByAreaID">update td_areas set AreaLeader = null where AreaID = #{AreaID}; </update>-->
 
     <!--5.2 和管线分布有冲突应用到我的人员管理上的getAreas方法，获取数据库中所有的AreaName，AreaID-->
     <select id="getArea" resultMap="BaseResultMap">select AreaName,AreaID from td_areas; </select>
 
     <!--5.2带有追加功能的更新AreaLeader，使得AreaLeader具有多个人员-->
-    <update id="appendAreaLeader">update td_areas set AreaLeader=CONCAT_WS(',',AreaLeader,#{AreaLeader}) where AreaID = #{AreaID}; </update>
+    <!--    <update id="appendAreaLeader">update td_areas set AreaLeader=CONCAT_WS(',',AreaLeader,#{AreaLeader}) where AreaID = #{AreaID}; </update>-->
 
     <!--5.2获取AreaLeader为空的所有AreaID-->
-    <select id="getLeaderIsNull" resultMap="BaseResultMap">select AreaID from td_areas where AreaLeader is null; </select>
+    <!--    <select id="getLeaderIsNull" resultMap="BaseResultMap">select AreaID from td_areas where AreaLeader is null; </select>-->
+
+    <!--5.15-->
+    <!--  获取分区总个数  -->
+    <select id="getAreaSize" resultType="Integer">
+        select count(AreaID) from td_areas;
+    </select>
+
+    <!--  获取分区全部信息  -->
+    <select id="getAllAreas" resultMap="BaseResultMap">
+        select * from td_areas order by AreaCreateDate asc
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
+
+    <!--  根据分区id找分区名称  -->
+    <select id="getNameByID" resultType="String">
+        select AreaName from td_areas where AreaID = #{AreaID}
+    </select>
+
+    <!--  获取所有分区id  -->
+    <select id="getAreaID" resultMap="BaseResultMap">
+        select AreaID from td_areas
+    </select>
+
+    <!--  添加分区id与分区名称  -->
+    <insert id="addArea">
+        insert into td_areas(AreaID,AreaName) values (#{AreaID},#{AreaName})
+    </insert>
+
+
+    <select id="getByAreaId" resultType="String">
+        select * from td_areas where AreaID = #{AreaID}
+    </select>
+
+    <!--  查询是否有存在的名称  -->
+    <select id="getAreaNameByName" resultType="String">
+        select * from td_areas where AreaName = #{AreaName}
+    </select>
+
+    <!--  更新分区名称  -->
+    <update id="modifyAreaNameByID">
+        update td_areas set AreaName = #{AreaName} where AreaID = #{AreaID}
+    </update>
+
+    <delete id="deleteArea">
+        delete from td_areas where AreaID = #{AreaID}
+    </delete>
 </mapper>

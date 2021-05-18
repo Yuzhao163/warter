@@ -13,21 +13,19 @@ Field 'id' doesn't have a default value] with root cause-->
         <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
         <result column="PipName" property="PipName" jdbcType="VARCHAR"/>
         <result column="PipDesc" property="PipDesc" jdbcType="VARCHAR"/>
-        <result column="PipLeadPhone" property="PipLeadPhone"
-                jdbcType="VARCHAR"/>
-        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
-        <result column="PipCreateDate" property="PipCreateDate"
-                jdbcType="DATE"/>
+        <result column="PipCreateDate" property="PipCreateDate" jdbcType="DATE"/>
     </resultMap>
-
+    <!--这里用到了，报错！！！！！！！！！！！！！！！-->
     <select id="getPips" resultMap="BaseResultMap">
         select PipName,PipID from td_pips where AreaID = #{AreaID};
     </select>
 
+    <!--这里用到了，报错！！！！！！！！！！！！！！！-->
     <select id="getPipsByAreaID" resultMap="BaseResultMap">
         select PipName,PipID from td_pips where AreaID = #{AreaID};
     </select>
 
+    <!--这里用到了，报错！！！！！！！！！！！！！！！-->
     <select id="getPipByAreaID" resultMap="BaseResultMap">
         select PipName,PipID from td_pips where AreaID = #{AreaID};
     </select>
@@ -37,6 +35,7 @@ Field 'id' doesn't have a default value] with root cause-->
         select PipName from td_pips where PipID = #{PipID}
     </select>
 
+    <!--这里用到了，报错！！！！！！！！！！！！！！！-->
     <!--根据管线查区域-->
     <select id="getAreasIdByPips" resultMap="BaseResultMap">
         select AreaID from td_pips where PipID=#{PipID};
@@ -48,36 +47,82 @@ Field 'id' doesn't have a default value] with root cause-->
     </select>
 
 
-
-    <update id="updatePipLeader">update td_pips set PipLeader=#{PipLeader} where PipID=#{PipID} </update>
-
     <!--根据管线名称获得管线id-->
     <select id="getPipIDByPipName" resultMap="BaseResultMap">select PipID from td_pips where PipName = #{PipName}; </select>
 
-    <!--获取所有管线领导名称-->
-    <select id="getPipLeader" resultMap="BaseResultMap">select PipLeader from td_pips where PipLeader is not null; </select>
+    <!--    &lt;!&ndash;获取所有管线领导名称&ndash;&gt;-->
+    <!--    <select id="getPipLeader" resultMap="BaseResultMap">select PipLeader from td_pips where PipLeader is not null; </select>-->
 
-    <!--通过PipLeder获取对应PipID-->
-    <select id="getPipID" resultMap="BaseResultMap">select PipID from td_pips where PipLeader = #{PipLeader}; </select>
+    <!--    &lt;!&ndash;通过PipLeder获取对应PipID&ndash;&gt;-->
+    <!--    <select id="getPipID" resultMap="BaseResultMap">select PipID from td_pips where PipLeader = #{PipLeader}; </select>-->
 
-    <select id="getPipsByAreaID1" resultMap="BaseResultMap">select PipName,PipID from td_pips where AreaID = #{AreaID} and PipLeader is null; </select>
+    <!--    <select id="getPipsByAreaID1" resultMap="BaseResultMap">select PipName,PipID from td_pips where AreaID = #{AreaID} and PipLeader is null; </select>-->
 
-    <select id="getPipsByID" resultMap="BaseResultMap">select PipName from td_pips where PipID = #{PipID} and PipLeader is null; </select>
+    <!--    <select id="getPipsByID" resultMap="BaseResultMap">select PipName from td_pips where PipID = #{PipID} and PipLeader is null; </select>-->
 
     <!--获取管线4.27/15.37-->
     <!--//和管线分布起冲突，修改人员管理获取管线5.2 获取数据库中所有的管线-->
     <select id="getPipe" resultMap="BaseResultMap">select * from td_pips; </select>
 
-    <!--设置对应ID的PipLeader为空-->
-    <update id="updateLeaderByPipID">update td_pips set PipLeader = null where PipID = #{PipID}; </update>
+    <!--    &lt;!&ndash;设置对应ID的PipLeader为空&ndash;&gt;-->
+    <!--    <update id="updateLeaderByPipID">update td_pips set PipLeader = null where PipID = #{PipID}; </update>-->
 
-    <!--5.2获取PipLeader为空的所有PipID-->
-    <select id="getLeaderIsNull" resultMap="BaseResultMap">select PipID from td_pips where PipLeader is null; </select>
+    <!--    &lt;!&ndash;5.2获取PipLeader为空的所有PipID&ndash;&gt;-->
+    <!--    <select id="getLeaderIsNull" resultMap="BaseResultMap">select PipID from td_pips where PipLeader is null; </select>-->
 
-    <!--5.2带有追加功能的更新PipLeader，使得PipLeader具有多个人员-->
-    <update id="appendPipLeader">update td_pips set PipLeader=CONCAT_WS(',',PipLeader,#{PipLeader}) where PipID = #{PipID}; </update>
+    <!--    &lt;!&ndash;5.2带有追加功能的更新PipLeader，使得PipLeader具有多个人员&ndash;&gt;-->
+    <!--    <update id="appendPipLeader">update td_pips set PipLeader=CONCAT_WS(',',PipLeader,#{PipLeader}) where PipID = #{PipID}; </update>-->
+
+    <!--5.15-->
+    <!--  根据管线id获取管线id与名称  -->
+    <select id="getPIDNameByPID" resultMap="BaseResultMap">
+        select PipID,PipName from td_pips where PipID = #{PipID};
+    </select>
 
 
+    <select id="getPipSize" resultType="Integer">
+        select count(PipID) from td_pips;
+    </select>
 
+    <select id="getAllPips" resultMap="BaseResultMap">
+        select * from td_pips order by PipCreateDate asc
+        <if test="page!=null and size!=null">
+            limit #{page},#{size};
+        </if>
+    </select>
 
+    <!--5.9增加管线-->
+    <insert id="addPips">
+    insert into td_pips(PipID,PipName) values (#{PipID},#{PipName});
+</insert>
+
+    <!--5.9根据管线名称查询是否存在同名管线-->
+    <select id="ifSameNamePip" resultMap="BaseResultMap">
+    select * from td_pips where PipName = #{PipName};
+</select>
+
+    <!--5.9判断在数据库中是否存在相同的PipID-->
+    <select id="getByPipId" resultType="String">
+    select * from td_pips where PipID = #{PipID};
+</select>
+
+    <!--5.9删除管线-->
+    <delete id="deletePip">
+    delete from td_pips where PipID = #{PipID};
+</delete>
+
+    <!--5.9更新管线-->
+    <update id="updatePips">
+    update td_pips set PipName = #{PipName} where PipID = #{PipID};
+</update>
+
+    <!--判断名称是否重复-->
+    <select id="getPipNameByName" resultType="String">
+    select PipName from td_pips where PipName = #{PipName};
+</select>
+
+    <!--5.17修改，为PipDistributeService同款方法添加一个SQL语句-->
+    <select id="getPipByPipID" resultMap="BaseResultMap">
+        select PipName from td_pips where PipID = #{PipID}
+    </select>
 </mapper>

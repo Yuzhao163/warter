@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.water.water.dao.td_ApDao">
+    <resultMap id="BaseResultMap"  type="com.water.water.pojo.td_Ap">
+        <id column="Id" property="Id" jdbcType="INTEGER"/>
+        <result column="AreaID" property="AreaID" jdbcType="VARCHAR"/>
+        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--  根据分区id获取管线id  -->
+    <select id="getPipIDByAreaID" resultMap="BaseResultMap">
+        select PipID from td_ap where AreaID = #{AreaID};
+    </select>
+
+    <!--  根据管线id获取分区id  -->
+    <select id="getAIDByPID" resultMap="BaseResultMap">
+        select AreaID from td_ap where PipID = #{PipID}
+    </select>
+
+    <!--  删除某一分区的所有数据  -->
+    <delete id="clearArea" >
+        delete from td_ap where AreaID = #{AreaID}
+    </delete>
+
+
+
+    <!--5.9插入选中的分区ID和管线ID-->
+    <insert id="addID">
+    insert into td_ap(AreaID,PipID) values (#{AreaID},#{PipID});
+</insert>
+
+    <!--5.9删除td_ap表中PipID对应的AreaID的关系-->
+    <delete id="deletePip">
+    delete from td_ap where PipID = #{PipID};
+</delete>
+
+    <!--5.10更新td_ap表中PipID对应AreaID关系-->
+    <update id="updateID">
+    update td_ap set AreaID = #{AreaID} where PipID = #{PipID};
+</update>
+
+
+
+</mapper>

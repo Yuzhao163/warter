@@ -30,12 +30,6 @@
         select * from td_errordeal_rec where ERId = #{ERId};
     </select>
 
-<!--    <select id="getSelectMessage" resultMap="DetailResult">-->
-<!--        select * from td_Rec_Detail where W_work = #{W_work} AND F_Volume-->
-<!--        between #{W_Downline} AND #{W_Upline};-->
-<!--    </select>-->
-    <!--    -->
-    <!--    <select id="getNameById" resultMap=""-->
     <update id="updateError">
         update td_errordeal_rec set Exception=#{Exception},Result=#{Result}
         where ERId=#{ERId};
@@ -52,12 +46,21 @@
         </if>
     </select>
 
-    <insert id="InsertToError">
-        insert into td_errordeal_rec
-        (ERId,Exception,Result,User,TmnId)
-         VALUES (#{ERId},#{Exception},#{Result},#{User},#{TmnId}) ON
-         DUPLICATE
-          KEY UPDATE ERId = #{ERId} , Exception = #{Exception} , Result =
-          #{Result},User = #{User},TmnId = #{TmnId};
+    <!--    <insert id="InsertToError">-->
+    <!--        insert into td_errordeal_rec-->
+    <!--        (ERId,Exception,Result,User,TmnId)-->
+    <!--         VALUES (#{ERId},#{Exception},#{Result},#{User},#{TmnId}) ON-->
+    <!--         DUPLICATE-->
+    <!--          KEY UPDATE ERId = #{ERId} , Exception = #{Exception} , Result =-->
+    <!--          #{Result},User = #{User},TmnId = #{TmnId};-->
+    <!--    </insert>-->
+    <!--5.15-->
+    <insert id="appendToError">
+        insert into td_errordeal_rec(ERId,Exception,Result,User,TmnId) VALUES (#{ERId},#{Exception},#{Result},#{User},#{TmnId})
     </insert>
+
+    <!--5.8-->
+    <select id="getAllErrorByTmnID" resultMap="ErrordealRecMap">
+        select * from td_errordeal_rec where TmnID = #{TmnID};
+    </select>
 </mapper>

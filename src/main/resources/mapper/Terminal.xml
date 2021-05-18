@@ -12,53 +12,57 @@
         <result column="ConPont1" property="ConPont1" jdbcType="VARCHAR"/>
         <result column="ConPont2" property="ConPont2" jdbcType="VARCHAR"/>
         <result column="ConPont3" property="ConPont3" jdbcType="VARCHAR"/>
-        <result column="PipID" property="PipID" jdbcType="VARCHAR"/>
         <result column="TmnDesc" property="TmnDesc" jdbcType="VARCHAR"/>
-        <result column="TmnLeader" property="TmnLeader" jdbcType="VARCHAR"/>
     </resultMap>
+    <!--可能会报错！！！！！！！！！！！！！！！！-->
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;
     </select>
 
-    <select id="getNameByID" resultMap="BaseResultMap">
-        select TmnName,TmnLeader from td_terminals where TmnId = #{TmnID};
-    </select>
 
-<!--    获取整个列表信息-->
+<!--******************************************************************************-->
+<!--******************************************************************************&ndash;&gt;-->
+        <select id="getNameByID" resultMap="BaseResultMap">
+            select TmnName from td_terminals where TmnId = #{TmnID};
+        </select>
+
+    <!--    获取整个列表信息-->
     <select id="getAllTmnList" resultMap="BaseResultMap">
         select * from td_terminals;
     </select>
 
-<!--    添加一个控制柜到表中-->
+    <!--    添加一个控制柜到表中-->
     <insert id="addTmn">
-        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,PipID,ConPont1,ConPont2,ConPont3,TmnDesc) values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{PipID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc})
+        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,ConPont1,ConPont2,ConPont3,TmnDesc) values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc})
     </insert>
 
-<!--    根据控制柜id删除控制柜-->
+    <!--    根据控制柜id删除控制柜-->
     <delete id="deleteTmnByID">
         delete from td_terminals where TmnId = #{TmnID}
     </delete>
 
-<!--    对控制柜信息进行修改-->
+    <!--    对控制柜信息进行修改-->
     <update id="modifyTmn">
         update td_terminals set TmnId=#{TmnId},TmnName=#{TmnName},U1TmnID=#{U1TmnID},U2TmnID=#{U2TmnID},
             D1TmnID=#{D1TmnID},D2TmnID=#{D2TmnID},PipID=#{PipID},ConPont1=#{ConPont1},
             ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where id=#{id}
     </update>
 
-<!--    根据控制柜id查询控制柜名称-->
+    <!--    根据控制柜id查询控制柜名称-->
     <select id="getTmnNameByTmnID" resultType="String">
-        select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
+        select TmnName from td_terminals where TmnId = #{TmnID}
     </select>
 
+
+    <!--可能会报错！！！！！！！！！！！！！！！！-->
+<!--    **********************************************************-->
+    <!--    **********************************************************-->
     <select id="getTerminalsByUserName" resultMap="BaseResultMap">
         select * from td_terminals where TmnLeader =
         #{UserName};
     </select>
 
-    <select id="getTmnLeaderNull" resultMap="BaseResultMap">select TmnName from td_terminals where TmnLeader is null; </select>
-
-
+    <!--    <select id="getTmnLeaderNull" resultMap="BaseResultMap">select TmnName from td_terminals where TmnLeader is null; </select>-->
 
     <!--//获取控制柜4.27/16.01-->
     <!--//和管线分布起冲突，修改人员管理获取控制柜5.2 获取数据库中所有的控制柜-->
@@ -66,22 +70,83 @@
     <select id="getTerminal" resultMap="BaseResultMap">select * from td_terminals; </select>
 
     <!--设置对应ID的TmnLeader为空-->
-<!--    <update id="updateLeaderByTmnID">update td_terminals set TmnLeader = null where TmnID = #{TmnID}; </update>-->
+    <!--    <update id="updateLeaderByTmnID">update td_terminals set TmnLeader = null where TmnID = #{TmnID}; </update>-->
 
     <!--5.2获取PipLeader为空的所有PipID-->
-    <select id="getLeaderIsNull" resultMap="BaseResultMap">select TmnID from td_terminals where TmnLeader is null; </select>
+    <!--    <select id="getLeaderIsNull" resultMap="BaseResultMap">select TmnID from td_terminals where TmnLeader is null; </select>-->
 
     <!--5.2带有追加功能的更新TmnLeader，使得TmnLeader具有多个人员-->
-    <update id="appendTmnLeader">update td_terminals set TmnLeader=CONCAT_WS(',',TmnLeader,#{TmnLeader}) where TmnID = #{TmnID}; </update>
+    <!--    <update id="appendTmnLeader">update td_terminals set TmnLeader=CONCAT_WS(',',TmnLeader,#{TmnLeader}) where TmnID = #{TmnID}; </update>-->
 
     <!--//获取控制柜4.27/16.01-->
-    <select id="getTerminals" resultMap="BaseResultMap">
-        select * from td_terminals where TmnLeader is null;
-    </select>
+    <!--    <select id="getTerminals" resultMap="BaseResultMap">-->
+    <!--        select * from td_terminals where TmnLeader is null;-->
+    <!--    </select>-->
 
     <!--设置对应ID的TmnLeader为空-->
-    <update id="updateLeaderByTmnID">
-        update td_terminals set TmnLeader = null where TmnID = #{TmnID};
+    <!--    <update id="updateLeaderByTmnID">-->
+    <!--        update td_terminals set TmnLeader = null where TmnID = #{TmnID};-->
+    <!--    </update>-->
+
+    <!--  根据控制柜id查询名称+id-->
+    <select id="getTINByTID" resultMap="BaseResultMap">
+        select TmnName,TmnId from td_terminals where TmnId = #{TmnID}
+    </select>
+
+    <!--5.15-->
+    <!--  根据控制柜id查询整条控制柜信息  -->
+    <select id="getTmnByID" resultMap="BaseResultMap">
+        select * from td_terminals where TmnID = #{TmnID};
+    </select>
+
+    <!--  更新控制柜  -->
+    <select id="updateTmnByid">
+        update td_terminals set TmnName=#{TmnName},ConPont1=#{ConPont1},
+            ConPont2=#{ConPont2},ConPont3=#{ConPont3},TmnDesc=#{TmnDesc} where TmnID=#{TmnID}
+    </select>
+
+    <!--  获取控制柜个数  -->
+    <select id="getTmnSize" resultType="Integer">
+        select count(id) from td_terminals;
+    </select>
+
+    <!--  分页查询  -->
+    <select id="getAllTmnListByPage" resultMap="BaseResultMap">
+        select * from td_terminals
+        <if test="page!=null and size!=null">
+            limit #{page},#{size}
+        </if>
+    </select>
+
+    <!--  获取全部控制柜id的最大值id 用于自动插入控制柜id  -->
+    <select id="getMaxID" resultType="Integer">
+        select max(id) from td_terminals
+    </select>
+
+    <!--  根据id修改下一控制柜id  -->
+    <update id="setD1TmnID">
+        update td_terminals set D1TmnID=#{D1TmnID} where TmnID = #{TmnID}
     </update>
 
+    <update id="setD1TmnIDNull">
+        update td_terminals set D1TmnID="" where TmnID = #{TmnID}
+    </update>
+
+    <!--  根据id修改上一控制柜id  -->
+    <update id="setU1TmnID">
+        update td_terminals set U1TmnID=#{U1TmnID} where TmnID = #{TmnID}
+    </update>
+    <update id="setU1TmnIDNull">
+        update td_terminals set U1TmnID="" where TmnID = #{TmnID}
+    </update>
+
+    <select id="existname" resultType="String">
+        select * from td_terminals where TmnName = #{TmnName}
+    </select>
+
+
+    <!--5.17修改，增加通过控制柜名称寻找控制柜-->
+    <select id="getTmnByTmnName" resultMap="BaseResultMap">
+        select * from td_terminals where TmnName = #{TmnName}
+    </select>
 </mapper>

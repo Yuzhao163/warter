@@ -1,14 +1,13 @@
 package com.water.water.pojo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class td_PIPs {
     private String PipID;
     private String PipName;
     private String PipDesc;
-    private Date PipCreateDate;
-    private String AreaID;
-    private String PipLeadPhone;
+    private Timestamp PipCreateDate;
 
     public String getPipID() {
         return PipID;
@@ -34,27 +33,12 @@ public class td_PIPs {
         PipDesc = pipDesc;
     }
 
-    public Date getPipCreateDate() {
+    public Timestamp getPipCreateDate() {
         return PipCreateDate;
     }
 
-    public void setPipCreateDate(Date pipCreateDate) {
+    public void setPipCreateDate(Timestamp pipCreateDate) {
         PipCreateDate = pipCreateDate;
     }
-
-    public String getAreaID() {
-        return AreaID;
-    }
-
-    public void setAreaID(String areaID) {
-        AreaID = areaID;
-    }
-
-    public String getPipLeadPhone() {
-        return PipLeadPhone;
-    }
-
-    public void setPipLeadPhone(String pipLeadPhone) {
-        PipLeadPhone = pipLeadPhone;
-    }
 }
+

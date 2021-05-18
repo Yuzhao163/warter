@@ -46,7 +46,7 @@ public class LoginController {
             else {
                 if(UserPswd.equals(password) && UClassID.equals("1")) {
                     return new Result(100);
-                }else if(UserPswd.equals(password) && UClassID.equals("2")){
+                }else if(UserPswd.equals(password) && (UClassID.equals("201") || UClassID.equals("202") || UClassID.equals("203"))){
                     return new Result(200);
                 }else if (UserPswd.equals(password) && UClassID.equals("3")){
                     return new Result(300);

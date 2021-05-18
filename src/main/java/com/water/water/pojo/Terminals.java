@@ -8,28 +8,26 @@ public class Terminals {
     String U2TmnID;
     String D1TmnID;
     String D2TmnID;
-    String PipID;
     String ConPont1;
     String ConPont2;
     String ConPont3;
     String TmnDesc;
 
-    public String getTmnLeader() {
-        return TmnLeader;
-    }
-
-    public void setTmnLeader(String tmnLeader) {
-        TmnLeader = tmnLeader;
-    }
-
-    String TmnLeader;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public Terminals(Integer id, String tmnId, String tmnName, String u1TmnID, String u2TmnID, String d1TmnID, String d2TmnID, String conPont1, String conPont2, String conPont3, String tmnDesc) {
         this.id = id;
+        TmnId = tmnId;
+        TmnName = tmnName;
+        U1TmnID = u1TmnID;
+        U2TmnID = u2TmnID;
+        D1TmnID = d1TmnID;
+        D2TmnID = d2TmnID;
+        ConPont1 = conPont1;
+        ConPont2 = conPont2;
+        ConPont3 = conPont3;
+        TmnDesc = tmnDesc;
+    }
+
+    public Terminals() {
     }
 
     @Override
@@ -42,12 +40,19 @@ public class Terminals {
                 ", U2TmnID='" + U2TmnID + '\'' +
                 ", D1TmnID='" + D1TmnID + '\'' +
                 ", D2TmnID='" + D2TmnID + '\'' +
-                ", PipID='" + PipID + '\'' +
                 ", ConPont1='" + ConPont1 + '\'' +
                 ", ConPont2='" + ConPont2 + '\'' +
                 ", ConPont3='" + ConPont3 + '\'' +
                 ", TmnDesc='" + TmnDesc + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTmnId() {
@@ -98,14 +103,6 @@ public class Terminals {
         D2TmnID = d2TmnID;
     }
 
-    public String getPipID() {
-        return PipID;
-    }
-
-    public void setPipID(String pipID) {
-        PipID = pipID;
-    }
-
     public String getConPont1() {
         return ConPont1;
     }
@@ -137,6 +134,4 @@ public class Terminals {
     public void setTmnDesc(String tmnDesc) {
         TmnDesc = tmnDesc;
     }
-
-
 }

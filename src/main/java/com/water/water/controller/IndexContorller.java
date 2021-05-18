@@ -39,7 +39,6 @@ public class IndexContorller {
 
     @RequestMapping(value = "api/SelectMessage")
     public List getSelectMessage(@RequestParam Map params) throws Exception {
-        System.out.println(params.get("W_work"));
         List selectmessage = indexService.getSelectMessage(params);
         List result_selectmessage = terminalsService.getNameByID(selectmessage);
         return result_selectmessage;

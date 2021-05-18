@@ -12,26 +12,28 @@
         <result column="UserPswd" property="UserPswd" jdbcType="VARCHAR"/>
         <result column="UClassID" property="UClassID" jdbcType="VARCHAR"/>
         <result column="Ustate" property="Ustate" jdbcType="INTEGER"/>
-        <result jdbcType="TIMESTAMP" property="RegTime" column="RegTime"/>
+        <result column="RegTime" property="RegTime" jdbcType="DATE"/>
         <result column="MoPhone" property="MoPhone" jdbcType="VARCHAR"/>
         <result column="RealName" property="RealName" jdbcType="VARCHAR"/>
         <result column="DPTName" property="DPTName" jdbcType="VARCHAR"/>
-        <result jdbcType="TIMESTAMP" property="ModTime" column="ModTime"/>
+        <result column="ModTime" property="ModTime" jdbcType="DATE"/>
     </resultMap>
     <select id="getByUserManageName" resultMap="BaseResultMap">
         select
         UserID,UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,
-        DPTName from td_User where UserName = #{UserName};
+        DPTName from td_user where UserName = #{UserName};
     </select>
 
     <select id="getByusername" resultMap="BaseResultMap">
         select
         UserID,UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,
-        DPTName from td_User where UserName = #{UserName};
+        DPTName from td_user where UserName = #{UserName};
     </select>
 
     <select id="getAllUserManage" resultMap="BaseResultMap">
-        select UserID,UserName,RealName,UClassID,MoPhone,DPTName,RegTime from td_User;
+        select
+        UserID,UserName,UserPswd,RealName,UClassID,MoPhone,DPTName,RegTime
+        from td_user;
     </select>
 
     <insert id="insertTotd_user">
@@ -46,22 +48,22 @@
     </delete>
 
     <!--这里是同步插入数据，插入userManager的数据之后同时也会往注册页面插入一条新的员工信息-->
-    <insert id="insert_user">
-        insert into user(username, password, telephone) values(#{UserName},#{UserPswd},#{MoPhone});
-    </insert>
+<!--    <insert id="insert_user">-->
+<!--        insert into user(username, password, telephone) values(#{UserName},#{UserPswd},#{MoPhone});-->
+<!--    </insert>-->
     <update id="updatetd_user">
         <!--update td_user set UserName = #{UserName}, UserPswd = #{UserPswd} ,UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}-->
         update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, UClassID = #{UClassID}, MoPhone = #{MoPhone}, RealName = #{RealName}, DPTName = #{DPTName} where UserID = #{UserID}
     </update>
 
     <select id="getUserMessageByName" resultMap="BaseResultMap">
-        select * from td_User where UserName = #{UserName};
+        select * from td_user where UserName = #{UserName};
     </select>
 
     <!--这一行可能没用-->
     <update id="update_userMessage">update td_user set UserName = #{UserName}, UserPswd = #{UserPswd}, RealName = #{RealName}, MoPhone = #{MoPhone}, DPTName = #{DPTName} where UserID = #{UserID}; </update>
 
-    <update id="update_user">update user set username = #{UserName}, password = #{UserPswd}, telephone = #{MoPhone} where UserID = #{UserID}; </update>
+<!--    <update id="update_user">update user set username = #{UserName}, password = #{UserPswd}, telephone = #{MoPhone} where UserID = #{UserID}; </update>-->
 
 
     <!--删除员工，通过设置其ustate为0来标识-->
@@ -75,5 +77,54 @@
 
     <!--5.6通过UserID获取UserManage，以在Leader表中删除数据-->
     <select id="getUserNameByID" resultMap="BaseResultMap">select UserName from td_user where UserID = #{UserID} </select>
+
+    <!-- 获取所有用户名称-->
+    <select id="getAllUserName" resultType="String">
+        select UserName from td_user where UserID != #{UserID} ;
+    </select>
+
+    <!--  根据id修改用户信息  -->
+    <update id="updateUserInfo">
+        update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, MoPhone = #{MoPhone},
+                            RealName = #{RealName}, DPTName = #{DPTName}, ModTime = #{ModTime}
+                       where UserID = #{UserID}
+    </update>
+
+    <!--  根据id获取用户名称  -->
+    <select id="getUNameByID" resultType="String">
+        select UserName from td_user where UserID = #{UserID}
+    </select>
+
+    <!--  获取用户id和名称  -->
+    <select id="getUIDNameByID" resultMap="BaseResultMap">
+        select UserID,UserName from td_user where UserID = #{UserID};
+    </select>
+
+    <!--  查询除了id下的用户名称是否存在  -->
+    <select id="checkUserName" resultMap="BaseResultMap">
+        select * from td_user where UserName=#{userName} and UserID != ${userID};
+    </select>
+
+    <!--  根据用户id获取用户全部信息  -->
+    <select id="getUserByID" resultMap="BaseResultMap">
+        select * from td_user where UserID = #{userID};
+    </select>
+
+
+    <!--5.17替换td_user_right表中Right_pp-->
+    <!--  选择出所有控制柜管理员  -->
+    <select id="getUIDByRight" resultMap="BaseResultMap">
+        select distinct UserID from td_user where UClassID = '203';
+    </select>
+
+    <!--  选择出所有分区管理员  -->
+    <select id="getAIDByRight" resultMap="BaseResultMap">
+        select distinct UserID from td_user_right where UClassID = '201';
+    </select>
+
+    <!--  选出所有管线管理员  -->
+    <select id="getPIDByRight" resultMap="BaseResultMap">
+        select distinct UserID from td_user_right where UClassID = '202';
+    </select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.water.water.dao;
 
 import com.water.water.pojo.ErrordealRec;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +22,9 @@ public interface ErrordealRecDao {
     List getErrorByErId(Short ERID);
 
     Integer InsertToError(ErrordealRec errordealRec);
+
+    Integer appendToError(ErrordealRec errordealRec);
+
+    //5.8
+    List getAllErrorByTmnID(String TmnID);
 }

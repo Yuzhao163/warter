@@ -63,8 +63,8 @@
     <select id = "getCountMessage" resultType="integer">
         select COUNT(*) from td_Rec_Detail;
     </select>
-<!--    -->
-<!--    <select id="getNameById" resultMap=""-->
+    <!--    -->
+    <!--    <select id="getNameById" resultMap=""-->
 
     <!--分页查询-->
     <select id="getSelectMessageByPage" resultMap="DetailResult">

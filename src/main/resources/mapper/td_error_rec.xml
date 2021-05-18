@@ -44,7 +44,7 @@
     </select>
 
     <update id="updateByTmnId">
-        update td_error_rec set if_deal = '2' where TmnId = #{TmnId};
+        update td_error_rec set if_deal = '2' where TmnID = #{TmnId};
     </update>
 
 </mapper>

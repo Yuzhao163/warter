@@ -3,12 +3,12 @@
 
 
 
-    <!--如果id不设置成自动递增的，但是如果不加递增符号的话，就会报如下的错误
-    Field 'id' doesn't have a default value] with root cause-->
+<!--如果id不设置成自动递增的，但是如果不加递增符号的话，就会报如下的错误
+Field 'id' doesn't have a default value] with root cause-->
 
-    <!--  <insert id="insertUser">
-          insert into user(username,password) values(#{username},#{password});
-      </insert>-->
+<!--  <insert id="insertUser">
+      insert into user(username,password) values(#{username},#{password});
+  </insert>-->
 <mapper namespace="com.water.water.dao.ShowDao">
     <resultMap id="BaseResultMap"  type="com.water.water.pojo.Rec_Detail">
         <id column="Id" property="Id" jdbcType="INTEGER"/>
@@ -39,6 +39,6 @@
 
 
     <select id="selectElement" resultMap="BaseResultMap">
-        select PackageID,Id,E_temp from td_Rec_Detail;
+        select PackageID,Id,E_temp from td_rec_detail;
     </select>
 </mapper>

@@ -56,7 +56,7 @@ public class UserManageController {
     @ResponseBody
     @RequestMapping(value = "api/addstaff")
     public Integer insertTotd_user(UserRight userRight){
-        System.out.println("后又跟，安都跟"+userRight);
+        System.out.println("这是新增加的用户和权限"+userRight);
         return userManageService.insertTotd_user(userRight);
     }
 
@@ -87,7 +87,8 @@ public class UserManageController {
     @ResponseBody
     @RequestMapping(value = "api/updstaff")
     public Integer updatetd_user(UserRight userRight){
-        System.out.println("这是我的"+userRight);
+        //System.out.println("这是我的"+userRight);
+        System.out.println("这是我更新的数据"+userRight);
         return userManageService.updatetd_user(userRight);
 
     }
@@ -95,7 +96,7 @@ public class UserManageController {
     //5.3,将前端的未修改的名称传往后端，与数据库进行对比
     @RequestMapping(value = "api/getstaff")
     public List getAllUser(String UserName){
-        System.out.println("这是我拿到前端传来的username"+UserName);
+        //System.out.println("这是我拿到前端传来的username"+UserName);
         List user = userManageService.getAllUser(UserName);
         return user;
     }

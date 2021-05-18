@@ -2,6 +2,7 @@ package com.water.water.service;
 
 import com.water.water.Result.Result;
 import com.water.water.dao.CommRecDao;
+import com.water.water.dao.td_pack_listDao;
 import com.water.water.pojo.CommRec;
 import com.water.water.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class CommRecService {
 
     @Autowired
     private CommRecDao commRecDao;
+
+    @Autowired
+    private td_pack_listDao td_pack_listDao;
+
 
     public CommRec inserttotd_comm(CommRec commRec){
         commRecDao.inserttotd_comm(commRec);
@@ -38,5 +43,10 @@ public class CommRecService {
         }catch (Exception e){
             return new Result(400);
         }
+    }
+
+    public String GetIp(CommRec commRec){
+        String TmnID = commRec.getTmnID();
+        return td_pack_listDao.GetIp(TmnID);
     }
 }

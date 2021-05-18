@@ -1,13 +1,11 @@
 package com.water.water.pojo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class td_Areas {
     private String AreaID;
     private String AreaName;
-    private String AreaLeader;
-    private Date AreaCreateDate;
-    private String AreaLeadPhone;
+    private Timestamp AreaCreateDate;
 
     public String getAreaID() {
         return AreaID;
@@ -25,27 +23,11 @@ public class td_Areas {
         AreaName = areaName;
     }
 
-    public String getAreaLeader() {
-        return AreaLeader;
-    }
-
-    public void setAreaLeader(String areaLeader) {
-        AreaLeader = areaLeader;
-    }
-
-    public Date getAreaCreateDate() {
+    public Timestamp getAreaCreateDate() {
         return AreaCreateDate;
     }
 
-    public void setAreaCreateDate(Date areaCreateDate) {
+    public void setAreaCreateDate(Timestamp areaCreateDate) {
         AreaCreateDate = areaCreateDate;
-    }
-
-    public String getAreaLeadPhone() {
-        return AreaLeadPhone;
-    }
-
-    public void setAreaLeadPhone(String areaLeadPhone) {
-        AreaLeadPhone = areaLeadPhone;
     }
 }

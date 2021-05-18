@@ -35,13 +35,13 @@ public class IndexService {
         String W_Upline = "";
         String W_Downline = "";
         for (Object key : params.keySet()){
-            System.out.println("key:=" + key + "  and value:=   " +  params.get(key)+"  \n");
+//            System.out.println("key:=" + key + "  and value:=   " +  params.get(key)+"  \n");
             if (key.equals("W_work")){
                 W_work = (params.get("W_work")).toString();
             }
             if (key.equals("defult")){
                 defult = (params.get("defult")).toString();
-                System.out.println("default:"+defult);
+//                System.out.println("default:"+defult);
                 if(defult.equals("601")){
                     W_Upline = "25";
                     W_Downline = "0";
@@ -85,7 +85,7 @@ public class IndexService {
                 message.setTmnID(TmnName);
             }catch (Exception e){
                 Rec_Detail message = new Rec_Detail();
-                message.setTmnID("false,warning");
+                message.setTmnID("控制柜名称");
                 allmessage.set(i,message);
             }
         }

@@ -66,7 +66,7 @@ public class ErrordealRecController {
 
     @RequestMapping(value = "api/dealerror")
     public Integer InsertToError(ErrordealRec errordealRec) throws Exception{
-        System.out.println(errordealRec);
+        //System.out.println(errordealRec);
 //        java.util.Date date = new java.util.Date();
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        //获取String类型的时间
@@ -75,6 +75,25 @@ public class ErrordealRecController {
 //        Date c_t = sdf.parse(createdate);
 //        errordealRec.setC_t(c_t);
         return errordealRecService.InsertToError(errordealRec);
+    }
+
+    //5.8-------------------------------------------------------------------------
+    @RequestMapping(value = "api/geterrorbytmnleader")
+    public List geterrorbytmnleader(@RequestParam String TmnID) throws Exception{
+        String tmnID = TmnID;
+
+        List errordata = errordealRecService.geterrorbytmnID(tmnID);
+        return errordata;
+    }
+
+    //5.9--------------------------------------------------------------------------
+    @RequestMapping(value = "api/getTerminalError")
+    public List getTerminalError(@RequestParam String TmnID) throws Exception{
+        String tmnID = TmnID;
+
+        List error = errordealRecService.geterrorbytmnID(tmnID);
+
+        return error;
     }
 }
 

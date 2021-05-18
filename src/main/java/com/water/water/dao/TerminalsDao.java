@@ -22,9 +22,7 @@ public interface TerminalsDao {
 
     String getTmnNameByTmnID(String tmnID);
 
-    List getTerminalsByUserName(String UserName);
-
-    List getTNameByUserName(String UserName);
+    //List getTerminalsByUserName(String UserName);
 
 //    没用了
 //    //更新新增用户分配所属控制柜

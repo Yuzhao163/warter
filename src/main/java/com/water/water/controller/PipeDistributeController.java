@@ -38,10 +38,10 @@ public class PipeDistributeController {
     }
     @RequestMapping(value = "api/getPipes")
     public List getPipeByArea(@RequestParam String AreaName) throws Exception{
-        String AreasName = AreaName;
         List Pipes = pipeDistributeService.getPipeByArea(AreaName);
         return Pipes;
     }
+
     @RequestMapping(value = "api/getTerminals")
     public List getTerminalsBypip(@RequestParam String PipID) throws Exception{
         String pipid = PipID;

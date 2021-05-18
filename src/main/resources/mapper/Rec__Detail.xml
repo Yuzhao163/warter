@@ -29,11 +29,11 @@
                 jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="getPipe" resultMap="BaseResultMap">
-        select TmnID,V_status,V_per,W_line from td_Rec_Detail;
+        select TmnID,V_status,V_per,W_line from td_rec_detail;
     </select>
 
     <select id="getRecByTmnID" resultMap="BaseResultMap">
-        select TmnID,V_status,V_per,W_line from td_Rec_Detail where TmnID =
+        select TmnID,V_status,V_per,W_line from td_rec_detail where TmnID =
         #{TmnID};
     </select>
 

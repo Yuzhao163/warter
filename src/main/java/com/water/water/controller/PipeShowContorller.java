@@ -25,7 +25,7 @@ public class PipeShowContorller {
     }
 
     @RequestMapping(value = "api/getpipebyusername")
-    public Map<String , Rec_Detail> getPipeByUserName(@RequestParam String UserName){
+    public Map<String , Rec_Detail> getPipeByUserName(@RequestParam String UserName) throws Exception{
         String userName = UserName;
         Map<String , Rec_Detail> pipedata = pipeShowService.getPipeByUserName(userName);
         return pipedata;

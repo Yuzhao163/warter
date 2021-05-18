@@ -123,6 +123,6 @@ Field 'id' doesn't have a default value] with root cause-->
 
     <!--5.17修改，为PipDistributeService同款方法添加一个SQL语句-->
     <select id="getPipByPipID" resultMap="BaseResultMap">
-        select PipName from td_pips where PipID = #{PipID}
+        select PipName,PipID from td_pips where PipID = #{PipID}
     </select>
 </mapper>

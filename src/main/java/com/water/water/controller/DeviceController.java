@@ -49,7 +49,7 @@ public class DeviceController {
     }
 
     @RequestMapping(value = "api/getTerminalsByUserName")
-    public List getTerminalsByUserName(@RequestParam String UserName){
+    public List getTerminalsByUserName(@RequestParam String UserName) throws Exception{
         return terminalsService.getTNameByUserName(UserName);
     }
 

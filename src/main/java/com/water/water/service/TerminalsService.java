@@ -32,6 +32,8 @@ public class TerminalsService {
     @Autowired
     private Td_User_RightDao td_user_rightDao;
 
+    ErrordealRecService errordealRecService = new ErrordealRecService();
+
 
     public List getTmnID(){
         return terminalsDao.getTmnID();
@@ -110,12 +112,6 @@ public class TerminalsService {
 //        return jsonArray;
 //    }
 
-    public List getTerminalsByUserName(String UserName){
-        return terminalsDao.getTerminalsByUserName(UserName);
-    }
-
-
-
     //获取控制柜--4.27/16.01--------5.2解决和管线分布的冲突----------------------------------------------
     // 没用了
     public List getTerminal() {
@@ -123,7 +119,19 @@ public class TerminalsService {
         return terminals;
     }
 
-
+    public List getTNameByUserName(String TmnLeader) throws Exception{
+        List terminal = new ArrayList();
+        UserManage userManage = userManageDao.getUserID(TmnLeader);
+        List tmnID = td_tmn_leaderDao.getRightByID(userManage.getUserID());
+        for(int i = 0; i < tmnID.size(); i++) {
+            td_Tmn_Leader td_tmn_leader = (td_Tmn_Leader) tmnID.get(i);
+            String tmnid = td_tmn_leader.getTmnID();
+            String tmnName = terminalsDao.getTmnNameByTmnID(tmnid);
+            Terminals tmn = terminalsDao.getTmnByTmnName(tmnName);
+            terminal.add(tmn);
+        }
+        return terminal;
+    }
     //  获取控制柜条数
     public Integer getTmnSize() {
         return terminalsDao.getTmnSize();
@@ -244,9 +252,6 @@ public class TerminalsService {
         return tmnList;
     }
 
-    public List getTNameByUserName(String UserName){
-        return terminalsDao.getTNameByUserName(UserName);
-    }
 
 //  选择具有管理控制柜权限的人员
     public List getTmnLeader() {

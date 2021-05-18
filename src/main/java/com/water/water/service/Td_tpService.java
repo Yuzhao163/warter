@@ -27,8 +27,19 @@ public class Td_tpService {
             td_Tp tp1 = (td_Tp)tp.get(j);
             String tmnid = tp1.getTmnID();
             com.water.water.pojo.Terminals Terminals_name = terminalsDao.getNameByID(tmnid);
-            String terminals = Terminals_name.getTmnName();
-            Terminals.add(terminals);
+            System.out.println(Terminals_name);
+            //System.out.println(Terminals_name.getTmnName());
+            try{
+                String terminals = Terminals_name.getTmnName();
+                Terminals.add(terminals);
+            }catch(Exception e){
+                System.out.println("错误是" + e);
+                String terminals = Terminals_name.getTmnName();
+                Terminals.add(terminals);
+            }
+//            }finally{
+//                System.err.println("重新尝试失败");
+//            }
         }
         return Terminals;
     }

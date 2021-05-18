@@ -19,36 +19,36 @@ Field 'id' doesn't have a default value] with root cause-->
 
 
     <select id="getAlltdById" resultMap="BaseResultMap">
-        select PipID,PTid from td_TP where TmnID = #{TmnId};
+        select PipID,PTid from td_tp where TmnID = #{TmnId};
     </select>
 
 
     <select id="getAlltdByPipID" resultMap="BaseResultMap">
-        select TmnID from td_TP where PipID = #{PipID} ORDER BY PTid;
+        select TmnID from td_tp where PipID = #{PipID} ORDER BY PTid;
     </select>
 
 <!--  根据管线id查询控制柜id并且要按照顺序排列  -->
     <select id="getAlltdByTmnID" resultMap="BaseResultMap">
-        select TmnID,PTid from td_TP where PipID = #{PipID} ORDER BY PTid;
+        select TmnID,PTid from td_tp where PipID = #{PipID} ORDER BY PTid;
     </select>
 
 <!--  根据管线控制柜id查找线内编号  -->
     <select id="getPtid" resultType="INTEGER">
-        select PTid from td_Tp where TmnID = #{TmnID} and PipID = #{PipID}
+        select PTid from td_tp where TmnID = #{TmnID} and PipID = #{PipID}
     </select>
 
 <!--  增加一条管线控制柜线内id数据  -->
     <insert id="insertPtid">
-        insert into td_TP(TmnID,PipID,PTid) values (#{TmnID},#{PipID},#{PTid})
+        insert into td_tp(TmnID,PipID,PTid) values (#{TmnID},#{PipID},#{PTid})
     </insert>
 
 <!--  线内id增加  -->
     <update id="ptidAdd">
-        update td_Tp set PTid=PTid+1 where (PipID = #{PipID} and PTid >= ${PTid})
+        update td_tp set PTid=PTid+1 where (PipID = #{PipID} and PTid >= ${PTid})
     </update>
 <!--  根据控制柜id查询管线id  -->
     <select id="getPIDByTID" resultType="String">
-        select PipID from td_TP where TmnID = #{TmnID}
+        select PipID from td_tp where TmnID = #{TmnID}
     </select>
 <!--  根据控制柜id删除一条数据  -->
     <delete id="deleteTP">

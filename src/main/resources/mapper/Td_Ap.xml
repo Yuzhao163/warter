@@ -24,8 +24,6 @@
         delete from td_ap where AreaID = #{AreaID}
     </delete>
 
-
-
     <!--5.9插入选中的分区ID和管线ID-->
     <insert id="addID">
     insert into td_ap(AreaID,PipID) values (#{AreaID},#{PipID});

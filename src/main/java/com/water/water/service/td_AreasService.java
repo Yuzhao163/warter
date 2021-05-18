@@ -98,15 +98,17 @@ public class td_AreasService {
             // 添加分区id、名称
             Integer ran_num = (int)(Math.random() * 999999999);
             String AreaID = Integer.toString(ran_num);
-            System.out.println(AreaID);
             while(ifexitAreaID(AreaID)){
                 AreaID = createRan();
             }
             td_areasDao.addArea(AreaID, areaName);
-            // 添加分区管理员信息  得到分区管理员id列表 循环遍历的同时进行分区管理员表的添加
-            for (int k = 0; k < areaLeader.size(); k++) {
-                td_area_leaderDao.addAreaLeader(areaLeader.get(k),AreaID);
+            if (areaLeader.get(0)!=-1) {
+                // 添加分区管理员信息  得到分区管理员id列表 循环遍历的同时进行分区管理员表的添加
+                for (int k = 0; k < areaLeader.size(); k++) {
+                    td_area_leaderDao.addAreaLeader(areaLeader.get(k),AreaID);
+                }
             }
+
             return 200;
         }
     }
@@ -144,22 +146,27 @@ public class td_AreasService {
     public Integer modifyArea(String areaID, String areaName, List<Integer> areaLeader) {
         // 修改分区名称 修改分区管理员表的管理员id
         String beareaName = td_areasDao.getNameByID(areaID);
+//        System.out.println("areaLeader"+areaLeader);
         if(!areaName.equals(beareaName)) {
             if(td_areasDao.getAreaNameByName(areaName)!=null) {
                 // 分区名称存在 不能修改
                 return  201;
             } else {
                 td_areasDao.modifyAreaNameByID(areaID, areaName);
-                for (int i = 0; i < areaLeader.size(); i++) {
-                    td_area_leaderDao.deleteLeader(areaID);
-                    td_area_leaderDao.addAreaLeader(areaLeader.get(i),areaID);
+                td_area_leaderDao.deleteLeader(areaID);
+                if (areaLeader.get(0)!=-1) {
+                    for (int i = 0; i < areaLeader.size(); i++) {
+                        td_area_leaderDao.addAreaLeader(areaLeader.get(i),areaID);
+                    }
                 }
                 return 200;
             }
         } else {
-            for (int i = 0; i < areaLeader.size(); i++) {
-                td_area_leaderDao.deleteLeader(areaID);
-                td_area_leaderDao.addAreaLeader(areaLeader.get(i),areaID);
+            td_area_leaderDao.deleteLeader(areaID);
+            if (areaLeader.get(0)!=-1) {
+                for (int i = 0; i < areaLeader.size(); i++) {
+                    td_area_leaderDao.addAreaLeader(areaLeader.get(i),areaID);
+                }
             }
             return 200;
         }
@@ -167,66 +174,13 @@ public class td_AreasService {
 
     public Integer deleteArea(String areaID) {
         td_areasDao.deleteArea(areaID);
-        td_apDao.clearAreaID(areaID);
+        td_apDao.clearArea(areaID);
 
         if (td_area_leaderDao.getUIDByAID(areaID).size()!=0) {
             td_area_leaderDao.deleteLeader(areaID);
         }
         return 200;
     }
-
-
-
-
-
-//    public List test111(Integer page, Integer size) {
-//        if (page != null && size != null){
-//            page = (page - 1) * size;
-//        }
-//
-//        // 这里创建一个前端需要的jsonObject对象返回
-//        // 存放分区数据的列表 AreaList
-//        List<JSONObject> AreaLists = new ArrayList<JSONObject>();
-//        List<JSONObject> userList = new ArrayList<JSONObject>();
-//        List AreaList = td_areasDao.getAllAreas(page, size);
-//        for (int i=0; i<AreaList.size(); i++) {
-//            JSONObject jsonObject = new JSONObject();
-//            td_Areas Area = (td_Areas)AreaList.get(i);
-//            String AreaID = Area.getAreaID();
-//            String AreaName = Area.getAreaName();
-//            Date CreateTime = Area.getAreaCreateDate();
-//            jsonObject.put("AreaID",AreaID);
-//            jsonObject.put("AreaName", AreaName);
-//            jsonObject.put("CreateTime",CreateTime);
-//            // 根据分区id获取用户id
-//            List UIDList = td_area_leaderDao.getUIDByAID(AreaID);
-//            userList.clear();
-//            for (int j=0; j<UIDList.size(); j++) {
-//                // 根据用户id查找用户名称
-//                td_Area_Leader UID = (td_Area_Leader)UIDList.get(j);
-//                Integer userID = UID.getLeader();
-//                UserManage userManage = userManageDao.getUserByID(userID);
-//                String userName = userManage.getUserName();
-//                String MoPhone = userManage.getMoPhone();
-//                System.out.println("===="+userName);
-//                // 再根据用户id获取用户名称
-//                JSONObject user = new JSONObject();
-//                user.put("userID",userID);
-//                user.put("userName",userName);
-//                if (MoPhone!=null){
-//                    user.put("MoPhone",MoPhone);
-//                }  else {
-//                   user.put("MoPhone","无");
-//                }
-//                userList.add(user);
-//            }
-//            jsonObject.put("AreaLeader",userList);
-//            AreaLists.add(i,jsonObject);
-//            System.out.println(userList);
-//        }
-//        System.out.println(AreaLists);
-//        return AreaLists;
-//    }
 
 
 }

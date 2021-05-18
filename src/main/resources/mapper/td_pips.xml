@@ -36,10 +36,10 @@ Field 'id' doesn't have a default value] with root cause-->
         select PipName from td_pips where PipID = #{PipID}
     </select>
 
-    <!--根据管线查区域-->
-    <select id="getAreasIdByPips" resultMap="BaseResultMap">
-        select AreaID from td_pips where PipID=#{PipID};
-    </select>
+<!--    &lt;!&ndash;根据管线查区域&ndash;&gt;-->
+<!--    <select id="getAreasIdByPips" resultMap="BaseResultMap">-->
+<!--        select AreaID from td_pips where PipID=#{PipID};-->
+<!--    </select>-->
 
     <!--    返回全部管线信息-->
     <select id="getPipList" resultMap="BaseResultMap">
@@ -74,7 +74,7 @@ Field 'id' doesn't have a default value] with root cause-->
 </insert>
 
     <!--5.9根据管线名称查询是否存在同名管线-->
-    <select id="ifSameNamePip" resultMap="BaseResultMap">
+    <select id="ifSameNamePip" resultType="String">
     select * from td_pips where PipName = #{PipName};
 </select>
 

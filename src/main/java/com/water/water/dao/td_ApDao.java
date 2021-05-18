@@ -12,7 +12,7 @@ public interface td_ApDao {
 
     List getAIDByPID(String PipID);
 
-    Integer clearAreaID(String AreaID);
+    Integer clearArea(String AreaID);
 
 
     //5.9插入选中的管线ID和分区ID

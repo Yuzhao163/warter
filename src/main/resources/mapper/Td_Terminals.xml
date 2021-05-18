@@ -13,7 +13,6 @@
         <result column="ConPont2" property="ConPont2" jdbcType="VARCHAR"/>
         <result column="ConPont3" property="ConPont3" jdbcType="VARCHAR"/>
         <result column="TmnDesc" property="TmnDesc" jdbcType="VARCHAR"/>
-        <result column="TmnLeader" property="TmnLeader" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getTmnID" resultMap="BaseResultMap">
         select TmnID from td_terminals;
@@ -30,8 +29,8 @@
 
 <!--    添加一个控制柜到表中-->
     <insert id="addTmn">
-        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,ConPont1,ConPont2,ConPont3,TmnDesc,TmnLeader)
-                values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc},#{TmnLeader})
+        insert into td_terminals(TmnId,TmnName,U1TmnID,U2TmnID,D1TmnID,D2TmnID,ConPont1,ConPont2,ConPont3,TmnDesc)
+                values (#{TmnId},#{TmnName},#{U1TmnID},#{U2TmnID},#{D1TmnID},#{D2TmnID},#{ConPont1},#{ConPont2},#{ConPont3},#{TmnDesc})
     </insert>
 
 <!--    根据控制柜id删除控制柜-->
@@ -55,11 +54,11 @@
         select * from td_terminals where TmnLeader = #{UserName};
     </select>
 
+
+
     <select id="getTNameByUserName" resultMap="BaseResultMap">
         select TmnName from td_terminals where TmnLeader =#{UserName};
     </select>
-
-
 <!--  修改控制柜管理员名称  -->
     <update id="updateTmnLeader">
         update td_terminals set TmnLeader = #{tmnLeader} where TmnLeader = #{beforeName};

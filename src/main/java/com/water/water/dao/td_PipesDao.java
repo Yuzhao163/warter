@@ -16,7 +16,7 @@ public interface td_PipesDao {
 
     String getPipNameByPipID(String pipID);
 
-    td_PIPs getAreasIdByPips(String PipsID);
+//    td_PIPs getAreasIdByPips(String PipsID);
 
 //  修改管线管理员名称和电话
     Integer updatePipLeader(String pipLeader, String pipLeadPhone, String beforeName);
@@ -34,7 +34,7 @@ public interface td_PipesDao {
     Integer addPips(@Param("PipID") String PipID, @Param("PipName") String PipName);
 
     //5.9根据管线名称查询是否存在同名管线
-    Integer ifSameNamePip(String PipName);
+    String ifSameNamePip(String PipName);
 
     //5.9判断在数据库中是否存在相同的PipID
     String getByPipId(String pipID);

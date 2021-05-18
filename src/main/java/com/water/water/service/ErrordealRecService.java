@@ -75,10 +75,10 @@ public class ErrordealRecService {
             String TmnName = terminals.getTmnName();
             td_Tp tp = td_tpDao.getAlltdById(TmnId);
             String PipId = tp.getPipID();
-            td_PIPs td_pips = td_PipesDao.getAreasIdByPips(PipId);
-            String areaID = td_pips.getAreaID();
-            td_Areas td_areas = td_areasDao.getAreaNameByAreaID(areaID);
-            String AreaName = td_areas.getAreaName();
+//            td_PIPs td_pips = td_PipesDao.getAreasIdByPips(PipId);
+//            String areaID = td_pips.getAreaID();
+//            td_Areas td_areas = td_areasDao.getAreaNameByAreaID(areaID);
+//            String AreaName = td_areas.getAreaName();
             Integer PTid = tp.getPTid();
             error_connection.setERDId(ERDId);
             error_connection.setERId(ERId);
@@ -91,7 +91,7 @@ public class ErrordealRecService {
             error_connection.setTmnName(TmnName);
             error_connection.setPipId(PipId);
             error_connection.setPTid(PTid);
-            error_connection.setAreaName(AreaName);
+//            error_connection.setAreaName(AreaName);
             list.add(error_connection);
         }
         return list;

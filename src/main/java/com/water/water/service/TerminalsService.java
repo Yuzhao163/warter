@@ -93,22 +93,9 @@ public class TerminalsService {
             String PipName = "";
             String AreaID = "";
             String AreaName = "";
-//          还需要显示控制柜所在的分区和管线
-            // 获得管线控制柜的管线id和名称
-//            td_Tp tp = (td_Tp)td_tpDao.getAlltdByTmnID(TmnID).get(0);
-//            System.out.println(td_tpDao.getPIDByTID(TmnID));
-//            List PIDList = td_tpDao.getPIDByTID(TmnID);
-            PipID = td_tpDao.getPIDByTID(TmnID);
-//          管线不为空时候才能输出
-//            if (PIDList.size() != 0) {
-////                System.out.println(PIDList.get(0));
-//                td_Tp tp = (td_Tp)PIDList.get(0);
-//                PipID = tp.getPipID();
-////                System.out.println(PipID);
-//            }
-//            System.out.println();
-            PipName = td_pipesDao.getPipNameByPipID(PipID);
 
+            PipID = td_tpDao.getPIDByTID(TmnID);
+            PipName = td_pipesDao.getPipNameByPipID(PipID);
             List AIDList = td_apDao.getAIDByPID(PipID);
             if (AIDList.size() != 0) {
                 td_Ap ap = (td_Ap)AIDList.get(0);
@@ -118,7 +105,6 @@ public class TerminalsService {
             if (AreaName == "") {
                 AreaName = "null";
             }
-//            System.out.println("AreaName"+AreaName);
             JSONObject item = jsonArray.getJSONObject(i);
             item.put("pipID",PipID);
             item.put("pipName",PipName);
@@ -128,11 +114,11 @@ public class TerminalsService {
             item.put("u2TmnName",U2TmnName);
             item.put("d1TmnName",D1TmnName);
             item.put("d2TmnName",D2TmnName);
-
             // 获得控制柜管理人员的名字并加入到json对象中
             JSONObject tmnleader = new JSONObject();
             List UIDList = td_tmn_leaderDao.getUIDByTID(TmnID);
             userList.clear();
+
             for (int j = 0; j < UIDList.size(); j++) {
                 td_Tmn_Leader UID = (td_Tmn_Leader)UIDList.get(j);
                 Integer userID = UID.getLeader();
@@ -153,7 +139,6 @@ public class TerminalsService {
             }
             item.put("TmnLeader",userList);
         }
-        System.out.println(jsonArray);
         return jsonArray;
     }
 
@@ -209,7 +194,6 @@ public class TerminalsService {
     }
 
     public List getAreas() {
-        System.out.println(td_areasDao.getAreas());
         return td_areasDao.getAreas();
     }
 
@@ -263,8 +247,6 @@ public class TerminalsService {
            userManage.setUserName(userName);
            userNIDList.add(i,userManage);
         }
-        System.out.println(userNIDList);
-
         return userNIDList;
     }
 
@@ -284,7 +266,6 @@ public class TerminalsService {
             Integer maxid = terminalsDao.getMaxID()+1;
             tmnID = maxid.toString();
         }
-
 //      将控制柜信息插入
         Terminals tmn = new Terminals();
         tmn.setTmnId(tmnID);
@@ -292,7 +273,6 @@ public class TerminalsService {
         if (U1TmnID!=null) {
             tmn.setU1TmnID(U1TmnID);
         }
-        System.out.println("是空吗"+tpa.getD1TmnID().length());
         if (tpa.getD1TmnID()!=null||tpa.getD1TmnID().equals("")) {
             tmn.setD1TmnID(tpa.getD1TmnID());
         } else {
@@ -345,7 +325,6 @@ public class TerminalsService {
                 // 找到上一控制柜的下一控制柜 将其修改为当前控制柜（这里要对数据库中的数据进行操作）
                 terminalsDao.setD1TmnID(U1TmnID,tmnID);
                 // 获取上一个控制柜的线内编号+1
-                System.out.println(pipID+"aaaaaa"+U1TmnID);
                 ptid = td_tpDao.getPtid(U1TmnID,pipID)+1;
                 //  对控制柜进行插入
                 terminalsDao.addTmn(tmn);
@@ -374,7 +353,7 @@ public class TerminalsService {
     }
     // 添加管理控制柜用户
     public Integer addTmnLeader(List<Integer> TmnLeader,String tmnID) {
-        if (TmnLeader.size() != 0) {
+        if (TmnLeader.get(0) != -1) {
             for (int i = 0; i < TmnLeader.size(); i++) {
                 td_tmn_leaderDao.addTmnLeader(TmnLeader.get(i),tmnID);
             }
@@ -401,20 +380,14 @@ public class TerminalsService {
                 // 即存在上一控制柜又存在下一控制柜(中间控制柜)
                 // （*修改上一控制柜的下一控制柜 以及 下一控制柜的上一控制柜）
                 // 对上一控制柜和下一控制柜的信息进行修改
-//                Terminals beTmn = (Terminals)terminalsDao.getTmnByID(beTmnID).get(0);
-//                beTmn.setD1TmnID(neTmnID);
-//                Terminals neTmn = (Terminals)terminalsDao.getTmnByID(neTmnID).get(0);
-//                neTmn.setU1TmnID(beTmnID);
                 // 设置上一控制柜的下一控制柜id
                 terminalsDao.setD1TmnID(beTmnID,neTmnID);
                 // 设置下一控制柜的上一控制柜id
                 terminalsDao.setU1TmnID(neTmnID,beTmnID);
                 // 管线控制柜表删除该控制柜并修改其他控制柜线内位置（不考虑交叉）
                 td_Tp PipIDList = (td_Tp)(td_tpDao.getTpByTID(tmnID).get(0));
-//                System.out.println("td_tplist"+PipIDList);
                 String PipID = PipIDList.getPipID();
                 Integer PTid = PipIDList.getPTid();
-//                System.out.println("PIPID"+PipID+"ptid"+PTid);
                 // 将管线内其他控制柜线内修改好
                 td_tpDao.ptidMinus(PipID,PTid);
                 // 删除管线控制柜中该控制柜信息
@@ -422,19 +395,13 @@ public class TerminalsService {
             } else {
                 // 存在上一控制柜 不存在下一控制柜（最后一个位置）
                 // 把删除控制柜的后一控制柜置空
-//                Terminals beTmn = (Terminals)terminalsDao.getTmnByID(beTmnID).get(0);
-//                beTmn.setD1TmnID(null);
                 terminalsDao.setD1TmnID(beTmnID,null);
-
                 // 最后一个控制柜 管线控制柜表直接删除数据即可
                 td_tpDao.deleteTP(tmnID);
             }
         } else if (!neTmnID.equals("")) {
             // 不存在上一控制柜存在下一控制柜（第一个位置）
             // 把下一控制柜的前一控制柜置空
-//                Terminals neTmn = (Terminals)terminalsDao.getTmnByID(neTmnID).get(0);
-//                neTmn.setU1TmnID(null);
-//                System.out.println(neTmn);
             terminalsDao.setU1TmnID(neTmnID,null);
             // 修改管线控制柜
             td_Tp PipIDList = (td_Tp)(td_tpDao.getTpByTID(tmnID).get(0));
@@ -452,12 +419,13 @@ public class TerminalsService {
 
         // 这里还要删除异常展示表的异常（两个表），控制柜没有了异常自然也就没有了（等会做）
         // packlist里面还有tmnid
-
+//        td_pack_list.deleteByTmnID(tmnID);
         // 删除控制柜管理员表的管理员id
         td_tmn_leaderDao.deleteTmnLeader(tmnID);
-
         // 删除控制柜
         if (terminalsDao.deleteTmnByID(tmnID)==1) {
+            // 删除控制柜的同时 删除packlist里的id
+            // td_packlist.deleteByTmnID(tmnID);
             return 1;
         } else {
             return 0;
@@ -481,9 +449,9 @@ public class TerminalsService {
         // 判断
         // 修改控制柜名称
         if (!tpa.getTmnName().equals(betmn.getTmnName())) {
-            System.out.println("这个控制柜的名称没有修改");
+            //这个控制柜的名称没有修改
             if(existname(tpa.getTmnName())==1) {
-                System.out.println("这个控制柜名字已经存在");
+                //这个控制柜名字已经存在
                 return 201;
             }
         }
@@ -560,7 +528,6 @@ public class TerminalsService {
             } else {
                 // 改到中间或最后
                 ptid = td_tpDao.getPtid(tpa.getU1TmnID(),tpa.getPipID())+1;
-                System.out.println("要插入再第几个位置："+ptid);
                 td_tpDao.ptidAdd(tpa.getPipID(),ptid);
                 td_tpDao.insertPtid(TmnID,tpa.getPipID(),ptid);
 
@@ -573,10 +540,6 @@ public class TerminalsService {
             terminalsDao.setD1TmnID(beTmnID,neTmnID);
             // 设置下一控制柜的上一控制柜id
             terminalsDao.setU1TmnID(neTmnID,beTmnID);
-
-            System.out.println("ptid"+ptid);
-            System.out.println("改后控制柜"+tpa);
-            System.out.println("要插入在这个控制柜之前"+firstTmnID);
             // 本控制柜
             terminalsDao.setU1TmnID(TmnID,tpa.getU1TmnID());
             if (ptid==1){
@@ -597,7 +560,6 @@ public class TerminalsService {
         terminalsDao.updateTmnByid(TmnID,tpa.getTmnName(),tpa.getConPont1(),tpa.getConPont2(),
                 tpa.getConPont3(),tpa.getTmnDesc());
         // 分区管线控制柜位置均未修改 什么都不做
-        System.out.println("修改之后的控制柜信息"+terminalsDao.getTmnByID(TmnID));
         // 管理人员的修改 直接先删除后添加
         td_tmn_leaderDao.deleteTmnLeader(TmnID);
         if(TmnLeader.size()!=0) {

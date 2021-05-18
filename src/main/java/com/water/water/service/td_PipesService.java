@@ -31,9 +31,9 @@ public class td_PipesService {
         return td_pipesDao.getPips();
     }
 
-    td_PIPs getAreasIdByPips(String PipsID) {
-        return td_pipesDao.getAreasIdByPips(PipsID);
-    }
+//    td_PIPs getAreasIdByPips(String PipsID) {
+//        return td_pipesDao.getAreasIdByPips(PipsID);
+//    }
 
     public Integer getPipSize() {return td_pipesDao.getPipSize();}
 
@@ -49,14 +49,10 @@ public class td_PipesService {
             JSONObject jsonObject = new JSONObject();
             td_PIPs Pip = (td_PIPs)PipList.get(i);
             String PipID = Pip.getPipID();
-//            String PipName = Pip.getPipName();
-//            String PipDesc = Pip.getPipDesc();
-//            Timestamp PipCreateTime = Pip.getPipCreateDate();
             jsonObject.put("PipID",Pip.getPipID());
             jsonObject.put("PipName",Pip.getPipName());
             jsonObject.put("PipDesc",Pip.getPipDesc());
             jsonObject.put("PipCreateTime",Pip.getPipCreateDate());
-//            jsonObject.put("PipCreateTime",Pip.getPipCreateDate());
             // 根据管线id获取分区id
             List AIDList = td_apDao.getAIDByPID(PipID);
             String AreaID = null;
@@ -79,7 +75,6 @@ public class td_PipesService {
                 td_Pip_Leader UID = (td_Pip_Leader)UIDList.get(j);
                 Integer userID = UID.getLeader();
                 UserManage userManage = userManageDao.getUserByID(userID);
-                System.out.println(userManage);
                 String userName = userManage.getUserName();
                 String MoPhone = userManage.getMoPhone();
                 JSONObject user = new JSONObject();
@@ -144,18 +139,22 @@ public class td_PipesService {
 
         if(td_pipesDao.ifSameNamePip(PipName) != null){
             return 201;//名称重复，不能添加
-
         }else{
-            td_pipesDao.addPips(PipID,PipName);
 
+            td_pipesDao.addPips(PipID,PipName);
         }
 
-        //插入td_Ap表
-        td_apDao.addID(AreaID,PipID);
+        if (AreaID!=null) {
+            //插入td_Ap表
+            td_apDao.addID(AreaID,PipID);
+        }
 
-        //插入td_pip_leader表
-        for (int k = 0; k < PipLeader.size(); k++) {
-            td_pip_leaderDao.addPipLeader(PipLeader.get(k),PipID);
+
+        if (PipLeader.get(0)!=-1) {
+            //插入td_pip_leader表
+            for (int k = 0; k < PipLeader.size(); k++) {
+                td_pip_leaderDao.addPipLeader(PipLeader.get(k),PipID);
+            }
         }
         return 200;
     }
@@ -177,79 +176,122 @@ public class td_PipesService {
     public Integer updatePip(String pipID, String pipName, List<Integer> pipLeader, String areaID) {
         // 修改管线名称 修改分区管线表 修改管线管理员表的管理员id
         String name = td_pipesDao.getPipNameByPipID(pipID);
+
+
+        // 修改
+        // 是否修改管线名称
+        // 修改管线名称
+            // 判断管线名称是否存在
+            // 存在 返回201
+            // 不存在 修改名称
         if(!pipName.equals(name)) {
             if (td_pipesDao.getPipNameByName(pipName) != null) {
                 // 分区名称存在 不能修改
                 return 201;
-
             } else {
-                td_pipesDao.updatePips(pipID,pipName);
+                td_pipesDao.updatePips(pipID, pipName);
             }
-
-            //修改td_ap表
-            List areaid = td_apDao.getAIDByPID(pipID);
-
-            if (areaid.size() == 0) {
-                if (areaID == null) {
-
-                    td_apDao.addID("0", pipID);
-                } else {
-
-                    td_apDao.addID(areaID, pipID);
-                }
-            } else {
-                for (int i = 0; i < areaid.size(); i++) {
-                    if (areaID == null) {
-
-                        td_apDao.updateID("0", pipID);
-                    } else {
-
-                        td_apDao.updateID(areaID, pipID);
-                    }
-                }
-            }
-
-            //修改td_pip_leader表
-            td_pip_leaderDao.deletePip(pipID);
-
-            for (int i = 0; i < pipLeader.size(); i++) {
-                td_pip_leaderDao.addPipLeader(pipLeader.get(i), pipID);
-            }
-
-            return 200;
-        }else{
-            //修改td_ap表
-            List areaid = td_apDao.getAIDByPID(pipID);
-
-            if (areaid.size() == 0) {
-                if (areaID == null) {
-
-                    td_apDao.addID("0", pipID);
-                } else {
-
-                    td_apDao.addID(areaID, pipID);
-                }
-            } else {
-                for (int i = 0; i < areaid.size(); i++) {
-                    if (areaID == null) {
-
-                        td_apDao.updateID("0", pipID);
-                    } else {
-
-                        td_apDao.updateID(areaID, pipID);
-                    }
-                }
-            }
-
-            //修改td_pip_leader表
-            td_pip_leaderDao.deletePip(pipID);
-
-            for (int i = 0; i < pipLeader.size(); i++) {
-                td_pip_leaderDao.addPipLeader(pipLeader.get(i), pipID);
-            }
-
-            return 200;
         }
+
+        System.out.println("分区名称"+areaID);
+
+        // 修改后的分区为空 把先前的ap表中有这个分区的数据删除
+        if (areaID.equals("")||areaID==null) {
+            td_apDao.deletePip(pipID);
+        } else {
+            // 修改后的分区不为空 先判断原来的分区存不存在 存在就更新 不存在就插入
+            List areaid = td_apDao.getAIDByPID(pipID);
+            if (areaid.size() == 0) {
+                if (areaID != null) {
+                    td_apDao.addID(areaID, pipID);
+                }
+            } else {
+                for (int i = 0; i < areaid.size(); i++) {
+                    if (areaID == null) {
+                        td_apDao.deletePip(pipID);
+                    } else {
+                        td_apDao.updateID(areaID, pipID);
+                    }
+                }
+            }
+        }
+
+        //修改td_pip_leader表
+        td_pip_leaderDao.deletePip(pipID);
+        if (pipLeader.get(0)!=-1) {
+            for (int i = 0; i < pipLeader.size(); i++) {
+                td_pip_leaderDao.addPipLeader(pipLeader.get(i), pipID);
+            }
+        }
+
+
+        return 200;
+
+
+
+//            if(!pipName.equals(name)) {
+//            if (td_pipesDao.getPipNameByName(pipName) != null) {
+//                // 分区名称存在 不能修改
+//                return 201;
+//            } else {
+//                td_pipesDao.updatePips(pipID,pipName);
+//            }
+//
+//            //修改td_ap表
+//            List areaid = td_apDao.getAIDByPID(pipID);
+//            if (areaid.size() == 0) {
+//                if (areaID == null) {
+//                } else {
+//                    td_apDao.addID(areaID, pipID);
+//                }
+//            } else {
+//                for (int i = 0; i < areaid.size(); i++) {
+//                    if (areaID == null) {
+//                        td_apDao.deletePip(pipID);
+//                    } else {
+//                        td_apDao.updateID(areaID, pipID);
+//                    }
+//                }
+//            }
+//            //修改td_pip_leader表
+//            td_pip_leaderDao.deletePip(pipID);
+//            if (pipLeader.get(0)!=-1) {
+//                for (int i = 0; i < pipLeader.size(); i++) {
+//                    td_pip_leaderDao.addPipLeader(pipLeader.get(i), pipID);
+//                }
+//            }
+//
+//            return 200;
+//        }else{
+//            //修改td_ap表
+//            List areaid = td_apDao.getAIDByPID(pipID);
+//
+//            if (areaid.size() == 0) {
+//                if (areaID == null) {
+////                    td_apDao.addID("0", pipID);
+//                } else {
+//                    td_apDao.addID(areaID, pipID);
+//                }
+//            } else {
+//                for (int i = 0; i < areaid.size(); i++) {
+//                    if (areaID == null) {
+////                        td_apDao.updateID("0", pipID);
+//                        td_apDao.deletePip(pipID);
+//                    } else {
+//                        td_apDao.updateID(areaID, pipID);
+//                    }
+//                }
+//            }
+//            //修改td_pip_leader表
+//            td_pip_leaderDao.deletePip(pipID);
+//            if (pipLeader.get(0)!=-1) {
+//                for (int i = 0; i < pipLeader.size(); i++) {
+//                    td_pip_leaderDao.addPipLeader(pipLeader.get(i), pipID);
+//                }
+//            }
+//
+//            return 200;
+//        }
     }
 
 

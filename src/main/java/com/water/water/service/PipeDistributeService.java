@@ -21,12 +21,12 @@ public class PipeDistributeService {
     @Autowired
     private TerminalsDao terminalsDao;
 
-    public List getPipeByArea(String AreaName){
-        td_Areas Area = td_areasDao.getAreaIDByAreaName(AreaName);
-        String AreaID = Area.getAreaID();
-        List Pips = td_pipesDao.getPipsByAreaID(AreaID);
-        return Pips;
-    }
+//    public List getPipeByArea(String AreaName){
+//        td_Areas Area = td_areasDao.getAreaIDByAreaName(AreaName);
+//        String AreaID = Area.getAreaID();
+//        List Pips = td_pipesDao.getPipsByAreaID(AreaID);
+//        return Pips;
+//    }
 
     public Map<String,Map<String, List>> getPipe() {
         String AreaID = "1";

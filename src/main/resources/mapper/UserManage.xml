@@ -21,17 +21,17 @@
     <select id="getByUserManageName" resultMap="BaseResultMap">
         select
         UserID,UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,
-        DPTName from td_User where UserName = #{UserName};
+        DPTName from td_user where UserName = #{UserName};
     </select>
 
     <select id="getByusername" resultMap="BaseResultMap">
         select
         UserID,UserName,UserPswd,UClassID,Ustate,RegTime,MoPhone,RealName,
-        DPTName from td_User where UserName = #{UserName};
+        DPTName from td_user where UserName = #{UserName};
     </select>
 
     <select id="getAllUserManage" resultMap="BaseResultMap">
-        select UserID,UserName,RealName,UClassID,MoPhone,DPTName,RegTime from td_User;
+        select UserID,UserName,RealName,UClassID,MoPhone,DPTName,RegTime from td_user;
     </select>
 
     <insert id="insertTotd_user">
@@ -52,7 +52,7 @@
     </update>
 
     <select id="getUserMessageByName" resultMap="BaseResultMap">
-        select * from td_User where UserName = #{UserName};
+        select * from td_user where UserName = #{UserName};
     </select>
 
     <!--这一行可能没用-->

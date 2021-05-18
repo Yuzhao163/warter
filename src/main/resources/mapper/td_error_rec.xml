@@ -13,6 +13,7 @@
         <result column="if_deal" property="if_deal" jdbcType="VARCHAR"/>
         <result column="Time" property="Time" jdbcType="DATE"/>
         <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
+        <result column="Error_Position" property="Error_Position" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--对应的sql语句-->
@@ -46,5 +47,11 @@
     <update id="updateByTmnId">
         update td_error_rec set if_deal = '2' where TmnID = #{TmnId};
     </update>
+
+    <insert id="insertToNewError">
+        insert into td_error_rec(ERId,Error_Position,If_deal,TmnID)
+        VALUES
+        (#{ERId},#{Error_Position},#{If_deal},#{TmnId})
+    </insert>
 
 </mapper>

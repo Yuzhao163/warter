@@ -3,6 +3,8 @@ package com.water.water.service;
 import com.water.water.dao.DetailDao;
 import com.water.water.dao.IndexDao;
 import com.water.water.dao.TerminalsDao;
+import com.water.water.dao.td_error_recDao;
+import com.water.water.pojo.ErrordealRec;
 import com.water.water.pojo.Rec_Detail;
 import com.water.water.pojo.Terminals;
 import com.water.water.util.PrintClassName;
@@ -20,13 +22,119 @@ public class IndexService {
     private IndexDao indexDao;
     @Autowired
     private TerminalsDao terminalsDao;
+    @Autowired
+    private com.water.water.dao.td_error_recDao td_error_recDao;
 
     public List getAllMessage(){
         return indexDao.getAllMessage();
     }
 
     public List getMessageDesc(){
-        return indexDao.getMessageDesc();
+        ErrordealRec errordealRec = new ErrordealRec();
+        List allmessage = indexDao.getMessageDesc();
+        for (int i = 0;i<allmessage.size();i++){
+            try{
+                //Rec_Detail message = (Rec_Detail)allmessage.get(i);
+                Rec_Detail message = (Rec_Detail)allmessage.get(i);
+                String TmnID = message.getTmnID();
+                Short Errorme = 0;
+                Short W_line = message.getW_line();
+                Short V_status = message.getV_status();
+                Short B_status = message.getB_status();
+                Short F_volume = message.getF_Volume();
+                String errormessage = " ";
+                if(W_line > 90){
+                    Errorme = 4;
+                    errormessage = errormessage + ("水位高于百分之九十");
+                    if(V_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                    }
+                    if(B_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("油温异常");
+                    }
+                    if(F_volume > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("环境温度过高");
+                    }
+                }
+                else if(W_line > 70 && W_line <= 90){
+                    Errorme = 3;
+                    errormessage = errormessage + ("水位高于百分之七十");
+                    if(V_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                    }
+                    if(B_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("油温异常");
+                    }
+                    if(F_volume > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("环境温度过高");
+                    }
+                }else if(W_line > 50 && W_line <= 70){
+                    Errorme = 2;
+                    errormessage = errormessage + ("水位高于百分之五十");
+                    if(V_status > 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                        if(B_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("油温异常");
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("环境温度过高");
+                        }
+                    }else if(B_status > 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("油温异常");
+                        if(V_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("环境温度过高");
+                        }
+                    }else if(F_volume > 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("环境温度过高");
+                        if(V_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                        }
+                        if(B_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("油温异常");
+                        }
+                    }
+                }
+                if(Errorme > 0){
+                    errordealRec.setError_Position(errormessage);
+                    errordealRec.setTmnId(TmnID);
+                    errordealRec.setIf_deal("1");
+                    td_error_recDao.insertToNewError(errordealRec);
+                }
+                message.setSend_error(Errorme);
+                String TmnName;
+                if(TmnID == null){
+                    TmnName = "名字查询失败";
+                }else{
+                    Terminals terminals = terminalsDao.getNameByID(TmnID);
+                    TmnName = terminals.getTmnName();
+                }
+
+                message.setTmnID(TmnName);
+            }catch (Exception e){
+                Rec_Detail message = new Rec_Detail();
+                message.setTmnID("控制柜名称");
+                allmessage.set(i,message);
+            }
+        }
+        return allmessage;
     }
 
     public List getSelectMessage(Map params){
@@ -65,6 +173,7 @@ public class IndexService {
     }
 
     public List getSelectMessageByPage(Integer page,Integer size){
+        ErrordealRec errordealRec = new ErrordealRec();
         if (page != null && size != null){
             page = (page - 1) * size;
         }
@@ -74,6 +183,88 @@ public class IndexService {
                 //Rec_Detail message = (Rec_Detail)allmessage.get(i);
                 Rec_Detail message = (Rec_Detail)allmessage.get(i);
                 String TmnID = message.getTmnID();
+                Short Errorme = 0;
+                Short W_line = message.getW_line();
+                Short V_status = message.getV_status();
+                Short B_status = message.getB_status();
+                Short F_volume = message.getF_Volume();
+                String errormessage = " ";
+                if(W_line > 90){
+                    Errorme = 4;
+                    errormessage = errormessage + ("水位高于百分之九十");
+                    if(V_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                    }
+                    if(B_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("油温异常");
+                    }
+                    if(F_volume > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("环境温度过高");
+                    }
+                }
+                else if(W_line > 70 && W_line <= 90){
+                    Errorme = 3;
+                    errormessage = errormessage + ("水位高于百分之七十");
+                    if(V_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                    }
+                    if(B_status > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("油温异常");
+                    }
+                    if(F_volume > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("环境温度过高");
+                    }
+                }else if(W_line > 50 && W_line <= 70){
+                    Errorme = 2;
+                    errormessage = errormessage + ("水位高于百分之五十");
+                    if(V_status > 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                        if(B_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("油温异常");
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("环境温度过高");
+                        }
+                    }else if(B_status > 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("油温异常");
+                        if(V_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("环境温度过高");
+                        }
+                    }else if(F_volume > 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("环境温度过高");
+                        if(V_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                        }
+                        if(B_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("油温异常");
+                        }
+                    }
+                }
+                if(Errorme > 0){
+                    errordealRec.setError_Position(errormessage);
+                    errordealRec.setTmnId(TmnID);
+                    errordealRec.setIf_deal("1");
+                    td_error_recDao.insertToNewError(errordealRec);
+                }
+                message.setSend_error(Errorme);
                 String TmnName;
                 if(TmnID == null){
                     TmnName = "名字查询失败";

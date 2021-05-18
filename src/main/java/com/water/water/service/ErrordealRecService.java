@@ -300,6 +300,4 @@ public Integer InsertToError(ErrordealRec errordealRec){
         System.out.println(errorByTmnID);
         return errorByTmnID;
     }
-
-
 }

@@ -6,7 +6,7 @@
         <result column="PackageID" property="PackageID" jdbcType="BIGINT"/>
         <result column="TmnID" property="TmnID" jdbcType="VARCHAR"/>
         <result column="D_ID" property="D_ID" jdbcType="VARCHAR"/>
-        <result column="V_status" property="V_status" jdbcType="INTEGER"/>
+        <result column="V_status" property="V_status" jdbcType="SMALLINT"/>
         <result column="V_per" property="V_per" jdbcType="SMALLINT"/>
         <result column="W_line" property="W_line" jdbcType="SMALLINT"/>
         <result column="B_status" property="B_status" jdbcType="SMALLINT"/>

@@ -14,7 +14,7 @@ public class ErrordealRec {
     private String TmnName;
     private String PipId;
     private Integer PTid;
-    private String if_deal;
+    private String If_deal;
     private String Error_Position;
     private Date Time;
 
@@ -32,18 +32,18 @@ public class ErrordealRec {
                 ", TmnName='" + TmnName + '\'' +
                 ", PipId='" + PipId + '\'' +
                 ", PTid=" + PTid +
-                ", if_deal='" + if_deal + '\'' +
+                ", if_deal='" + If_deal + '\'' +
                 ", Error_Position='" + Error_Position + '\'' +
                 ", Time=" + Time +
                 '}';
     }
 
     public String getIf_deal() {
-        return if_deal;
+        return If_deal;
     }
 
-    public void setIf_deal(String if_deal) {
-        this.if_deal = if_deal;
+    public void setIf_deal(String If_deal) {
+        this.If_deal = If_deal;
     }
 
     public String getError_Position() {

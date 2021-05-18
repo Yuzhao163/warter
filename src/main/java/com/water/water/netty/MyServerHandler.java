@@ -123,7 +123,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
 //        recDetail.setPackageID(Long.parseLong(createdate));
             recDetail.setTmnID(stringbuffer[0]);
             recDetail.setD_ID(stringbuffer[1]);
-            recDetail.setV_status(Integer.parseInt(stringbuffer[6]));
+            recDetail.setV_status(Short.parseShort(stringbuffer[6]));
             recDetail.setV_per(Short.parseShort(stringbuffer[7]));
             recDetail.setW_line(Short.parseShort(stringbuffer[8]));
             recDetail.setB_status(Short.parseShort(stringbuffer[9]));
@@ -210,7 +210,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
             Long PackageID = rec_detail.getPackageID();
             String TmnID = rec_detail.getTmnID();
             String D_ID = rec_detail.getD_ID();
-            Integer V_Status = rec_detail.getV_status();
+            Short V_Status = rec_detail.getV_status();
             Short V_per = rec_detail.getV_per();
             Short W_line = rec_detail.getV_per();
             Short B_status = rec_detail.getV_per();

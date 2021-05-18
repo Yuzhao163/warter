@@ -9,7 +9,7 @@ public class Rec_Detail {
     private Integer Id;
     private String TmnID;
     private String D_ID;
-    private Integer V_status;
+    private Short V_status;
     private Short V_per;
     private Short W_line;
     private Short B_status;
@@ -122,11 +122,11 @@ public class Rec_Detail {
         D_ID = d_ID;
     }
 
-    public Integer getV_status() {
+    public Short getV_status() {
         return V_status;
     }
 
-    public void setV_status(Integer v_status) {
+    public void setV_status(Short v_status) {
         V_status = v_status;
     }
 

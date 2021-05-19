@@ -7,6 +7,15 @@ public class td_Areas {
     private String AreaName;
     private Timestamp AreaCreateDate;
 
+    @Override
+    public String toString() {
+        return "td_Areas{" +
+                "AreaID='" + AreaID + '\'' +
+                ", AreaName='" + AreaName + '\'' +
+                ", AreaCreateDate=" + AreaCreateDate +
+                '}';
+    }
+
     public String getAreaID() {
         return AreaID;
     }

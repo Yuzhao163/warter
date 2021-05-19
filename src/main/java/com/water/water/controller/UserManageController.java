@@ -100,4 +100,31 @@ public class UserManageController {
         List user = userManageService.getAllUser(UserName);
         return user;
     }
+
+    // 05.18 被忽视的个人信息部分
+    //  个人信息的修改功能
+//  根据id查询修改后的用户名是否重复
+    @ResponseBody
+    @RequestMapping(value = "api/checkUserName")
+    public Integer checkUserName(@RequestParam Integer userID,@RequestParam String userName) {
+        return userManageService.checkUserName(userID,userName);
+    }
+
+    //  根据用户id修改个人信息
+    @ResponseBody
+    @RequestMapping(value = "api/updateUserInfo")
+    public Integer updateUserInfo(UserManage userManage) {
+//      首先判断修改的用户名是否有重复
+        String userName = userManage.getUserName();
+        Integer userID = userManage.getUserID();
+//      用户名有重复不执行更新
+        if (userManageService.checkUserName(userID,userName)==201) {
+            return 201;
+        } else {
+//      用户名没有重复执行更新
+            System.out.println(userManage);
+
+            return userManageService.updateUserInfo(userManage);
+        }
+    }
 }

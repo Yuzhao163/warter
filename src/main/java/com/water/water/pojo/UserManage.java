@@ -15,6 +15,23 @@ public class UserManage {
     private String RealName;
     private String DPTName;
     private Timestamp ModTime;
+
+    @Override
+    public String toString() {
+        return "UserManage{" +
+                "UserID=" + UserID +
+                ", UserName='" + UserName + '\'' +
+                ", UserPswd='" + UserPswd + '\'' +
+                ", UClassID='" + UClassID + '\'' +
+                ", Ustate=" + Ustate +
+                ", RegTime=" + RegTime +
+                ", MoPhone='" + MoPhone + '\'' +
+                ", RealName='" + RealName + '\'' +
+                ", DPTName='" + DPTName + '\'' +
+                ", ModTime=" + ModTime +
+                '}';
+    }
+
     public UserManage() {
     }
 

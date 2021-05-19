@@ -506,4 +506,26 @@ public class UserManageService {
         // (userName));
         return userManageDao.getAllUser(userName);
     }
+
+
+    // 05.18 被忽视的个人信息部分
+    //lmh
+    //  判断修改后的用户名是否重复
+    public Integer checkUserName(Integer userID,String userName) {
+        //      将用户名与数据库中的不是该id的用户名进行比较
+        List result = userManageDao.checkUserName(userID,userName);
+        if (result.size() != 0) {
+            // 存在用户名 返回用户名存在状态码
+            return 201;
+        } else
+            return 200;
+    }
+
+    //  根据用户id修改个人信息
+    public Integer updateUserInfo(UserManage userManage) {
+        // 现在只需要对用户表进行更新
+                userManageDao.updateUserInfo(userManage);
+
+        return 200;
+    }
 }

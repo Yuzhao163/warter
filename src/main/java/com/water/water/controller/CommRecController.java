@@ -45,7 +45,13 @@ public class CommRecController {
     }
 
     @RequestMapping(value = "api/sendall")
-    public void sendall(Integer openorclose) throws Exception{
-        myServerHandler.sendall(openorclose);
+    public Result sendall(Integer openorclose) throws Exception{
+        try{
+            myServerHandler.sendall(openorclose);
+            return new Result(200);
+        }catch (Exception e){
+            System.out.println(e);
+            return new Result(400);
+        }
     }
 }

@@ -96,7 +96,8 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
                         //System.out.print(buffer_temp1);
                         //System.out.println
                         // ("buffer_temp1[]"+"第"+i+"个"+buffer_temp1);
-                        buffer_num = int2Binary.int2binary(buffer_temp1);
+                        buffer_num = int2Binary.int2binary(buffer_temp1 - 48);
+                        //buffer_num = int2Binary.int2binary(buffer_temp1 - 48);
                         buffer_nums = buffer_nums + buffer_num;
                         i++;
                     }
@@ -110,6 +111,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
                     //int result = Integer.parseInt("11111100", 2);
                     //System.out.println("第"+i+"次结果是：=" + result);
                     stringbuffer[k] = Integer.toString(result);
+                    System.out.println(stringbuffer);
                     k++;
                 }
             } catch (Exception e) {
@@ -282,10 +284,190 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
         }
     }
 
+
+    public void close() throws Exception{
+        for (String IP : ctxId.keySet()) {
+            ChannelHandlerContext ctx = ctxId.get(IP);
+            System.out.println("Value = " + ctx);
+            System.out.println("一键关阀进行中");
+            //CommRec commRec = commRecDao.SendOrder();
+//            String TmnID = commrec.getTmnID();
+//            String D_ID = commrec.getD_ID();
+//            //Integer TmnId = Integer.valueOf(TmnID);
+//            //Integer d_id = Integer.valueOf(D_ID);
+//            Integer W_work = commrec.getW_work();
+//            //Integer v_pre = commrec.getV_pre();
+//            Integer Ov_period = commrec.getOV_period();
+//            Integer OV_waterline= commrec.getOV_waterline();
+//            Integer OV_keeptime = commrec.getOV_keeptime();
+//            Integer CV_waterline = commrec.getCV_waterline();
+//            Integer V_actiontime = commrec.getV_actiontime();
+            //byte[] tmnid = intToByte.intToBytes(TmnId);
+            //byte[] d_iD = intToByte.intToBytes(d_id);
+            byte[] buff = new byte[22];
+            //buff[b] = TmnID;
+//            if(Integer.parseInt(TmnID) > 256){
+//                buff[0] = (byte)(Integer.parseInt(TmnID) >> 8);
+//                buff[1] = (byte)(Integer.parseInt(TmnID));
+//            }else{
+//                buff[0] = (byte)0;
+//                buff[1] = (byte)Integer.parseInt(TmnID);
+//            }
+//            buff[2] = (byte)Integer.parseInt(D_ID);
+//            buff[3] = (byte)(int)(W_work);
+//            buff[4] = (byte)0;
+//            if(Ov_period > 256){
+//                buff[5] = (byte)(Ov_period >> 8);
+//                buff[6] = (byte)(int)(Ov_period);
+//            }else{
+//                buff[5] = (byte)0;
+//                buff[6] = (byte)(int)(Ov_period);
+//            }
+//            if(OV_waterline > 256){
+//                buff[7] = (byte)(OV_waterline >> 8);
+//                buff[8] = (byte)(int)(OV_waterline);
+//            }else{
+//                buff[7] = (byte)0;
+//                buff[8] = (byte)(int)(OV_waterline);
+//            }
+//            if(OV_keeptime > 256){
+//                buff[9] = (byte)(OV_keeptime >> 8);
+//                buff[10] =  (byte)(int)(OV_keeptime);
+//            }else{
+//                buff[9] = (byte)0;
+//                buff[10] = (byte)(int)(OV_keeptime);
+//            }
+//            if(CV_waterline > 256){
+//                buff[11] = (byte)(CV_waterline >> 8);
+//                buff[12] = (byte)(int)(CV_waterline);
+//            }else{
+//                buff[11] = (byte)0;
+//                buff[12] = (byte)(int)(CV_waterline);
+//            }
+            //buff[13] = (byte)(int)(V_actiontime);
+            buff[0] = (byte)0;
+            buff[1] = (byte)0;
+            buff[2] = (byte)0;
+            buff[3] = (byte)0;
+            buff[4] = (byte)0;
+            buff[5] = (byte)0;
+            buff[6] = (byte)0;
+            buff[7] = (byte)0;
+            buff[8] = (byte)0;
+            buff[9] = (byte)0;
+            buff[10] = (byte)0;
+            buff[11] = (byte)0;
+            buff[12] = (byte)0;
+            buff[13] = (byte)0;
+            buff[14] = (byte)0;
+            buff[15] = (byte)0;
+            buff[16] = (byte)0;
+            buff[17] = (byte)0;
+            buff[18] = (byte)0;
+            buff[19] = (byte)0;
+            buff[20] = (byte)0;
+            buff[21] = (byte)0;
+            ByteBuf buffer = Unpooled.buffer();
+            buffer.writeBytes(buff);
+            ctx.writeAndFlush(buffer);
+        }
+    }
+
+    public void sendall(Integer openorclose) throws Exception{
+        for (String IP : ctxId.keySet()) {
+            ChannelHandlerContext ctx = ctxId.get(IP);
+            System.out.println("Value = " + ctx);
+            Integer V_pre = 0;
+            //0为关
+            V_pre = openorclose;
+            System.out.println("一键开关阀进行中");
+            //CommRec commRec = commRecDao.SendOrder();
+//            String TmnID = commrec.getTmnID();
+//            String D_ID = commrec.getD_ID();
+//            //Integer TmnId = Integer.valueOf(TmnID);
+//            //Integer d_id = Integer.valueOf(D_ID);
+//            Integer W_work = commrec.getW_work();
+//            //Integer v_pre = commrec.getV_pre();
+//            Integer Ov_period = commrec.getOV_period();
+//            Integer OV_waterline= commrec.getOV_waterline();
+//            Integer OV_keeptime = commrec.getOV_keeptime();
+//            Integer CV_waterline = commrec.getCV_waterline();
+//            Integer V_actiontime = commrec.getV_actiontime();
+            //byte[] tmnid = intToByte.intToBytes(TmnId);
+            //byte[] d_iD = intToByte.intToBytes(d_id);
+            byte[] buff = new byte[22];
+            //buff[b] = TmnID;
+//            if(Integer.parseInt(TmnID) > 256){
+//                buff[0] = (byte)(Integer.parseInt(TmnID) >> 8);
+//                buff[1] = (byte)(Integer.parseInt(TmnID));
+//            }else{
+//                buff[0] = (byte)0;
+//                buff[1] = (byte)Integer.parseInt(TmnID);
+//            }
+//            buff[2] = (byte)Integer.parseInt(D_ID);
+//            buff[3] = (byte)(int)(W_work);
+//            buff[4] = (byte)0;
+//            if(Ov_period > 256){
+//                buff[5] = (byte)(Ov_period >> 8);
+//                buff[6] = (byte)(int)(Ov_period);
+//            }else{
+//                buff[5] = (byte)0;
+//                buff[6] = (byte)(int)(Ov_period);
+//            }
+//            if(OV_waterline > 256){
+//                buff[7] = (byte)(OV_waterline >> 8);
+//                buff[8] = (byte)(int)(OV_waterline);
+//            }else{
+//                buff[7] = (byte)0;
+//                buff[8] = (byte)(int)(OV_waterline);
+//            }
+//            if(OV_keeptime > 256){
+//                buff[9] = (byte)(OV_keeptime >> 8);
+//                buff[10] =  (byte)(int)(OV_keeptime);
+//            }else{
+//                buff[9] = (byte)0;
+//                buff[10] = (byte)(int)(OV_keeptime);
+//            }
+//            if(CV_waterline > 256){
+//                buff[11] = (byte)(CV_waterline >> 8);
+//                buff[12] = (byte)(int)(CV_waterline);
+//            }else{
+//                buff[11] = (byte)0;
+//                buff[12] = (byte)(int)(CV_waterline);
+//            }
+            //buff[13] = (byte)(int)(V_actiontime);
+            buff[0] = (byte)0;
+            buff[1] = (byte)0;
+            buff[2] = (byte)0;
+            buff[3] = (byte)0;
+            buff[4] = (byte)(int)V_pre;
+            buff[5] = (byte)0;
+            buff[6] = (byte)0;
+            buff[7] = (byte)0;
+            buff[8] = (byte)0;
+            buff[9] = (byte)0;
+            buff[10] = (byte)0;
+            buff[11] = (byte)0;
+            buff[12] = (byte)0;
+            buff[13] = (byte)0;
+            buff[14] = (byte)0;
+            buff[15] = (byte)0;
+            buff[16] = (byte)0;
+            buff[17] = (byte)0;
+            buff[18] = (byte)0;
+            buff[19] = (byte)0;
+            buff[20] = (byte)0;
+            buff[21] = (byte)0;
+            ByteBuf buffer = Unpooled.buffer();
+            buffer.writeBytes(buff);
+            ctx.writeAndFlush(buffer);
+        }
+    }
+
     public void channelActive(CommRec commrec,String IP) throws Exception {
         ChannelHandlerContext ctx = ctxId.get(IP);
         //使用客户端发送10条数据 hello,server 编号
-        System.out.println("sss");
+        System.out.println("一键开阀进行中");
         //CommRec commRec = commRecDao.SendOrder();
         String TmnID = commrec.getTmnID();
         String D_ID = commrec.getD_ID();

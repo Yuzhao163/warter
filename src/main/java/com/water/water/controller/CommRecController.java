@@ -43,4 +43,9 @@ public class CommRecController {
         myServerHandler.channelActive(commRec,IP);
        return commRecService.SendOrder(commRec);
     }
+
+    @RequestMapping(value = "api/sendall")
+    public void sendall(Integer openorclose) throws Exception{
+        myServerHandler.sendall(openorclose);
+    }
 }

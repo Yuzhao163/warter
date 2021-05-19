@@ -137,43 +137,45 @@ public class ErrordealRecService {
             //String user = terminals.getTmnLeader();
             //获取当前控制柜的管理员
             List tmn_leader = td_tmn_leaderDao.getUIDByTID(TmnId);
+            String username = "";
             for(int j = 0;j < tmn_leader.size();j++){
                 td_Tmn_Leader tmnleader = (td_Tmn_Leader)tmn_leader.get(j);
                 Integer user = tmnleader.getLeader();
-                String username = userManageDao.getUNameByID(user);
-                String TmnName = terminals.getTmnName();
-                ErrordealRec errordealRec = new ErrordealRec();
-                td_Tp tp = td_tpDao.getAlltdById(TmnId);
-                String PipId = tp.getPipID();
-                Integer PTid = tp.getPTid();
-                //message.setTmnID(TmnName);
-                errordealRec.setUser(username);
-                errordealRec.setTmnId(TmnId);
-                errordealRec.setPipId(PipId);
-                errordealRec.setPTid(PTid);
-                errordealRec.setTmnName(TmnName);
-                errordealRec.setIf_deal(message.getIf_deal());
-                errordealRec.setError_Position(message.getError_Position());
-                errordealRec.setTime(message.getTime());
-                errordealRec.setTmnId(message.getTmnID());
-                errordealRec.setERId(message.getERId());
-                String if_deal = message.getIf_deal();
-                //if_deal如果已经处理过了就是2，如果未处理是1
-                if(if_deal.equals("1")){
-                    error.add(errordealRec);
-                }else{
-                    //由tmnID去td_errordeal_rec表中查找
-                    Short ERID = message.getERId();
-                    List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
-                    for(int k = 0;k < ErrorDeal.size();k++){
-                        ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(k);
-                        errordealRec.setException(errordeal.getException());
-                        errordealRec.setResult(errordeal.getResult());
-                        errordealRec.setUser(errordeal.getUser());
-                        errordealRec.setC_t(errordeal.getC_t());
-                    }
-                    error.add(errordealRec);
+                username = username + userManageDao.getUNameByID(user) + ";";
+
+            }
+            String TmnName = terminals.getTmnName();
+            ErrordealRec errordealRec = new ErrordealRec();
+            td_Tp tp = td_tpDao.getAlltdById(TmnId);
+            String PipId = tp.getPipID();
+            Integer PTid = tp.getPTid();
+            //message.setTmnID(TmnName);
+            errordealRec.setUser(username);
+            errordealRec.setTmnId(TmnId);
+            errordealRec.setPipId(PipId);
+            errordealRec.setPTid(PTid);
+            errordealRec.setTmnName(TmnName);
+            errordealRec.setIf_deal(message.getIf_deal());
+            errordealRec.setError_Position(message.getError_Position());
+            errordealRec.setTime(message.getTime());
+            errordealRec.setTmnId(message.getTmnID());
+            errordealRec.setERId(message.getERId());
+            String if_deal = message.getIf_deal();
+            //if_deal如果已经处理过了就是2，如果未处理是1
+            if(if_deal.equals("1")){
+                error.add(errordealRec);
+            }else{
+                //由tmnID去td_errordeal_rec表中查找
+                Short ERID = message.getERId();
+                List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
+                for(int k = 0;k < ErrorDeal.size();k++){
+                    ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(k);
+                    errordealRec.setException(errordeal.getException());
+                    errordealRec.setResult(errordeal.getResult());
+                    errordealRec.setUser(errordeal.getUser());
+                    errordealRec.setC_t(errordeal.getC_t());
                 }
+                error.add(errordealRec);
             }
         }
         return error;

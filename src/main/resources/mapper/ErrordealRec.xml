@@ -60,7 +60,11 @@
     </insert>
 
     <!--5.8-->
+<!--    <select id="getAllErrorByTmnID" resultMap="ErrordealRecMap">-->
+<!--        select * from td_errordeal_rec where TmnID = #{TmnID};-->
+<!--    </select>-->
+
     <select id="getAllErrorByTmnID" resultMap="ErrordealRecMap">
-        select * from td_errordeal_rec where TmnID = #{TmnID};
+        select * from td_errordeal_rec where Erid = #{Erid};
     </select>
 </mapper>

@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface td_pack_listDao {
     String GetIp(String TmnID);
+
+    void deleteByTmnID(String TmnID);
 }

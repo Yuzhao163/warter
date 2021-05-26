@@ -26,12 +26,29 @@ public class UserManageController {
 
     @Autowired
     UserManageService userManageService;
+    //5.19
+//    //通过用户名称搜索展示用户信息
+//    @RequestMapping(value = "api/staff")
+//    public List<UserManage> getAllUserManage() throws Exception{
+//        List<UserManage> user = userManageService.getAllUserManage();
+//        return user;
+//    }
+
     //通过用户名称搜索展示用户信息
     @RequestMapping(value = "api/staff")
-    public List<UserManage> getAllUserManage() throws Exception{
-        List<UserManage> user = userManageService.getAllUserManage();
+    public List<UserManage> getAllUserManage(String UserName,Integer page, Integer size) throws Exception{
+        List<UserManage> user = userManageService.getAllUserManage(UserName,page, size);
+        System.out.println("这是page"+page);
+        System.out.println("这是size"+size);
         return user;
     }
+
+    @RequestMapping(value = "api/getSize")
+    public Integer getCountNum(String UserName){
+        Integer num = userManageService.getCountNum(UserName);
+        return num;
+    }
+
     //删除员工数据
     @ResponseBody
     @RequestMapping(value = "api/delstaff")
@@ -100,4 +117,32 @@ public class UserManageController {
         List user = userManageService.getAllUser(UserName);
         return user;
     }
+
+    // 05.18 被忽视的个人信息部分
+    //  个人信息的修改功能
+//  根据id查询修改后的用户名是否重复
+    @ResponseBody
+    @RequestMapping(value = "api/checkUserName")
+    public Integer checkUserName(@RequestParam Integer userID,@RequestParam String userName) {
+        return userManageService.checkUserName(userID,userName);
+    }
+
+    //  根据用户id修改个人信息
+    @ResponseBody
+    @RequestMapping(value = "api/updateUserInfo")
+    public Integer updateUserInfo(UserManage userManage) {
+//      首先判断修改的用户名是否有重复
+        String userName = userManage.getUserName();
+        Integer userID = userManage.getUserID();
+//      用户名有重复不执行更新
+        if (userManageService.checkUserName(userID,userName)==201) {
+            return 201;
+        } else {
+//      用户名没有重复执行更新
+            System.out.println(userManage);
+
+            return userManageService.updateUserInfo(userManage);
+        }
+    }
+
 }

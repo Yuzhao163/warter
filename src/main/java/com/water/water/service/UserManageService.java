@@ -6,6 +6,7 @@ package com.water.water.service;
  */
 import com.water.water.dao.*;
 import com.water.water.pojo.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class UserManageService {
         return userManageDao.getByUserManageName(username);
     }
 
+    /*
+     *   插入员工数据
+     */
     /*
      *   插入员工数据
      */
@@ -174,9 +178,17 @@ public class UserManageService {
     }
 
     //获取所有员工信息
-    public List getAllUserManage(){
+    public List getAllUserManage(@Param(value="UserName") String UserName, Integer page, Integer size){
 //        System.out.println("这是Service层的输出："+userManageDao.getAllUserManage());
-        List allUserManage = userManageDao.getAllUserManage();
+
+        if (page != null && size != null){
+            page = (page - 1) * size;
+        }
+
+
+        //5.18
+        List allUserManage = userManageDao.getAllUserManage("%"+UserName+"%",page, size);
+        System.out.println("ZHESHIALLUSERMANAGE"+allUserManage);
         List UserManageRight = new ArrayList();
 
         for(int i = 0; i < allUserManage.size(); i++){
@@ -233,10 +245,11 @@ public class UserManageService {
 
             UserManageRight.add(userManageRight);
         }
-
+        System.out.println(UserManageRight);
         return UserManageRight;
 
     }
+
 
 
     /*
@@ -249,214 +262,229 @@ public class UserManageService {
         String origin_name = name_split[name_split.length - 1];//获取修改前名称
         String new_name = name_split[0];
 
-        //判断权限分配为0，清空所有权限
-        if(userRight.getRight_PP() == 0){
-            System.out.println("我要将您的权限全部清空");
+//        //判断权限分配为0，清空所有权限
+//        if(userRight.getRight_PP() == 0){
+//            System.out.println("我要将您的权限全部清空");
+//
+//            Integer userID = userRight.getUserID();//获取前端提交的UserID
+//            System.out.println("这是需要进行清空权限的userID"+userID);
+//
+//            td_User_Right pp = td_user_rightDao.getRight_PP(userID);//通过该UserID去td_user_right表中对应Right_PP
+//            Integer right_pp = pp.getRight_PP();
+//
+//            if(right_pp == 1) { //如果该人权限为分区管理员，则清空其分区管理员权限
+//                //用username做条件，删除其在td_area_leader表中所拥有的权限
+//                System.out.println("您删除分区权限的用户ID是"+userRight.getUserID());
+//
+//                td_area_leaderDao.deleteRight(userRight.getUserID());
+//
+//            }else if(right_pp == 2){//如果该人权限为管线管理员，则清空其管线管理员权限
+//                //用username做条件，删除其在td_pip_leader表中所拥有的权限
+//                System.out.println("您删除管线权限的用户ID是"+userRight.getUserID());
+//
+//                td_pip_leaderDao.deleteRight(userRight.getUserID());
+//
+//            }else if(right_pp == 3){//如果该人权限为控制柜管理员，则清空其控制柜管理员权限
+//                //用username做条件，删除其在td_tmn_leader表中所拥有的权限
+//                System.out.println("您删除控制柜权限的用户ID是"+userRight.getUserID());
+//
+//                td_tmn_leaderDao.deleteRight(userRight.getUserID());
+//            }
+//
+//
+////            Date date = new Date();//获取当前时间
+////            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////            String str = sdf.format(date);//时间存储为字符串
+////            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
+//
+//            UserManage userManage = new UserManage();
+//            userManage.setUserID(userRight.getUserID());
+//            userManage.setUserName(new_name);
+//            userManage.setUserPswd(userRight.getUserPswd());
+//            userManage.setUClassID(userRight.getUClassID());
+//            userManage.setUstate(userRight.getUstate());
+//            userManage.setRegTime(userRight.getRegTime());
+//            userManage.setMoPhone(userRight.getMoPhone());
+//            userManage.setRealName(userRight.getRealName());
+//            userManage.setDPTName(userRight.getDPTName());
+////            userManage.setModTime(now);
+//            userManage.setUstate(1);
+//
+//            userManageDao.updatetd_user(userManage);
+//
+//            //td_user_right表进行更新
+//            Integer rightpp = userRight.getRight_PP();
+//            UserManage user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
+//            Integer userid = user.getUserID();
+//            td_user_rightDao.updateUserRights(userid, rightpp);
+//
+//            return 200;
+
+        //5.18
+        //判断UClassID为3，该员工为职工管理员
+        if(Integer.parseInt(userRight.getUClassID()) == 3){
+            System.out.println("该员工权限为员工管理员");
 
             Integer userID = userRight.getUserID();//获取前端提交的UserID
-            System.out.println("这是需要进行清空权限的userID"+userID);
+            System.out.println("这是设置为员工管理员的userID"+userID);
 
-            td_User_Right pp = td_user_rightDao.getRight_PP(userID);//通过该UserID去td_user_right表中对应Right_PP
-            Integer right_pp = pp.getRight_PP();
-
-            if(right_pp == 1) { //如果该人权限为分区管理员，则清空其分区管理员权限
-                //用username做条件，删除其在td_area_leader表中所拥有的权限
-                System.out.println("您删除分区权限的用户ID是"+userRight.getUserID());
-
-                td_area_leaderDao.deleteRight(userRight.getUserID());
-
-            }else if(right_pp == 2){//如果该人权限为管线管理员，则清空其管线管理员权限
-                //用username做条件，删除其在td_pip_leader表中所拥有的权限
-                System.out.println("您删除管线权限的用户ID是"+userRight.getUserID());
-
-                td_pip_leaderDao.deleteRight(userRight.getUserID());
-
-            }else if(right_pp == 3){//如果该人权限为控制柜管理员，则清空其控制柜管理员权限
-                //用username做条件，删除其在td_tmn_leader表中所拥有的权限
-                System.out.println("您删除控制柜权限的用户ID是"+userRight.getUserID());
-
-                td_tmn_leaderDao.deleteRight(userRight.getUserID());
+//            td_User_Right pp = td_user_rightDao.getRight_PP(userID);//通过该UserID去td_user_right表中对应Right_PP
+//            Integer right_pp = pp.getRight_PP();
+            //得到被修改人员的UserID
+            Integer UID = userRight.getUserID();
+            //用这个UID去找这个员工原本的UClassID
+            UserManage userByID = userManageDao.getUserByID(UID);
+            String uclassID = userByID.getUClassID();
+            //用这个该员工原本的uclassID去判断应该去哪个表中删除权限
+            if(Integer.parseInt(uclassID) == 201){
+                td_area_leaderDao.deleteRight(UID);
+            } else if(Integer.parseInt(uclassID) == 202){
+                td_pip_leaderDao.deleteRight(UID);
+            } else if(Integer.parseInt(uclassID) == 203){
+                td_tmn_leaderDao.deleteRight(UID);
             }
 
-
-//            Date date = new Date();//获取当前时间
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String str = sdf.format(date);//时间存储为字符串
-//            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
-
-            UserManage userManage = new UserManage();
-            userManage.setUserID(userRight.getUserID());
-            userManage.setUserName(new_name);
-            userManage.setUserPswd(userRight.getUserPswd());
-            userManage.setUClassID(userRight.getUClassID());
-            userManage.setUstate(userRight.getUstate());
-            userManage.setRegTime(userRight.getRegTime());
-            userManage.setMoPhone(userRight.getMoPhone());
-            userManage.setRealName(userRight.getRealName());
-            userManage.setDPTName(userRight.getDPTName());
-//            userManage.setModTime(now);
-            userManage.setUstate(1);
-
-            userManageDao.updatetd_user(userManage);
-
-            //td_user_right表进行更新
-            Integer rightpp = userRight.getRight_PP();
-            UserManage user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
-            Integer userid = user.getUserID();
-            td_user_rightDao.updateUserRights(userid, rightpp);
-
-            return 200;
-        } else if(userRight.getRight_PP() == -1){//保留权限
-
-//            Date date = new Date();//获取当前时间
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String str = sdf.format(date);//时间存储为字符串
-//            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
-
-            UserManage userManage = new UserManage();
-            userManage.setUserID(userRight.getUserID());
-            userManage.setUserName(new_name);
-            userManage.setUserPswd(userRight.getUserPswd());
-            userManage.setUClassID(userRight.getUClassID());
-            userManage.setUstate(userRight.getUstate());
-            userManage.setRegTime(userRight.getRegTime());
-            userManage.setMoPhone(userRight.getMoPhone());
-            userManage.setRealName(userRight.getRealName());
-            userManage.setDPTName(userRight.getDPTName());
-//            userManage.setModTime(now);
-            userManage.setUstate(1);
-
-            userManageDao.updatetd_user(userManage);
-
-//            List arealist = td_area_leaderDao.showLeader(userRight.getUserID());
-//            List piplist = td_pip_leaderDao.showLeader(userRight.getUserID());
-//            List tmnlist = td_tmn_leaderDao.showLeader(userRight.getUserID());
+//            if(right_pp == 1) { //如果该人权限为分区管理员，则清空其分区管理员权限
+//                //用username做条件，删除其在td_area_leader表中所拥有的权限
+//                System.out.println("您删除分区权限的用户ID是"+userRight.getUserID());
 //
-//            System.out.println(arealist.size());
-//            System.out.println(piplist.size());
-//            System.out.println(tmnlist.size());
+//                td_area_leaderDao.deleteRight(userRight.getUserID());
 //
-//            if(arealist.size() != 0){
+//            }else if(right_pp == 2){//如果该人权限为管线管理员，则清空其管线管理员权限
+//                //用username做条件，删除其在td_pip_leader表中所拥有的权限
+//                System.out.println("您删除管线权限的用户ID是"+userRight.getUserID());
 //
-//                //td_areas表进行更新
-//                //修改td_area_leader中Leader为修改前名称的Leader为新名称
-////                td_area_leaderDao.updateLeader(new_name,origin_name);
-//                System.out.println("area已保留权限");
-//            }else if(piplist.size() != 0){
+//                td_pip_leaderDao.deleteRight(userRight.getUserID());
 //
-//                //td_pips表进行更新
-//                //修改td_pip_leader中Leader为修改前名称的Leader为新名称
-////                td_pip_leaderDao.updateLeader(new_name,origin_name);
-//                System.out.println("pip已保留权限");
-//            }else if(tmnlist.size() != 0){
+//            }else if(right_pp == 3){//如果该人权限为控制柜管理员，则清空其控制柜管理员权限
+//                //用username做条件，删除其在td_tmn_leader表中所拥有的权限
+//                System.out.println("您删除控制柜权限的用户ID是"+userRight.getUserID());
 //
-//                //修改td_terminlal_leader中Leader为修改前名称的Leader为新名称
-//                //td_terminals表进行更新
-////                td_tmn_leaderDao.updateLeader(new_name,origin_name);
-//                System.out.println("tmn已保留权限");
-//
+//                td_tmn_leaderDao.deleteRight(userRight.getUserID());
 //            }
 
+
+//            Date date = new Date();//获取当前时间
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String str = sdf.format(date);//时间存储为字符串
+//            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
+
+            UserManage userManage = new UserManage();
+            userManage.setUserID(userRight.getUserID());
+            userManage.setUserName(new_name);
+            userManage.setUserPswd(userRight.getUserPswd());
+            userManage.setUClassID(userRight.getUClassID());
+            userManage.setUstate(userRight.getUstate());
+            userManage.setRegTime(userRight.getRegTime());
+            userManage.setMoPhone(userRight.getMoPhone());
+            userManage.setRealName(userRight.getRealName());
+            userManage.setDPTName(userRight.getDPTName());
+//            userManage.setModTime(now);
+            userManage.setUstate(1);
+
+            userManageDao.updatetd_user(userManage);
+
+//            //td_user_right表进行更新
+//            Integer rightpp = userRight.getRight_PP();
+//            UserManage user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
+//            Integer userid = user.getUserID();
+//            td_user_rightDao.updateUserRights(userid, rightpp);
+
             return 200;
-
-        } else if((userRight.getAreaID() == null || userRight.getAreaID() == "")
-                && (userRight.getPipID() == null || userRight.getPipID() == "")
-                && (userRight.getTmnId() == null || userRight.getTmnId() == "")){
-            // 在usermanage表中更新员工信息
+        } //else if(userRight.getRight_PP() == -1){//保留权限
+        else if(Integer.parseInt(userRight.getUClassID()) == 201) {//保留权限
 //            Date date = new Date();//获取当前时间
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            String str = sdf.format(date);//时间存储为字符串
 //            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
 
-            UserManage userManage = new UserManage();
-            userManage.setUserID(userRight.getUserID());
-            userManage.setUserName(new_name);
-            userManage.setUserPswd(userRight.getUserPswd());
-            userManage.setUClassID(userRight.getUClassID());
-            userManage.setUstate(userRight.getUstate());
-            userManage.setRegTime(userRight.getRegTime());
-            userManage.setMoPhone(userRight.getMoPhone());
-            userManage.setRealName(userRight.getRealName());
-            userManage.setDPTName(userRight.getDPTName());
-//            userManage.setModTime(now);
-            userManage.setUstate(1);
+            //5.18拿该职工的UserID去查看其原先的UClassID
+            System.out.println("该员工权限为分区管理员");
 
-            userManageDao.updatetd_user(userManage);
+            Integer userID = userRight.getUserID();//获取前端提交的UserID
+            System.out.println("这是设置为分区管理员的userID" + userID);
 
-            //将之前所有的权限都给清空之后，赋予新的权限，这个权限没有选择具体的分区/管线/控制柜
-            //-----------------------------------------------------------------------------------------
+            //得到被修改人员的UserID
+            Integer UID = userRight.getUserID();
+            //用这个UID去找这个员工原本的UClassID
+            UserManage userByID = userManageDao.getUserByID(UID);
+            String uclassID = userByID.getUClassID();
 
-            td_area_leaderDao.deleteRight(userRight.getUserID());
+            //用这个该员工原本的uclassID去判断应该去哪个表中删除权限
+            if (Integer.parseInt(uclassID) == 201) {
+                td_area_leaderDao.deleteRight(UID);
+            } else if (Integer.parseInt(uclassID) == 202) {
+                td_pip_leaderDao.deleteRight(UID);
+            } else if (Integer.parseInt(uclassID) == 203) {
+                td_tmn_leaderDao.deleteRight(UID);
+            }
 
-            //-----------------------------------------------------------------------------------------
-
-            td_pip_leaderDao.deleteRight(userRight.getUserID());
-
-            //-----------------------------------------------------------------------------------------
-
-            td_tmn_leaderDao.deleteRight(userRight.getUserID());
-            //-----------------------------------------------------------------------------------------
-            //td_user_right表进行更新
-            Integer rightpp = userRight.getRight_PP();
-            UserManage user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
-            Integer userid = user.getUserID();
-            td_user_rightDao.updateUserRights(userid, rightpp);
-
-        } else {
-            System.out.println("修改用户权限呢");
-            //------------------------------------------------------------------------------------------
-            // 在usermanage表中更新员工信息
-//            Date date = new Date();//获取当前时间
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String str = sdf.format(date);//时间存储为字符串
-//            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
-
-            UserManage userManage = new UserManage();
-            userManage.setUserID(userRight.getUserID());
-            userManage.setUserName(new_name);
-            userManage.setUserPswd(userRight.getUserPswd());
-            userManage.setUClassID(userRight.getUClassID());
-            userManage.setUstate(userRight.getUstate());
-            userManage.setRegTime(userRight.getRegTime());
-            userManage.setMoPhone(userRight.getMoPhone());
-            userManage.setRealName(userRight.getRealName());
-            userManage.setDPTName(userRight.getDPTName());
-//            userManage.setModTime(now);
-            userManage.setUstate(1);
-
-            userManageDao.updatetd_user(userManage);
-
-            //-----------------------------------------------------------------------------------------
-
-            td_area_leaderDao.deleteRight(userRight.getUserID());
-            //-----------------------------------------------------------------------------------------
-
-            td_pip_leaderDao.deleteRight(userRight.getUserID());
-            //-----------------------------------------------------------------------------------------
-
-            td_tmn_leaderDao.deleteRight(userRight.getUserID());
-            //-----------------------------------------------------------------------------------------
-
-            //------------------------------------------------------------------------------------------
+            //因为UClassID为201，所以往td_area_Leader中插入新的数据
             //td_area_leader表进行更新
             String areaID = userRight.getAreaID();
 
-            //5.7通过新添加的用户的名称，查找其对应UserID
-            UserManage user = userManageDao.getUserID(userManage.getUserName());
-            Integer userID = user.getUserID();
-
-            if(areaID != null && areaID != ""){
+            //5.18通过新添加的用户的名称，查找其对应UserID
+            if (areaID != null && areaID != "") {
                 String[] areaSplit = areaID.split(",");
-                for(int i = 0; i < areaSplit.length; i++){
+                for (int i = 0; i < areaSplit.length; i++) {
                     //通过AreaID获取AreaLeader
 //                        td_areasDao.updateAreaLeader(new_name,areaSplit[i]);
                     //将新的权限插入td_area_leader表
-                    td_area_leaderDao.addAreaLeader(userID,areaSplit[i]);
+                    td_area_leaderDao.addAreaLeader(userID, areaSplit[i]);
                 }
             }
 
-            //------------------------------------------------------------------------------------------
-            //td_pip_leader表进行更新
+            //5.18更新td_user表
+            UserManage userManage = new UserManage();
+            userManage.setUserID(userRight.getUserID());
+            userManage.setUserName(new_name);
+            userManage.setUserPswd(userRight.getUserPswd());
+            userManage.setUClassID(userRight.getUClassID());
+            userManage.setUstate(userRight.getUstate());
+            userManage.setRegTime(userRight.getRegTime());
+            userManage.setMoPhone(userRight.getMoPhone());
+            userManage.setRealName(userRight.getRealName());
+            userManage.setDPTName(userRight.getDPTName());
+//            userManage.setModTime(now);
+            userManage.setUstate(1);
+
+            userManageDao.updatetd_user(userManage);
+
+
+            return 200;
+        }
+        else if(Integer.parseInt(userRight.getUClassID()) == 202){
+//        } else if((userRight.getAreaID() == null || userRight.getAreaID() == "")
+//                && (userRight.getPipID() == null || userRight.getPipID() == "")
+//                && (userRight.getTmnId() == null || userRight.getTmnId() == "")){
+//            // 在usermanage表中更新员工信息
+//            Date date = new Date();//获取当前时间
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String str = sdf.format(date);//时间存储为字符串
+//            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
+
+            //5.18拿该职工的UserID去查看其原先的UClassID
+            System.out.println("该员工权限为控制柜管理员");
+
+            Integer userID = userRight.getUserID();//获取前端提交的UserID
+            System.out.println("这是设置为分区管理员的userID" + userID);
+
+            //5.18得到被修改人员的UserID
+            Integer UID = userRight.getUserID();
+            //用这个UID去找这个员工原本的UClassID
+            UserManage userByID = userManageDao.getUserByID(UID);
+            String uclassID = userByID.getUClassID();
+
+            //5.18用这个该员工原本的uclassID去判断应该去哪个表中删除权限
+            if (Integer.parseInt(uclassID) == 201) {
+                td_area_leaderDao.deleteRight(UID);
+            } else if (Integer.parseInt(uclassID) == 202) {
+                td_pip_leaderDao.deleteRight(UID);
+            } else if (Integer.parseInt(uclassID) == 203) {
+                td_tmn_leaderDao.deleteRight(UID);
+            }
+
+            //5.18td_pip_leader表进行更新
             String pipeID = userRight.getPipID();
 
             if(pipeID != null && pipeID != ""){
@@ -467,8 +495,73 @@ public class UserManageService {
                 }
             }
 
+            UserManage userManage = new UserManage();
+            userManage.setUserID(userRight.getUserID());
+            userManage.setUserName(new_name);
+            userManage.setUserPswd(userRight.getUserPswd());
+            userManage.setUClassID(userRight.getUClassID());
+            userManage.setUstate(userRight.getUstate());
+            userManage.setRegTime(userRight.getRegTime());
+            userManage.setMoPhone(userRight.getMoPhone());
+            userManage.setRealName(userRight.getRealName());
+            userManage.setDPTName(userRight.getDPTName());
+//            userManage.setModTime(now);
+            userManage.setUstate(1);
+
+            userManageDao.updatetd_user(userManage);
+
+//            //将之前所有的权限都给清空之后，赋予新的权限，这个权限没有选择具体的分区/管线/控制柜
+//            //-----------------------------------------------------------------------------------------
+//
+//            td_area_leaderDao.deleteRight(userRight.getUserID());
+//
+//            //-----------------------------------------------------------------------------------------
+//
+//            td_pip_leaderDao.deleteRight(userRight.getUserID());
+//
+//            //-----------------------------------------------------------------------------------------
+//
+//            td_tmn_leaderDao.deleteRight(userRight.getUserID());
+//            //-----------------------------------------------------------------------------------------
+//            //td_user_right表进行更新
+//            Integer rightpp = userRight.getRight_PP();
+//            UserManage user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
+//            Integer userid = user.getUserID();
+//            td_user_rightDao.updateUserRights(userid, rightpp);
+            return 200;
+        } if(Integer.parseInt(userRight.getUClassID()) == 203){
+//        else {
+//            System.out.println("修改用户权限呢");
             //------------------------------------------------------------------------------------------
-            //td_tmn_leader表进行更新
+            // 在usermanage表中更新员工信息
+//            Date date = new Date();//获取当前时间
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String str = sdf.format(date);//时间存储为字符串
+//            Timestamp now = Timestamp.valueOf(str);//转换时间字符串为Timestamp
+
+
+            //5.18拿该职工的UserID去查看其原先的UClassID
+            System.out.println("该员工权限为控制柜管理员");
+
+            Integer userID = userRight.getUserID();//获取前端提交的UserID
+            System.out.println("这是设置为分区管理员的userID" + userID);
+
+            //5.18得到被修改人员的UserID
+            Integer UID = userRight.getUserID();
+            //5.18用这个UID去找这个员工原本的UClassID
+            UserManage userByID = userManageDao.getUserByID(UID);
+            String uclassID = userByID.getUClassID();
+
+            //5.18用这个该员工原本的uclassID去判断应该去哪个表中删除权限
+            if (Integer.parseInt(uclassID) == 201) {
+                td_area_leaderDao.deleteRight(UID);
+            } else if (Integer.parseInt(uclassID) == 202) {
+                td_pip_leaderDao.deleteRight(UID);
+            } else if (Integer.parseInt(uclassID) == 203) {
+                td_tmn_leaderDao.deleteRight(UID);
+            }
+
+            //5.18td_tmn_leader表进行更新
             String tmnID = userRight.getTmnId();
 
             if(tmnID != null && tmnID != ""){
@@ -478,17 +571,87 @@ public class UserManageService {
                     td_tmn_leaderDao.addTmnLeader(userID,tmnSplit[i]);
                 }
             }
-            //------------------------------------------------------------------------------------------
-            //td_user_right表进行更新
-            Integer rightpp = userRight.getRight_PP();
-            user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
-            Integer userid = user.getUserID();
-            td_user_rightDao.updateUserRights(userid, rightpp);
 
+            //5.18修改td_user
+            UserManage userManage = new UserManage();
+            userManage.setUserID(userRight.getUserID());
+            userManage.setUserName(new_name);
+            userManage.setUserPswd(userRight.getUserPswd());
+            userManage.setUClassID(userRight.getUClassID());
+            userManage.setUstate(userRight.getUstate());
+            userManage.setRegTime(userRight.getRegTime());
+            userManage.setMoPhone(userRight.getMoPhone());
+            userManage.setRealName(userRight.getRealName());
+            userManage.setDPTName(userRight.getDPTName());
+//            userManage.setModTime(now);
+            userManage.setUstate(1);
+
+            userManageDao.updatetd_user(userManage);
+
+//            //-----------------------------------------------------------------------------------------
+//
+//            td_area_leaderDao.deleteRight(userRight.getUserID());
+//            //-----------------------------------------------------------------------------------------
+//
+//            td_pip_leaderDao.deleteRight(userRight.getUserID());
+//            //-----------------------------------------------------------------------------------------
+//
+//            td_tmn_leaderDao.deleteRight(userRight.getUserID());
+//            //-----------------------------------------------------------------------------------------
+//
+//            //------------------------------------------------------------------------------------------
+//            //td_area_leader表进行更新
+//            String areaID = userRight.getAreaID();
+//
+//            //5.7通过新添加的用户的名称，查找其对应UserID
+//            UserManage user = userManageDao.getUserID(userManage.getUserName());
+//            Integer userID = user.getUserID();
+//
+//            if(areaID != null && areaID != ""){
+//                String[] areaSplit = areaID.split(",");
+//                for(int i = 0; i < areaSplit.length; i++){
+//                    //通过AreaID获取AreaLeader
+////                        td_areasDao.updateAreaLeader(new_name,areaSplit[i]);
+//                    //将新的权限插入td_area_leader表
+//                    td_area_leaderDao.addAreaLeader(userID,areaSplit[i]);
+//                }
+//            }
+//
+//            //------------------------------------------------------------------------------------------
+//            //td_pip_leader表进行更新
+//            String pipeID = userRight.getPipID();
+//
+//            if(pipeID != null && pipeID != ""){
+//                String[] pipeSplit = pipeID.split(",");
+//                for(int i = 0; i < pipeSplit.length; i++){
+////                        td_pipesDao.updatePipLeader(new_name,pipeSplit[i]);
+//                    td_pip_leaderDao.addPipLeader(userID,pipeSplit[i]);
+//                }
+//            }
+//
+//            //------------------------------------------------------------------------------------------
+//            //td_tmn_leader表进行更新
+//            String tmnID = userRight.getTmnId();
+//
+//            if(tmnID != null && tmnID != ""){
+//                String[] tmnSplit = tmnID.split(",");
+//                for(int i = 0; i < tmnSplit.length; i++){
+////                        terminalsDao.updateTmnLeader(new_name,tmnSplit[i]);
+//                    td_tmn_leaderDao.addTmnLeader(userID,tmnSplit[i]);
+//                }
+//            }
+//            //------------------------------------------------------------------------------------------
+//            //td_user_right表进行更新
+//            Integer rightpp = userRight.getRight_PP();
+//            user = userManageDao.getUserID(new_name);//新增用户的用户名->用户ID
+//            Integer userid = user.getUserID();
+//            td_user_rightDao.updateUserRights(userid, rightpp);
+//
         }
 
         return 200;
     }
+
 
 
     public UserManage getByusername(String username){
@@ -506,4 +669,43 @@ public class UserManageService {
         // (userName));
         return userManageDao.getAllUser(userName);
     }
+
+    //5.19统计用户个数
+    public Integer getCountNum(String UserName) {
+        //System.out.println("得到的所有的员工人数为"+userManageDao.getCountNum(UserName));
+        System.out.println("%"+UserName+"%");
+        //Integer countNum = 0;
+        //if(UserName == null){
+        //countNum = userManageDao.getCountNum(UserName);
+        //}else{
+        Integer countNum = userManageDao.getCountNum("%" + UserName + "%");
+        //}
+        //Integer countNum = userManageDao.getCountNum("%" + UserName + "%");
+//        return userManageDao.getCountNum(UserName);
+        return countNum;
+    }
+
+
+    // 05.18 被忽视的个人信息部分
+    //lmh
+    //  判断修改后的用户名是否重复
+    public Integer checkUserName(Integer userID,String userName) {
+        //      将用户名与数据库中的不是该id的用户名进行比较
+        List result = userManageDao.checkUserName(userID,userName);
+        if (result.size() != 0) {
+            // 存在用户名 返回用户名存在状态码
+            return 201;
+        } else
+            return 200;
+    }
+
+    //  根据用户id修改个人信息
+    public Integer updateUserInfo(UserManage userManage) {
+        // 现在只需要对用户表进行更新
+        userManageDao.updateUserInfo(userManage);
+
+        return 200;
+    }
+
+
 }

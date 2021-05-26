@@ -26,5 +26,7 @@ public interface ErrordealRecDao {
     Integer appendToError(ErrordealRec errordealRec);
 
     //5.8
-    List getAllErrorByTmnID(String TmnID);
+//    List getAllErrorByTmnID(String TmnID);
+    List getAllErrorByTmnID(@Param("Erid") Short Erid);
+
 }

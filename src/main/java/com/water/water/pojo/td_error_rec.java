@@ -49,4 +49,15 @@ public class td_error_rec {
     public void setTmnID(String tmnID) {
         TmnID = tmnID;
     }
+
+    @Override
+    public String toString() {
+        return "td_error_rec{" +
+                "ERId=" + ERId +
+                ", Error_Position='" + Error_Position + '\'' +
+                ", if_deal='" + if_deal + '\'' +
+                ", Time=" + Time +
+                ", TmnID='" + TmnID + '\'' +
+                '}';
+    }
 }

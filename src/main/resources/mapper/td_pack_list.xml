@@ -16,5 +16,9 @@
         select PeerAddress from td_pack_list where TmnID = #{TmnID};
     </select>
 
+    <select id="deleteByTmnID">
+        delete from td_pack_list where TmnID = #{TmnID};
+    </select>
+
 
 </mapper>

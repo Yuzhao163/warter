@@ -12,7 +12,10 @@ public interface UserManageDao {
     List<UserManage> getByUserManageName(String username);
     Integer insertTotd_user(UserManage userManage);
     Integer deletetd_user(String UserID);
-    List<UserManage> getAllUserManage();
+
+    //List<UserManage> getAllUserManage();
+    List<UserManage> getAllUserManage(@Param(value="UserName") String UserName,Integer page,Integer size);
+
     UserManage getByusername(String username);
     Integer updatetd_user(UserManage userManage);
     List getUserMessageByName(String UserName);
@@ -50,4 +53,7 @@ public interface UserManageDao {
 
     // 选出所有管线管理员id
     List getPIDByRight();
+
+    //    Integer getCountNum();
+    Integer getCountNum(String UserName);
 }

@@ -30,10 +30,20 @@
         DPTName from td_user where UserName = #{UserName};
     </select>
 
+<!--    <select id="getAllUserManage" resultMap="BaseResultMap">-->
+<!--        select-->
+<!--        UserID,UserName,UserPswd,RealName,UClassID,MoPhone,DPTName,RegTime-->
+<!--        from td_user;-->
+<!--    </select>-->
+
     <select id="getAllUserManage" resultMap="BaseResultMap">
         select
         UserID,UserName,UserPswd,RealName,UClassID,MoPhone,DPTName,RegTime
-        from td_user;
+        from td_user
+        <if test="_parameter != null">
+            where UserName like #{UserName}
+        </if>
+        limit #{page},#{size}
     </select>
 
     <insert id="insertTotd_user">
@@ -86,7 +96,7 @@
     <!--  根据id修改用户信息  -->
     <update id="updateUserInfo">
         update td_user set UserName=#{UserName}, UserPswd = #{UserPswd}, MoPhone = #{MoPhone},
-                            RealName = #{RealName}, DPTName = #{DPTName}, ModTime = #{ModTime}
+                            RealName = #{RealName}, DPTName = #{DPTName}, ModTime = now()
                        where UserID = #{UserID}
     </update>
 
@@ -119,12 +129,18 @@
 
     <!--  选择出所有分区管理员  -->
     <select id="getAIDByRight" resultMap="BaseResultMap">
-        select distinct UserID from td_user_right where UClassID = '201';
+        select distinct UserID from td_user where UClassID = '201';
     </select>
 
     <!--  选出所有管线管理员  -->
     <select id="getPIDByRight" resultMap="BaseResultMap">
-        select distinct UserID from td_user_right where UClassID = '202';
+        select distinct UserID from td_user where UClassID = '202';
     </select>
 
+    <select id="getCountNum" resultType="Integer">
+        select count(UserID) from td_user
+        <if test="_parameter != null">
+            where UserName like #{UserName}
+        </if>
+    </select>
 </mapper>

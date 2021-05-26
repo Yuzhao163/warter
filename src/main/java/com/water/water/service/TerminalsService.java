@@ -31,6 +31,8 @@ public class TerminalsService {
     private td_Tmn_LeaderDao td_tmn_leaderDao;
     @Autowired
     private Td_User_RightDao td_user_rightDao;
+    @Autowired
+    private td_pack_listDao td_pack_listDao;
 
     ErrordealRecService errordealRecService = new ErrordealRecService();
 
@@ -444,6 +446,8 @@ public class TerminalsService {
         // 这里还要删除异常展示表的异常（两个表），控制柜没有了异常自然也就没有了（等会做）
         // packlist里面还有tmnid
 //        td_pack_list.deleteByTmnID(tmnID);
+        td_pack_listDao.deleteByTmnID(tmnID);
+
         // 删除控制柜管理员表的管理员id
         td_tmn_leaderDao.deleteTmnLeader(tmnID);
         // 删除控制柜

@@ -57,10 +57,15 @@ public class ErrordealRecController {
     }
 
     @RequestMapping(value = "api/geterrorbyusername")
-    public List geterrorbyusername(@RequestParam String TmnLeader) throws Exception{
+    public List geterrorbyusername(@RequestParam String TmnLeader, Integer page, Integer size) throws Exception{
+//        System.out.println("页面个数"+page);
+//        System.out.println("页面大小"+size);
         String tmnleader = TmnLeader;
-        List errordata =
-                errordealRecService.geterrorbyusername(tmnleader);
+        List errordata = errordealRecService.geterrorbyusername(tmnleader, page, size);
+//        for(int i = 0; i < errordata.size(); i++){
+//            ErrordealRec errordealRec = (ErrordealRec) errordata.get(i);
+//            System.out.println("分页拿到的数据"+errordealRec);
+//        }
         return errordata;
     }
 
@@ -78,22 +83,42 @@ public class ErrordealRecController {
     }
 
     //5.8-------------------------------------------------------------------------
-    @RequestMapping(value = "api/geterrorbytmnleader")
-    public List geterrorbytmnleader(@RequestParam String TmnID) throws Exception{
-        String tmnID = TmnID;
-
-        List errordata = errordealRecService.geterrorbytmnID(tmnID);
+//    @RequestMapping(value = "api/geterrorbytmnleader")
+//    public List geterrorbytmnleader(@RequestParam String TmnID) throws Exception{
+//        String tmnID = TmnID;
+//
+//        List errordata = errordealRecService.geterrorbytmnID(tmnID);
+//        return errordata;
+//    }
+    @RequestMapping(value = "api/geterrorbyerid")
+    public List geterrorbytmnleader(@RequestParam Short Erid) throws Exception{
+        //根据异常记录的Erid，去error_deal_rec中查找其对应的处理记录
+        List errordata = errordealRecService.geterrorbyErid(Erid);
         return errordata;
     }
-
     //5.9--------------------------------------------------------------------------
-    @RequestMapping(value = "api/getTerminalError")
-    public List getTerminalError(@RequestParam String TmnID) throws Exception{
-        String tmnID = TmnID;
+//    @RequestMapping(value = "api/getTerminalError")
+//    public List getTerminalError(@RequestParam String TmnID) throws Exception{
+//        String tmnID = TmnID;
+//
+//        List error = errordealRecService.geterrorbytmnID(tmnID);
+//
+//        return error;
+//    }
 
-        List error = errordealRecService.geterrorbytmnID(tmnID);
+    @RequestMapping(value = "api/getTerminalError")
+    public List getTerminalError(@RequestParam Short Erid) throws Exception{
+
+        List error = errordealRecService.geterrorbytmnID(Erid);
 
         return error;
+    }
+
+    //5.19统计数据总数
+    @RequestMapping(value = "api/getCountNum")
+    public Integer getCountNum(String TmnLeader){
+//        System.out.println("这是前端传来的异常控制柜的控制者名称"+TmnLeader);
+        return errordealRecService.getCountNum(TmnLeader);
     }
 }
 

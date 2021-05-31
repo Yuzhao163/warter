@@ -100,10 +100,10 @@ public class td_PipesService {
 
         //List UIDlist = td_user_rightDao.getPIDByRight();
         //5.17 替换td_user_right表中Right_pp
-        List UIDlist = td_user_rightDao.getPIDByRight();
+        List UIDlist = userManageDao.getPIDByRight();
         List PipLeaderList = new ArrayList();
         for (int i=0; i<UIDlist.size(); i++) {
-            td_User_Right user_right = (td_User_Right)UIDlist.get(i);
+            UserManage user_right = (UserManage)UIDlist.get(i);
             Integer userID = user_right.getUserID();
             String userName = userManageDao.getUNameByID(userID);
             UserManage userManage = new UserManage();

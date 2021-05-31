@@ -1,6 +1,8 @@
 package com.water.water.netty;
 
+import com.water.water.dao.td_error_recDao;
 import com.water.water.pojo.CommRec;
+import com.water.water.pojo.ErrordealRec;
 import com.water.water.service.DetailService;
 import com.water.water.pojo.Rec_Detail;
 import com.water.water.util.Int2Binary;
@@ -21,6 +23,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -181,25 +184,23 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
     }
 
         public void InsertTest(Connection conn,Long PackageID,
-                               String PackagePP,String TmnID,String IP)
-    {
-        try {
-            String sqlStr="INSERT INTO td_pack_list(PackageID,PackagePP," +
-                    "TmnID,PeerAddress) VALUES(?,?,?,?)";
-            PreparedStatement st=conn.prepareStatement(sqlStr);
-            st.setLong(1,PackageID);
-            st.setString(2,PackagePP);
-            st.setString(3,TmnID);
-            st.setString(4,IP);
-            st.executeUpdate();
-            //rs.close();
-            st.close();
-            //conn.close();
-        }catch (Exception e)
-        {
-            System.err.println(e);
+                               String PackagePP,String TmnID,String IP) {
+            try {
+                String sqlStr = "INSERT INTO td_pack_list(PackageID,PackagePP," +
+                        "TmnID,PeerAddress) VALUES(?,?,?,?)";
+                PreparedStatement st = conn.prepareStatement(sqlStr);
+                st.setLong(1, PackageID);
+                st.setString(2, PackagePP);
+                st.setString(3, TmnID);
+                st.setString(4, IP);
+                st.executeUpdate();
+                //rs.close();
+                st.close();
+                //conn.close();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
         }
-    }
 
     public void UpdateRec(Connection conn,Rec_Detail rec_detail,String Ip){
         try {
@@ -266,6 +267,11 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
 //                String inserttoIp = "INSERT INTO td_pack_list (PackageID," +
 //                        "PackagePP,TmnID,PeerAddress) VALUES (" +  PackageID + "0" + TmnID + Ip;
             }
+            try{
+                inserttoError(conn, W_line, V_Status, B_status, F_Volume, TmnID);
+            }catch (Exception e){
+                System.out.println("在netty接收到数据之后，插入异常数据时发生异常为："+e);
+            }
 //            preparedStatement.setString(1,newPassword);
 //            preparedStatement.setString(2,username);
             preparedStatement.executeUpdate();
@@ -274,6 +280,120 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
             System.out.println(e);
         }
     }
+
+    public void inserttoError(Connection conn, Short W_line, Short V_status,
+                              Short B_status,
+                              Short F_volume ,String TmnID) {
+        ErrordealRec errordealRec = new ErrordealRec();
+        try {
+            //Rec_Detail message = (Rec_Detail)allmessage.get(i);
+            //Rec_Detail message = (Rec_Detail)allmessage.get(i);
+            //String TmnID = message.getTmnID();
+            Short Errorme = 0;
+//            Short W_line = message.getW_line();
+//            Short V_status = message.getV_status();
+//            Short B_status = message.getB_status();
+//            Short F_volume = message.getF_Volume();
+            String errormessage = " ";
+            if (W_line > 90) {
+                Errorme = 4;
+                errormessage = errormessage + ("水位高于百分之九十");
+                if (V_status > 90) {
+                    Errorme = 4;
+                    errormessage = errormessage + ("蓄电池状态异常");
+                }
+                if (B_status > 90) {
+                    Errorme = 4;
+                    errormessage = errormessage + ("油温异常");
+                }
+                if (F_volume > 90) {
+                    Errorme = 4;
+                    errormessage = errormessage + ("环境温度过高");
+                }
+            } else if (W_line > 70 && W_line <= 90) {
+                Errorme = 3;
+                errormessage = errormessage + ("水位高于百分之七十");
+                if (V_status > 90) {
+                    Errorme = 4;
+                    errormessage = errormessage + ("蓄电池状态异常");
+                }
+                if (B_status > 90) {
+                    Errorme = 4;
+                    errormessage = errormessage + ("油温异常");
+                }
+                if (F_volume > 90) {
+                    Errorme = 4;
+                    errormessage = errormessage + ("环境温度过高");
+                }
+            } else if (W_line > 50 && W_line <= 70) {
+                Errorme = 2;
+                errormessage = errormessage + ("水位高于百分之五十");
+                if (V_status > 90) {
+                    Errorme = 3;
+                    errormessage = errormessage + ("蓄电池状态异常");
+                    if (B_status > 90) {
+                        Errorme = 4;
+                        errormessage = errormessage + ("油温异常");
+                    }
+                    if (F_volume > 90) {
+                        Errorme = 4;
+                        errormessage = errormessage + ("环境温度过高");
+                    }
+                } else if (B_status > 90) {
+                    Errorme = 3;
+                    errormessage = errormessage + ("油温异常");
+                    if (V_status > 90) {
+                        Errorme = 4;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                    }
+                    if (F_volume > 90) {
+                        Errorme = 4;
+                        errormessage = errormessage + ("环境温度过高");
+                    }
+                } else if (F_volume > 90) {
+                    Errorme = 3;
+                    errormessage = errormessage + ("环境温度过高");
+                    if (V_status > 90) {
+                        Errorme = 4;
+                        errormessage = errormessage + ("蓄电池状态异常");
+                    }
+                    if (B_status > 90) {
+                        Errorme = 4;
+                        errormessage = errormessage + ("油温异常");
+                    }
+                }
+            }
+            if (Errorme > 0) {
+                errordealRec.setError_Position(errormessage);
+                errordealRec.setTmnId(TmnID);
+                errordealRec.setIf_deal("1");
+//                td_error_recDao.insertToNewError(errordealRec);
+                InsertError(conn, errormessage, TmnID, "1");
+            }
+        }
+        catch (Exception e){
+            System.out.println("netty首页查询数据异常：："+e);
+        }
+    }
+
+    public void InsertError(Connection conn, String Error_Position
+            , String TmnID,String if_deal) {
+        try {
+            String sqlStr = "INSERT INTO td_error_rec(Error_Position," +
+                    "TmnID ,If_deal) VALUES(?,?,?,?)";
+            PreparedStatement st = conn.prepareStatement(sqlStr);
+            st.setString(1, Error_Position);
+            st.setString(2, TmnID);
+            st.setString(3, if_deal);
+            st.executeUpdate();
+            //rs.close();
+            st.close();
+            //conn.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
 
     public String toString(Integer value){
         if(value != null || value != 0){
@@ -474,7 +594,12 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
         //Integer TmnId = Integer.valueOf(TmnID);
         //Integer d_id = Integer.valueOf(D_ID);
         Integer W_work = commrec.getW_work();
-        //Integer v_pre = commrec.getV_pre();
+        Integer v_pre = 0;
+        try{
+            v_pre = commrec.getV_pre();
+        }catch (Exception e){
+            v_pre = 0;
+        }
         Integer Ov_period = commrec.getOV_period();
         Integer OV_waterline= commrec.getOV_waterline();
         Integer OV_keeptime = commrec.getOV_keeptime();
@@ -493,7 +618,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
         }
         buff[2] = (byte)Integer.parseInt(D_ID);
         buff[3] = (byte)(int)(W_work);
-        buff[4] = (byte)0;
+        buff[4] = (byte)(int)(v_pre);
         if(Ov_period > 256){
             buff[5] = (byte)(Ov_period >> 8);
             buff[6] = (byte)(int)(Ov_period);
@@ -531,6 +656,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
         buff[19] = (byte)0;
         buff[20] = (byte)0;
         buff[21] = (byte)0;
+        //http://localhost:8443/api/order?TmnID=26&W_work=21&V_pre=&OV_period=2&OV_waterline=1&OV_keeptime=600&CV_waterline=600&V_actiontime=100
         ByteBuf buffer = Unpooled.buffer();
         buffer.writeBytes(buff);
         ctx.writeAndFlush(buffer);

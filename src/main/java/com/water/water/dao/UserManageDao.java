@@ -56,4 +56,7 @@ public interface UserManageDao {
 
     //    Integer getCountNum();
     Integer getCountNum(String UserName);
+
+    //5.25添加员工名称是否重复判断
+    String getNameRepulicate(String userName);
 }

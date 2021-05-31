@@ -285,52 +285,56 @@ public class ErrordealRecService {
 
         List error = new ArrayList();
 //        System.out.println("取出该员工名下控制柜的数量"+terminal.size());
-        List errorByTmnId = td_error_recDao.getErrorByTmnId(terminal, page, size);
+        Integer userID = userManage.getUserID();
+        List rightByID = td_tmn_leaderDao.getRightByID(userID);
+
+        if(rightByID.size() != 0){
+            List errorByTmnId = td_error_recDao.getErrorByTmnId(terminal, page, size);
 //        for(int j = 0; j < errorByTmnId.size(); j++){
 //            System.out.println("这是我取得的异常的个数"+(td_error_rec)errorByTmnId.get(j));
 //        }
 
-        for(int i =0; i < errorByTmnId.size();i++){
-            td_error_rec td_error_rec = (td_error_rec) errorByTmnId.get(i);
-            String tmnID1 = td_error_rec.getTmnID();
-            //获得该控制柜的ID，通过该ID找到控制柜的名称
-            Terminals nameByID = terminalsDao.getNameByID(tmnID1);
-            String tmnName = nameByID.getTmnName();
+            for(int i =0; i < errorByTmnId.size();i++){
+                td_error_rec td_error_rec = (td_error_rec) errorByTmnId.get(i);
+                String tmnID1 = td_error_rec.getTmnID();
+                //获得该控制柜的ID，通过该ID找到控制柜的名称
+                Terminals nameByID = terminalsDao.getNameByID(tmnID1);
+                String tmnName = nameByID.getTmnName();
 
-            ErrordealRec errordealRec = new ErrordealRec();
-            td_Tp tp = td_tpDao.getAlltdById(tmnID1);
-            String PipId = tp.getPipID();
-            Integer PTid = tp.getPTid();
-            //message.setTmnID(TmnName);
-            errordealRec.setUser(TmnLeader);
-            errordealRec.setTmnId(tmnID1);
-            errordealRec.setPipId(PipId);
-            errordealRec.setPTid(PTid);
-            errordealRec.setTmnName(tmnName);
-            errordealRec.setIf_deal(td_error_rec.getIf_deal());
-            errordealRec.setError_Position(td_error_rec.getError_Position());
-            errordealRec.setTime(td_error_rec.getTime());
-            errordealRec.setTmnId(td_error_rec.getTmnID());
-            errordealRec.setERId(td_error_rec.getERId());
-            String if_deal = td_error_rec.getIf_deal();
-            //if_deal如果已经处理过了就是2，如果未处理是1
-            if(if_deal.equals("1")){
-                error.add(errordealRec);
-            }else{
-                //由tmnID去td_errordeal_rec表中查找
-                Short ERID = td_error_rec.getERId();
-                List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
-                for(int j = 0;j < ErrorDeal.size();j++){
-                    ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(j);
-                    errordealRec.setException(errordeal.getException());
-                    errordealRec.setResult(errordeal.getResult());
-                    errordealRec.setUser(errordeal.getUser());
-                    errordealRec.setC_t(errordeal.getC_t());
+                ErrordealRec errordealRec = new ErrordealRec();
+                td_Tp tp = td_tpDao.getAlltdById(tmnID1);
+                String PipId = tp.getPipID();
+                Integer PTid = tp.getPTid();
+                //message.setTmnID(TmnName);
+                errordealRec.setUser(TmnLeader);
+                errordealRec.setTmnId(tmnID1);
+                errordealRec.setPipId(PipId);
+                errordealRec.setPTid(PTid);
+                errordealRec.setTmnName(tmnName);
+                errordealRec.setIf_deal(td_error_rec.getIf_deal());
+                errordealRec.setError_Position(td_error_rec.getError_Position());
+                errordealRec.setTime(td_error_rec.getTime());
+                errordealRec.setTmnId(td_error_rec.getTmnID());
+                errordealRec.setERId(td_error_rec.getERId());
+                String if_deal = td_error_rec.getIf_deal();
+                //if_deal如果已经处理过了就是2，如果未处理是1
+                if(if_deal.equals("1")){
+                    error.add(errordealRec);
+                }else{
+                    //由tmnID去td_errordeal_rec表中查找
+                    Short ERID = td_error_rec.getERId();
+                    List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
+                    for(int j = 0;j < ErrorDeal.size();j++){
+                        ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(j);
+                        errordealRec.setException(errordeal.getException());
+                        errordealRec.setResult(errordeal.getResult());
+                        errordealRec.setUser(errordeal.getUser());
+                        errordealRec.setC_t(errordeal.getC_t());
+                    }
+                    error.add(errordealRec);
                 }
-                error.add(errordealRec);
+
             }
-
-
 
 
 //        for(int k = 0;k < terminal.size();k++){
@@ -491,15 +495,21 @@ public class ErrordealRecService {
 //        System.out.println("这是故障处理中该员工的userID"+userID);//测试
 
         List rightByID = td_tmn_leaderDao.getRightByID(userID);
-        for(int i = 0; i < rightByID.size(); i++){
-            td_Tmn_Leader td_tmn_leader = (td_Tmn_Leader) rightByID.get(i);
-            String tmnID = td_tmn_leader.getTmnID();
+        System.out.println("这个人取得了控制柜的ID是"+rightByID);
+        if(rightByID.size() != 0){
+            for(int i = 0; i < rightByID.size(); i++){
+                td_Tmn_Leader td_tmn_leader = (td_Tmn_Leader) rightByID.get(i);
+                String tmnID = td_tmn_leader.getTmnID();
 //            System.out.println("这是该员工控制的控制柜的ID"+tmnID);//测试
 
-            countNum += td_error_recDao.getCountNum(tmnID);
-        }
+                countNum += td_error_recDao.getCountNum(tmnID);
+            }
 //        System.out.println("该员工控制的控制柜下故障总数"+countNum);//测试
-        return countNum;
+            return countNum;
+        } else {
+            return 0;
+        }
+
     }
 
     //5.19使用Erid去查询该控制柜异常状态的处理记录

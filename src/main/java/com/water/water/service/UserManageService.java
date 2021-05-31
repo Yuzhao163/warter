@@ -708,4 +708,9 @@ public class UserManageService {
     }
 
 
+    //5.25添加员工名称是否重复判断
+    public String getNameRepulicate(String userName) {
+        return userManageDao.getNameRepulicate(userName);
+    }
+
 }

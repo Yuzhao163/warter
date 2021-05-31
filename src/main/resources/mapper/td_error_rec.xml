@@ -51,9 +51,9 @@
     </update>
 
     <insert id="insertToNewError">
-        insert into td_error_rec(ERId,Error_Position,If_deal,TmnID)
+        insert into td_error_rec(Error_Position,If_deal,TmnID)
         VALUES
-        (#{ERId},#{Error_Position},#{If_deal},#{TmnId})
+        (#{Error_Position},#{If_deal},#{TmnId})
     </insert>
 
     <!--    5.19-->

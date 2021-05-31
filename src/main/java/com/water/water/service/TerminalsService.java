@@ -260,12 +260,12 @@ public class TerminalsService {
         // 获取具有权限的用户id
         //List userIDList = td_user_rightDao.getUIDByRight();
         //5.17替换td_user_right表中Right_pp
-        List userIDList = td_user_rightDao.getUIDByRight();
+        List userIDList = userManageDao.getUIDByRight();
         List userNIDList = new ArrayList();
         // 循环list通过用户id找到用户名称  再将id和名称放在一个新的实体类中 返回给前端
         for (int i = 0; i < userIDList.size(); i++) {
-            td_User_Right user_right = (td_User_Right)userIDList.get(i);
-            Integer userID = user_right.getUserID();
+            UserManage us = (UserManage) userIDList.get(i);
+            Integer userID = us.getUserID();
             String userName = userManageDao.getUNameByID(userID);
             UserManage userManage = new UserManage();
             userManage.setUserID(userID);
@@ -288,6 +288,11 @@ public class TerminalsService {
 //        把管线控制柜表要用的数据取出来
         String pipID = tpa.getPipID();
         String tmnID = tpa.getTmnID();
+
+        if (existname(TmnName)==1) {
+            return 201;
+        }
+
         if (tmnID == null) {
             Integer maxid = terminalsDao.getMaxID()+1;
             tmnID = maxid.toString();

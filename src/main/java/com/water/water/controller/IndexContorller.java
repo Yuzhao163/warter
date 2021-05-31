@@ -38,10 +38,17 @@ public class IndexContorller {
     }
 
     @RequestMapping(value = "api/SelectMessage")
-    public List getSelectMessage(@RequestParam Map params) throws Exception {
-        List selectmessage = indexService.getSelectMessage(params);
+    public List getSelectMessage(@RequestParam Map params, Integer page,Integer size) throws Exception {
+        //List selectmessage = indexService.getSelectMessage(params, page,
+        // size);
+        List selectmessage = indexService.getSelectMessage(params, page, size);
         List result_selectmessage = terminalsService.getNameByID(selectmessage);
         return result_selectmessage;
+    }
+
+    @RequestMapping(value = "api/SelectMessageCount")
+    public Integer getCountMessageByWork(@RequestParam Map params) throws Exception{
+        return indexService.getCountMessageByWork(params);
     }
 
     @RequestMapping(value = "api/count")

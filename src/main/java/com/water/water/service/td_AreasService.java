@@ -130,11 +130,12 @@ public class td_AreasService {
     public List getAreaLeader() {
         //List UIDlist = td_user_rightDao.getAIDByRight();
         //5.17 替换td_user_right表中Right_pp
-        List UIDlist = td_user_rightDao.getAIDByRight();
+
+        List UIDlist = userManageDao.getAIDByRight();
         List AreaLeaderList = new ArrayList();
         for (int i=0; i<UIDlist.size(); i++) {
-            td_User_Right user_right = (td_User_Right)UIDlist.get(i);
-            Integer userID = user_right.getUserID();
+            UserManage us = (UserManage)UIDlist.get(i);
+            Integer userID = us.getUserID();
             String userName = userManageDao.getUNameByID(userID);
             UserManage userManage = new UserManage();
             userManage.setUserID(userID);

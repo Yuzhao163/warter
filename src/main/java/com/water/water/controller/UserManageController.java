@@ -145,4 +145,20 @@ public class UserManageController {
         }
     }
 
+
+    //5.25 添加员工名称是否重复判断
+    @RequestMapping(value = "api/getNameRepulicate")
+    public String getNameRepulicate(String UserName){
+        System.out.println("这是我拿到前端传来的username"+UserName);
+//        List user = userManageService.getAllUser(UserName);
+        String result = userManageService.getNameRepulicate(UserName);
+        System.out.println(result);
+        if(result == null){
+            return "ok";
+        } else{
+            return "no";
+        }
+
+    }
+
 }

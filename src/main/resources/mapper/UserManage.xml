@@ -143,4 +143,10 @@
             where UserName like #{UserName}
         </if>
     </select>
+
+    <!--5.25添加员工名称是否重复判断-->
+    <select id="getNameRepulicate" resultType="String">
+        select * from td_user where UserName = #{UserName};
+    </select>
+
 </mapper>

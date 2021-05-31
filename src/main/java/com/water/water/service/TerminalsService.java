@@ -43,11 +43,93 @@ public class TerminalsService {
 
     public List getNameByID(List selectmessage){
         //System.out.println(selectmessage);
-        PrintClassName printClassName = new PrintClassName();
         for (int i = 0;i<selectmessage.size();i++){
             try{
-                Rec_Detail message = (Rec_Detail)selectmessage.get(i);
-                String TmnID = message.getTmnID();
+                    //Rec_Detail message = (Rec_Detail)allmessage.get(i);
+                    Rec_Detail message = (Rec_Detail)selectmessage.get(i);
+                    String TmnID = message.getTmnID();
+                    Short Errorme = 0;
+                    Short W_line = message.getW_line();
+                    Short V_status = message.getV_status();
+                    Short B_status = message.getB_status();
+                    Short F_volume = message.getF_Volume();
+                    String errormessage = " ";
+                    if(W_line > 90){
+                        Errorme = 4;
+                        errormessage = errormessage + ("水位高于百分之九十");
+                        if(V_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                        }
+                        if(B_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("油温异常");
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("环境温度过高");
+                        }
+                    }
+                    else if(W_line > 70 && W_line <= 90){
+                        Errorme = 3;
+                        errormessage = errormessage + ("水位高于百分之七十");
+                        if(V_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                        }
+                        if(B_status > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("油温异常");
+                        }
+                        if(F_volume > 90){
+                            Errorme = 4;
+                            errormessage = errormessage + ("环境温度过高");
+                        }
+                    }else if(W_line > 50 && W_line <= 70){
+                        Errorme = 2;
+                        errormessage = errormessage + ("水位高于百分之五十");
+                        if(V_status > 90){
+                            Errorme = 3;
+                            errormessage = errormessage + ("蓄电池状态异常");
+                            if(B_status > 90){
+                                Errorme = 4;
+                                errormessage = errormessage + ("油温异常");
+                            }
+                            if(F_volume > 90){
+                                Errorme = 4;
+                                errormessage = errormessage + ("环境温度过高");
+                            }
+                        }else if(B_status > 90){
+                            Errorme = 3;
+                            errormessage = errormessage + ("油温异常");
+                            if(V_status > 90){
+                                Errorme = 4;
+                                errormessage = errormessage + ("蓄电池状态异常");
+                            }
+                            if(F_volume > 90){
+                                Errorme = 4;
+                                errormessage = errormessage + ("环境温度过高");
+                            }
+                        }else if(F_volume > 90){
+                            Errorme = 3;
+                            errormessage = errormessage + ("环境温度过高");
+                            if(V_status > 90){
+                                Errorme = 4;
+                                errormessage = errormessage + ("蓄电池状态异常");
+                            }
+                            if(B_status > 90){
+                                Errorme = 4;
+                                errormessage = errormessage + ("油温异常");
+                            }
+                        }
+                    }
+//                if(Errorme > 0){
+//                    errordealRec.setError_Position(errormessage);
+//                    errordealRec.setTmnId(TmnID);
+//                    errordealRec.setIf_deal("1");
+//                    td_error_recDao.insertToNewError(errordealRec);
+//                }
+                message.setSend_error(Errorme);
                 Terminals terminals = terminalsDao.getNameByID(TmnID);
                 String TmnName = terminals.getTmnName();
                 message.setTmnID(TmnName);

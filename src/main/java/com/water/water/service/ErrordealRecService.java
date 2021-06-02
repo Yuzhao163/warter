@@ -76,11 +76,12 @@ public class ErrordealRecService {
         for (int i = 0; i < AllError.size(); i++) {
             Error_Connection error_connection = new Error_Connection();
             ErrordealRec message = (ErrordealRec) AllError.get(i);
-            Short ERDId = message.getERDId();
-            Short ERId = message.getERId();
+            Long ERDId = message.getERDId();
+            Long ERId = message.getERId();
             String Exception = message.getException();
             String Result = message.getResult();
-            Date C_t = message.getC_t();
+            //Date C_t = message.getC_t();
+            Timestamp C_t = message.getC_t();
             String User = message.getUser();
             Long PackageId = message.getPackageId();
             Long packageId = message.getPackageId();
@@ -166,7 +167,7 @@ public class ErrordealRecService {
                 error.add(errordealRec);
             }else{
                 //由tmnID去td_errordeal_rec表中查找
-                Short ERID = message.getERId();
+                Long ERID = message.getERId();
                 List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
                 for(int k = 0;k < ErrorDeal.size();k++){
                     ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(k);
@@ -290,9 +291,9 @@ public class ErrordealRecService {
 
         if(rightByID.size() != 0){
             List errorByTmnId = td_error_recDao.getErrorByTmnId(terminal, page, size);
-//        for(int j = 0; j < errorByTmnId.size(); j++){
-//            System.out.println("这是我取得的异常的个数"+(td_error_rec)errorByTmnId.get(j));
-//        }
+        for(int j = 0; j < errorByTmnId.size(); j++){
+            System.out.println("这是我取得的异常的个数"+(td_error_rec)errorByTmnId.get(j));
+        }
 
             for(int i =0; i < errorByTmnId.size();i++){
                 td_error_rec td_error_rec = (td_error_rec) errorByTmnId.get(i);
@@ -322,7 +323,7 @@ public class ErrordealRecService {
                     error.add(errordealRec);
                 }else{
                     //由tmnID去td_errordeal_rec表中查找
-                    Short ERID = td_error_rec.getERId();
+                    Long ERID = td_error_rec.getERId();
                     List ErrorDeal = errordealRecDao.getErrorByErId(ERID);
                     for(int j = 0;j < ErrorDeal.size();j++){
                         ErrordealRec errordeal = (ErrordealRec)ErrorDeal.get(j);
@@ -437,7 +438,7 @@ public class ErrordealRecService {
     public Integer InsertToError(ErrordealRec errordealRec){
 //        System.out.println("异常处理记录在此"+errordealRec);
 //        String TmnID = errordealRec.getTmnId();
-        Short erId = errordealRec.getERId();
+        Long erId = errordealRec.getERId();
         //根据tmnID去总异常表中查找该条记录，判断if_deal是否为2，如果不是的话则改成2，如果是的话则不变
         //5.19注释掉，因为单个控制柜的故障有非常多
         //td_error_rec error = td_error_recDao.getIfByTmnId(TmnID);
@@ -479,7 +480,7 @@ public class ErrordealRecService {
 //        return errorByTmnID;
 //    }
 
-    public List geterrorbytmnID(Short Erid) {
+    public List geterrorbytmnID(Long Erid) {
         //通过TmnID从td_errordeal_rec表中获取对应TmnID的处理记录
         List errorByTmnID = errordealRecDao.getAllErrorByTmnID(Erid);
 //        System.out.println(errorByTmnID);
@@ -513,7 +514,7 @@ public class ErrordealRecService {
     }
 
     //5.19使用Erid去查询该控制柜异常状态的处理记录
-    public List geterrorbyErid(Short erid) {
+    public List geterrorbyErid(Long erid) {
         List errorByErId = errordealRecDao.getErrorByErId(erid);
         return errorByErId;
     }

@@ -19,7 +19,7 @@ public interface ErrordealRecDao {
 
     List getSelectErrorMessageByPage(Integer page,Integer size);
 
-    List getErrorByErId(Short ERID);
+    List getErrorByErId(Long ERID);
 
     Integer InsertToError(ErrordealRec errordealRec);
 
@@ -27,6 +27,6 @@ public interface ErrordealRecDao {
 
     //5.8
 //    List getAllErrorByTmnID(String TmnID);
-    List getAllErrorByTmnID(@Param("Erid") Short Erid);
+    List getAllErrorByTmnID(@Param("Erid") Long Erid);
 
 }

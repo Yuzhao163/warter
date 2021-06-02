@@ -291,6 +291,10 @@ public class IndexService {
             page = (page - 1) * size;
         }
         List allmessage = indexDao.getSelectMessageByPage(page,size);
+        //0602测试
+        for(int j = 0; j < allmessage.size(); j++){
+            System.out.println("这是首页取得的数据"+allmessage.get(j));
+        }
         for (int i = 0;i<allmessage.size();i++){
             try{
                 //Rec_Detail message = (Rec_Detail)allmessage.get(i);

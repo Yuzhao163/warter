@@ -4,17 +4,17 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class td_error_rec {
-    private Short ERId;
+    private Long ERId;
     private String Error_Position;
     private String if_deal;
-    private Date Time;
+    private Timestamp Time;
     private String TmnID;
 
-    public Short getERId() {
+    public Long getERId() {
         return ERId;
     }
 
-    public void setERId(Short ERId) {
+    public void setERId(Long ERId) {
         this.ERId = ERId;
     }
 
@@ -34,11 +34,11 @@ public class td_error_rec {
         this.if_deal = if_deal;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return Time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         Time = time;
     }
 

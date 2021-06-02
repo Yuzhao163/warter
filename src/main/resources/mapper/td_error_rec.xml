@@ -8,7 +8,7 @@
     <!--resultMap中type对用所匹配的实体类,id表示resultMap的标识-->
     <resultMap id="ErrorRecMap" type="com.water.water.pojo.td_error_rec">
         <!--对应数据表的字段信息-->
-        <result column="ERDId" property="ERDId" jdbcType="SMALLINT"/>
+        <result column="ERDId" property="ERDId" jdbcType="BIGINT"/>
         <result column="ERId" property="ERId" jdbcType="SMALLINT"/>
         <result column="if_deal" property="if_deal" jdbcType="VARCHAR"/>
         <result column="Time" property="Time" jdbcType="DATE"/>

@@ -1,13 +1,15 @@
 package com.water.water.pojo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 //异常展示实体类
 public class ErrordealRec {
-    private Short ERDId;
-    private Short ERId;
+    private Long ERDId;
+    private Long ERId;
     private String Exception;
     private String Result;
-    private Date C_t;
+    private Timestamp C_t;
     private String User;
     private Long PackageId;
     private String TmnId;
@@ -16,7 +18,7 @@ public class ErrordealRec {
     private Integer PTid;
     private String If_deal;
     private String Error_Position;
-    private Date Time;
+    private Timestamp Time;
 
     @Override
     public String toString() {
@@ -54,11 +56,11 @@ public class ErrordealRec {
         Error_Position = error_Position;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return Time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         Time = time;
     }
 
@@ -94,19 +96,19 @@ public class ErrordealRec {
         this.PTid = PTid;
     }
 
-    public Short getERDId() {
+    public Long getERDId() {
         return ERDId;
     }
 
-    public void setERDId(Short ERDId) {
+    public void setERDId(Long ERDId) {
         this.ERDId = ERDId;
     }
 
-    public Short getERId() {
+    public Long getERId() {
         return ERId;
     }
 
-    public void setERId(Short ERId) {
+    public void setERId(Long ERId) {
         this.ERId = ERId;
     }
 
@@ -126,11 +128,11 @@ public class ErrordealRec {
         Result = result;
     }
 
-    public Date getC_t() {
+    public Timestamp getC_t() {
         return C_t;
     }
 
-    public void setC_t(Date c_t) {
+    public void setC_t(Timestamp c_t) {
         C_t = c_t;
     }
 

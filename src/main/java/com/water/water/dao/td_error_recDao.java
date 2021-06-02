@@ -24,7 +24,7 @@ public interface td_error_recDao {
     //td_error_rec getIfByTmnId(String TmnId);
     //5.19修改
     //5.19getIfByTmnId需要修改为getIfByErid，因为每一条异常都需要处理记录，而控制柜可能有很多异常部位
-    td_error_rec getIfByErid(Short Erid);
+    td_error_rec getIfByErid(Long Erid);
 
 
     Integer updateByTmnId(String TmnId);
@@ -35,5 +35,5 @@ public interface td_error_recDao {
     Integer getCountNum(@Param("TmnID") String tmnID);
 
     //5.19更新对应异常的处理状态
-    Integer updateByErid(@Param("ERId") Short erId);
+    Integer updateByErid(@Param("ERId") Long erId);
 }

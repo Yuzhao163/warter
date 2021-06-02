@@ -91,7 +91,7 @@ public class ErrordealRecController {
 //        return errordata;
 //    }
     @RequestMapping(value = "api/geterrorbyerid")
-    public List geterrorbytmnleader(@RequestParam Short Erid) throws Exception{
+    public List geterrorbytmnleader(@RequestParam Long Erid) throws Exception{
         //根据异常记录的Erid，去error_deal_rec中查找其对应的处理记录
         List errordata = errordealRecService.geterrorbyErid(Erid);
         return errordata;
@@ -107,7 +107,7 @@ public class ErrordealRecController {
 //    }
 
     @RequestMapping(value = "api/getTerminalError")
-    public List getTerminalError(@RequestParam Short Erid) throws Exception{
+    public List getTerminalError(@RequestParam Long Erid) throws Exception{
 
         List error = errordealRecService.geterrorbytmnID(Erid);
 

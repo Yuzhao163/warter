@@ -380,7 +380,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf>{
             , String TmnID,String if_deal) {
         try {
             String sqlStr = "INSERT INTO td_error_rec(Error_Position," +
-                    "TmnID ,If_deal) VALUES(?,?,?,?)";
+                    "TmnID ,If_deal) VALUES(?,?,?)";
             PreparedStatement st = conn.prepareStatement(sqlStr);
             st.setString(1, Error_Position);
             st.setString(2, TmnID);
